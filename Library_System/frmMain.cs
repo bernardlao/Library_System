@@ -20,6 +20,7 @@ namespace Library_System
         public frmMain()
         {
             InitializeComponent();
+		//gey!;
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
