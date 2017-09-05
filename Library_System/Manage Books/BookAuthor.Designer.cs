@@ -41,6 +41,7 @@
             this.txtAuthorFname = new DevExpress.XtraEditors.TextEdit();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.btnAddAuthor = new DevExpress.XtraEditors.SimpleButton();
+            this.colIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookAuthor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookAuthorItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorLname.Properties)).BeginInit();
@@ -57,7 +58,7 @@
             this.lstBookAuthor.MainView = this.lstBookAuthorItem;
             this.lstBookAuthor.Name = "lstBookAuthor";
             this.lstBookAuthor.Size = new System.Drawing.Size(790, 475);
-            this.lstBookAuthor.TabIndex = 4;
+            this.lstBookAuthor.TabIndex = 5;
             this.lstBookAuthor.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.lstBookAuthorItem});
             // 
@@ -67,19 +68,18 @@
             this.colAuthorID,
             this.colFirstName,
             this.colMiddleName,
-            this.colLastName});
+            this.colLastName,
+            this.colIsSelected});
             this.lstBookAuthorItem.GridControl = this.lstBookAuthor;
             this.lstBookAuthorItem.Name = "lstBookAuthorItem";
-            this.lstBookAuthorItem.OptionsBehavior.Editable = false;
             this.lstBookAuthorItem.OptionsFind.AlwaysVisible = true;
-            this.lstBookAuthorItem.OptionsSelection.MultiSelect = true;
-            this.lstBookAuthorItem.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             // 
             // colAuthorID
             // 
             this.colAuthorID.Caption = "Author ID";
             this.colAuthorID.FieldName = "authorID";
             this.colAuthorID.Name = "colAuthorID";
+            this.colAuthorID.OptionsColumn.ReadOnly = true;
             this.colAuthorID.Visible = true;
             this.colAuthorID.VisibleIndex = 4;
             // 
@@ -88,8 +88,9 @@
             this.colFirstName.Caption = "First Name";
             this.colFirstName.FieldName = "fname";
             this.colFirstName.Name = "colFirstName";
+            this.colFirstName.OptionsColumn.ReadOnly = true;
             this.colFirstName.Visible = true;
-            this.colFirstName.VisibleIndex = 0;
+            this.colFirstName.VisibleIndex = 1;
             this.colFirstName.Width = 191;
             // 
             // colMiddleName
@@ -97,8 +98,9 @@
             this.colMiddleName.Caption = "Middle Name/Initial";
             this.colMiddleName.FieldName = "mname";
             this.colMiddleName.Name = "colMiddleName";
+            this.colMiddleName.OptionsColumn.ReadOnly = true;
             this.colMiddleName.Visible = true;
-            this.colMiddleName.VisibleIndex = 1;
+            this.colMiddleName.VisibleIndex = 2;
             this.colMiddleName.Width = 138;
             // 
             // colLastName
@@ -106,8 +108,9 @@
             this.colLastName.Caption = "Last Name";
             this.colLastName.FieldName = "lname";
             this.colLastName.Name = "colLastName";
+            this.colLastName.OptionsColumn.ReadOnly = true;
             this.colLastName.Visible = true;
-            this.colLastName.VisibleIndex = 2;
+            this.colLastName.VisibleIndex = 3;
             this.colLastName.Width = 200;
             // 
             // txtAuthorLname
@@ -160,9 +163,17 @@
             this.btnAddAuthor.Location = new System.Drawing.Point(748, 15);
             this.btnAddAuthor.Name = "btnAddAuthor";
             this.btnAddAuthor.Size = new System.Drawing.Size(38, 23);
-            this.btnAddAuthor.TabIndex = 35;
+            this.btnAddAuthor.TabIndex = 4;
             this.btnAddAuthor.Text = "+";
             this.btnAddAuthor.Click += new System.EventHandler(this.btnAddAuthor_Click);
+            // 
+            // colIsSelected
+            // 
+            this.colIsSelected.Caption = "Select";
+            this.colIsSelected.FieldName = "isSelected";
+            this.colIsSelected.Name = "colIsSelected";
+            this.colIsSelected.Visible = true;
+            this.colIsSelected.VisibleIndex = 0;
             // 
             // addBookAuthor
             // 
@@ -205,6 +216,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.SimpleButton btnAddAuthor;
         public DevExpress.XtraGrid.GridControl lstBookAuthor;
+        private DevExpress.XtraGrid.Columns.GridColumn colIsSelected;
 
     }
 }

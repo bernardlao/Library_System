@@ -327,7 +327,8 @@ namespace MyClassCollection
         }
         public void DecimalHandle(ref object sender, ref KeyPressEventArgs e)
         {
-            TextBox txt = (TextBox)sender;
+            //TextBox txt = (TextBox)sender;
+            DevExpress.XtraEditors.TextEdit txt = (DevExpress.XtraEditors.TextEdit)sender;
             if (txt.Text.Contains(".") && e.KeyChar == '.')
                 e.Handled = true;
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
@@ -349,6 +350,19 @@ namespace MyClassCollection
                     e.Handled = true;
                 }
             }
+        }
+        public void HypenatedNumberHandle(ref object sender, ref KeyPressEventArgs e)
+        {
+            DevExpress.XtraEditors.TextEdit txt = (DevExpress.XtraEditors.TextEdit)sender;
+            if (txt.Text.Length > 0)
+            {
+                if (txt.Text[txt.Text.Length - 1].Equals('-') && e.KeyChar == '-')
+                    e.Handled = true;
+            }
+            if (txt.Text.Length == 0 && e.KeyChar == '-')
+                e.Handled = true;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
+                e.Handled = true;
         }
         public string GenerateSalt(int len)
         {
@@ -382,6 +396,16 @@ namespace MyClassCollection
             foreach (byte b in hash)
                 hashedStrings += String.Format("{0:X2}", b);
             return hashedStrings;
+        }
+        public void ClearTextEdit(DevExpress.XtraEditors.XtraUserControl form)
+        {
+            foreach (Control c in form.Controls)
+            {
+                if (c is DevExpress.XtraEditors.TextEdit)
+                {
+                    (c as DevExpress.XtraEditors.TextEdit).Text = "";
+                }
+            }
         }
         /*public DataTable ConvertToDataTable<T>(List<T> data)
         {

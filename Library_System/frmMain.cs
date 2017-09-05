@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using MyClassCollection;
 
 namespace Library_System
@@ -24,8 +25,11 @@ namespace Library_System
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            rpgBookModifier.Enabled = false;
+            ClearPanel();
             addBookInfo info = new addBookInfo();
             info.Dock = DockStyle.Fill;
+            info.btnMultiAuthor.Checked = false;
             scMain.Panel1.Controls.Add(info);
             scMain.Panel1.Enabled = true;
             addBookAuthor auth = new addBookAuthor();
@@ -41,7 +45,7 @@ namespace Library_System
             {
                 if (c is DevExpress.XtraEditors.XtraUserControl)
                 {
-                    (c as addBookAuthor).SendMessage(); 
+                    XtraMessageBox.Show((c as addBookAuthor).Name);
                 }
             }
         }
@@ -82,6 +86,11 @@ namespace Library_System
                 }
                 triggerDesigner = false;
             }
+        }
+        private void ClearPanel()
+        {
+            scMain.Panel1.Controls.Clear();
+            scMain.Panel2.Controls.Clear();
         }
     }
 }

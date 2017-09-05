@@ -54,7 +54,6 @@
             this.labelControl = new DevExpress.XtraEditors.LabelControl();
             this.chkCopyright = new DevExpress.XtraEditors.CheckEdit();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
-            this.cmbSubject = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.optPerson = new DevExpress.XtraEditors.CheckEdit();
             this.optCorporate = new DevExpress.XtraEditors.CheckEdit();
@@ -69,6 +68,7 @@
             this.gpbCorporate = new DevExpress.XtraEditors.GroupControl();
             this.txtCorporate = new DevExpress.XtraEditors.TextEdit();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
+            this.txtSubject = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDewey.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCatters.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPub.Properties)).BeginInit();
@@ -82,7 +82,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPublisherAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtISBN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCopyright.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSubject.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optPerson.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.optCorporate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpbPerson)).BeginInit();
@@ -93,6 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpbCorporate)).BeginInit();
             this.gpbCorporate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCorporate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubject.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -109,6 +109,7 @@
             this.txtDewey.Name = "txtDewey";
             this.txtDewey.Size = new System.Drawing.Size(239, 20);
             this.txtDewey.TabIndex = 1;
+            this.txtDewey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDewey_KeyPress);
             // 
             // txtCatters
             // 
@@ -116,6 +117,7 @@
             this.txtCatters.Name = "txtCatters";
             this.txtCatters.Size = new System.Drawing.Size(239, 20);
             this.txtCatters.TabIndex = 3;
+            this.txtCatters.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCatters_KeyPress);
             // 
             // labelControl2
             // 
@@ -131,6 +133,7 @@
             this.txtYearOfPub.Name = "txtYearOfPub";
             this.txtYearOfPub.Size = new System.Drawing.Size(239, 20);
             this.txtYearOfPub.TabIndex = 5;
+            this.txtYearOfPub.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearOfPub_KeyPress);
             // 
             // labelControl3
             // 
@@ -161,6 +164,7 @@
             this.txtPage.Name = "txtPage";
             this.txtPage.Size = new System.Drawing.Size(239, 20);
             this.txtPage.TabIndex = 9;
+            this.txtPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearOfPub_KeyPress);
             // 
             // labelControl5
             // 
@@ -176,6 +180,7 @@
             this.txtVolume.Name = "txtVolume";
             this.txtVolume.Size = new System.Drawing.Size(239, 20);
             this.txtVolume.TabIndex = 11;
+            this.txtVolume.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearOfPub_KeyPress);
             // 
             // labelControl6
             // 
@@ -191,6 +196,7 @@
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(239, 20);
             this.txtQuantity.TabIndex = 13;
+            this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearOfPub_KeyPress);
             // 
             // labelControl7
             // 
@@ -266,6 +272,7 @@
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(239, 20);
             this.txtISBN.TabIndex = 23;
+            this.txtISBN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtISBN_KeyPress);
             // 
             // labelControl
             // 
@@ -290,17 +297,6 @@
             this.labelControl12.Size = new System.Drawing.Size(69, 13);
             this.labelControl12.TabIndex = 26;
             this.labelControl12.Text = "Book Subject :";
-            // 
-            // cmbSubject
-            // 
-            this.cmbSubject.EnterMoveNextControl = true;
-            this.cmbSubject.Location = new System.Drawing.Point(148, 411);
-            this.cmbSubject.Name = "cmbSubject";
-            this.cmbSubject.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbSubject.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbSubject.Size = new System.Drawing.Size(239, 20);
-            this.cmbSubject.TabIndex = 27;
             // 
             // labelControl13
             // 
@@ -363,6 +359,7 @@
             this.txtAuthorLname.Name = "txtAuthorLname";
             this.txtAuthorLname.Size = new System.Drawing.Size(222, 20);
             this.txtAuthorLname.TabIndex = 29;
+            this.txtAuthorLname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAuthorFname_KeyPress);
             // 
             // labelControl14
             // 
@@ -378,6 +375,7 @@
             this.txtAuthorMname.Name = "txtAuthorMname";
             this.txtAuthorMname.Size = new System.Drawing.Size(222, 20);
             this.txtAuthorMname.TabIndex = 27;
+            this.txtAuthorMname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAuthorFname_KeyPress);
             // 
             // labelControl15
             // 
@@ -393,6 +391,7 @@
             this.txtAuthorFname.Name = "txtAuthorFname";
             this.txtAuthorFname.Size = new System.Drawing.Size(222, 20);
             this.txtAuthorFname.TabIndex = 25;
+            this.txtAuthorFname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAuthorFname_KeyPress);
             // 
             // labelControl16
             // 
@@ -428,6 +427,13 @@
             this.labelControl17.TabIndex = 26;
             this.labelControl17.Text = "Corporate Name :";
             // 
+            // txtSubject
+            // 
+            this.txtSubject.Location = new System.Drawing.Point(148, 411);
+            this.txtSubject.Name = "txtSubject";
+            this.txtSubject.Size = new System.Drawing.Size(239, 20);
+            this.txtSubject.TabIndex = 27;
+            // 
             // addBookInfo
             // 
             this.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -436,12 +442,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.txtSubject);
             this.Controls.Add(this.gpbCorporate);
             this.Controls.Add(this.gpbPerson);
             this.Controls.Add(this.optCorporate);
             this.Controls.Add(this.optPerson);
             this.Controls.Add(this.labelControl13);
-            this.Controls.Add(this.cmbSubject);
             this.Controls.Add(this.labelControl12);
             this.Controls.Add(this.chkCopyright);
             this.Controls.Add(this.txtISBN);
@@ -484,7 +490,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPublisherAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtISBN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCopyright.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSubject.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.optPerson.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.optCorporate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpbPerson)).EndInit();
@@ -497,6 +502,7 @@
             this.gpbCorporate.ResumeLayout(false);
             this.gpbCorporate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCorporate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubject.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -530,7 +536,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl;
         private DevExpress.XtraEditors.CheckEdit chkCopyright;
         private DevExpress.XtraEditors.LabelControl labelControl12;
-        private DevExpress.XtraEditors.ComboBoxEdit cmbSubject;
         private DevExpress.XtraEditors.LabelControl labelControl13;
         private DevExpress.XtraEditors.CheckEdit optPerson;
         private DevExpress.XtraEditors.CheckEdit optCorporate;
@@ -544,7 +549,8 @@
         private DevExpress.XtraEditors.GroupControl gpbCorporate;
         private DevExpress.XtraEditors.TextEdit txtCorporate;
         private DevExpress.XtraEditors.LabelControl labelControl17;
-        private DevExpress.XtraEditors.CheckButton btnMultiAuthor;
+        public DevExpress.XtraEditors.CheckButton btnMultiAuthor;
+        private DevExpress.XtraEditors.TextEdit txtSubject;
 
     }
 }

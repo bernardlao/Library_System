@@ -62,6 +62,7 @@
             this.btnBorrowSelectedBook = new DevExpress.XtraBars.BarButtonItem();
             this.ribBooks = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgBookManager = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpgBookModifier = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgSubject = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribBorrowing = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -77,7 +78,6 @@
             this.rpgBorrowControl = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.scMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.tmDesigner = new System.Windows.Forms.Timer(this.components);
-            this.rpgBookModifier = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribTabs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.SuspendLayout();
@@ -358,6 +358,13 @@
             this.rpgBookManager.Name = "rpgBookManager";
             this.rpgBookManager.Text = "Book Manager";
             // 
+            // rpgBookModifier
+            // 
+            this.rpgBookModifier.ItemLinks.Add(this.btnEdit);
+            this.rpgBookModifier.ItemLinks.Add(this.btnDelete);
+            this.rpgBookModifier.Name = "rpgBookModifier";
+            this.rpgBookModifier.Text = "Book Modifier";
+            // 
             // rpgSubject
             // 
             this.rpgSubject.ItemLinks.Add(this.btnSubject);
@@ -460,7 +467,6 @@
             this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scMain.Location = new System.Drawing.Point(0, 143);
             this.scMain.Name = "scMain";
-            this.scMain.Panel1.AutoScroll = true;
             this.scMain.Panel1.Text = "Panel1";
             this.scMain.Panel2.AutoScroll = true;
             this.scMain.Panel2.Text = "Panel2";
@@ -473,13 +479,6 @@
             // 
             this.tmDesigner.Enabled = true;
             this.tmDesigner.Tick += new System.EventHandler(this.tmDesigner_Tick);
-            // 
-            // rpgBookModifier
-            // 
-            this.rpgBookModifier.ItemLinks.Add(this.btnEdit);
-            this.rpgBookModifier.ItemLinks.Add(this.btnDelete);
-            this.rpgBookModifier.Name = "rpgBookModifier";
-            this.rpgBookModifier.Text = "Book Modifier";
             // 
             // frmMain
             // 
