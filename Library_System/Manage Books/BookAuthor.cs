@@ -28,7 +28,7 @@ namespace Library_System
 
         private void addBookAuthor_Load(object sender, EventArgs e)
         {
-            dt = db.SelectTable("SELECT authorID,fname,mname,lname FROM tblauthor");
+            dt = db.SelectTable("SELECT authorID,fname,mname,lname FROM tblauthor WHERE corporation IS NULL");
             DataColumn isSelected = new DataColumn("isSelected",typeof(bool));
             isSelected.DefaultValue = false;
             dt.Columns.Add(isSelected);
@@ -73,17 +73,23 @@ namespace Library_System
             {
                 if (!IsUserExist())
                 {
-                    DataRow r = dt.NewRow();
-                    r["authorID"] = -1;
-                    r["fname"] = txtAuthorFname.Text;
-                    r["mname"] = txtAuthorMname.Text;
-                    r["lname"] = txtAuthorLname.Text;
-                    r["isSelected"] = true;
-                    dt.Rows.Add(r);
-                    collection.Add(txtAuthorFname.Text);
-                    collection2.Add(txtAuthorMname.Text);
-                    collection3.Add(txtAuthorLname.Text);
-                    hm.ClearTextEdit(this);
+                    db.InsertQuery("INSERT INTO tblauthor(fname,mname,lname) VALUES('" + 
+                        txtAuthorFname.Text + "','" + txtAuthorMname.Text + "','" + txtAuthorLname.Text + "');");
+                    DataRow row = db.GetLastInsertItem("SELECT * FROM tblauthor ORDER BY authorID DESC LIMIT 1;");
+                    if (row != null)
+                    {
+                        DataRow r = dt.NewRow();
+                        r["authorID"] = row["authorID"].ToString();
+                        r["fname"] = row["fname"].ToString();
+                        r["mname"] = row["mname"].ToString();
+                        r["lname"] = row["lname"].ToString();
+                        r["isSelected"] = true;
+                        dt.Rows.Add(r);
+                        collection.Add(txtAuthorFname.Text);
+                        collection2.Add(txtAuthorMname.Text);
+                        collection3.Add(txtAuthorLname.Text);
+                        hm.ClearTextEdit(this);
+                    }
                 }
             }
         }
@@ -111,6 +117,23 @@ namespace Library_System
                 }
             }
             return false;
+        }
+        public string[] GetSelectedAuthors()
+        {
+            List<string> selectedAuthors = new List<string>();
+            foreach (DataRow r in dt.Rows)
+            {
+                string s = r["isSelected"].ToString();
+                if (r["isSelected"].ToString().Equals("True"))
+                    selectedAuthors.Add(r["authorID"].ToString());
+            }
+            return selectedAuthors.ToArray();
+        }
+
+        private void lstBookAuthorItem_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            object id = lstBookAuthorItem.GetRowCellValue(e.RowHandle, lstBookAuthorItem.Columns[0]);
+            dt.AsEnumerable().Where(s => s["authorID"].ToString().Equals(id.ToString())).Select(s=>s).Single()["isSelected"] = e.Value;
         }
         //private void SetSelected()
         //{

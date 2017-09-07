@@ -37,7 +37,7 @@
             this.lnkRegister = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
-            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+            this.picLogo = new DevExpress.XtraEditors.PictureEdit();
             this.txtServer = new DevExpress.XtraEditors.TextEdit();
             this.txtPort = new DevExpress.XtraEditors.TextEdit();
             this.txtUID = new DevExpress.XtraEditors.TextEdit();
@@ -48,7 +48,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtServer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUID.Properties)).BeginInit();
@@ -134,16 +134,16 @@
             this.separatorControl1.Size = new System.Drawing.Size(26, 231);
             this.separatorControl1.TabIndex = 10;
             // 
-            // pictureEdit1
+            // picLogo
             // 
-            this.pictureEdit1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureEdit1.EditValue = ((object)(resources.GetObject("pictureEdit1.EditValue")));
-            this.pictureEdit1.Location = new System.Drawing.Point(312, 12);
-            this.pictureEdit1.Name = "pictureEdit1";
-            this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.pictureEdit1.Size = new System.Drawing.Size(131, 96);
-            this.pictureEdit1.TabIndex = 11;
+            this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picLogo.EditValue = ((object)(resources.GetObject("picLogo.EditValue")));
+            this.picLogo.Location = new System.Drawing.Point(312, 12);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.picLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picLogo.Size = new System.Drawing.Size(131, 96);
+            this.picLogo.TabIndex = 11;
             // 
             // txtServer
             // 
@@ -216,7 +216,7 @@
             this.Controls.Add(this.txtUID);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.txtServer);
-            this.Controls.Add(this.pictureEdit1);
+            this.Controls.Add(this.picLogo);
             this.Controls.Add(this.separatorControl1);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.lnkRegister);
@@ -225,6 +225,7 @@
             this.Controls.Add(this.lnkLoginGuest);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";
@@ -235,7 +236,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtServer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUID.Properties)).EndInit();
@@ -255,7 +256,7 @@
         private DevExpress.XtraEditors.HyperlinkLabelControl lnkRegister;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.SeparatorControl separatorControl1;
-        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private DevExpress.XtraEditors.PictureEdit picLogo;
         private DevExpress.XtraEditors.TextEdit txtServer;
         private DevExpress.XtraEditors.TextEdit txtPort;
         private DevExpress.XtraEditors.TextEdit txtUID;

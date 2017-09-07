@@ -34,6 +34,7 @@
             this.colFirstName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMiddleName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLastName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtAuthorLname = new DevExpress.XtraEditors.TextEdit();
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
             this.txtAuthorMname = new DevExpress.XtraEditors.TextEdit();
@@ -41,7 +42,6 @@
             this.txtAuthorFname = new DevExpress.XtraEditors.TextEdit();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.btnAddAuthor = new DevExpress.XtraEditors.SimpleButton();
-            this.colIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookAuthor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookAuthorItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthorLname.Properties)).BeginInit();
@@ -73,6 +73,8 @@
             this.lstBookAuthorItem.GridControl = this.lstBookAuthor;
             this.lstBookAuthorItem.Name = "lstBookAuthorItem";
             this.lstBookAuthorItem.OptionsFind.AlwaysVisible = true;
+            this.lstBookAuthorItem.OptionsView.EnableAppearanceEvenRow = true;
+            this.lstBookAuthorItem.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.lstBookAuthorItem_CellValueChanging);
             // 
             // colAuthorID
             // 
@@ -80,8 +82,6 @@
             this.colAuthorID.FieldName = "authorID";
             this.colAuthorID.Name = "colAuthorID";
             this.colAuthorID.OptionsColumn.ReadOnly = true;
-            this.colAuthorID.Visible = true;
-            this.colAuthorID.VisibleIndex = 4;
             // 
             // colFirstName
             // 
@@ -112,6 +112,14 @@
             this.colLastName.Visible = true;
             this.colLastName.VisibleIndex = 3;
             this.colLastName.Width = 200;
+            // 
+            // colIsSelected
+            // 
+            this.colIsSelected.Caption = "Select";
+            this.colIsSelected.FieldName = "isSelected";
+            this.colIsSelected.Name = "colIsSelected";
+            this.colIsSelected.Visible = true;
+            this.colIsSelected.VisibleIndex = 0;
             // 
             // txtAuthorLname
             // 
@@ -166,14 +174,6 @@
             this.btnAddAuthor.TabIndex = 4;
             this.btnAddAuthor.Text = "+";
             this.btnAddAuthor.Click += new System.EventHandler(this.btnAddAuthor_Click);
-            // 
-            // colIsSelected
-            // 
-            this.colIsSelected.Caption = "Select";
-            this.colIsSelected.FieldName = "isSelected";
-            this.colIsSelected.Name = "colIsSelected";
-            this.colIsSelected.Visible = true;
-            this.colIsSelected.VisibleIndex = 0;
             // 
             // addBookAuthor
             // 

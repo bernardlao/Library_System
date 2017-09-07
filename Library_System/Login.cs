@@ -37,6 +37,7 @@ namespace Library_System
                 lnkRegister.Enabled = false;
                 btnConnection.Enabled = false;
                 isConnected = false;
+                EnableConnectionControls(!btnApplyConnection.Enabled);
             }
             else
             {
@@ -53,6 +54,7 @@ namespace Library_System
                             pass + "','" + salt + "','','','','');");
                     }
                 }
+                EnableConnectionControls(false);
             }
 
         }
@@ -70,6 +72,7 @@ namespace Library_System
             this.Size = new Size(555, this.Size.Height);
             this.Location = new Point(this.Location.X - 127, this.Location.Y);
             btnConnection.Enabled = false;
+            EnableConnectionControls(!btnApplyConnection.Enabled);
         }
 
         private void btnCloseConnectionSet_Click(object sender, EventArgs e)
@@ -77,6 +80,7 @@ namespace Library_System
             this.Size = new Size(300, this.Size.Height);
             this.Location = new Point(this.Location.X + 127, this.Location.Y);
             btnConnection.Enabled = true;
+            EnableConnectionControls(!btnApplyConnection.Enabled);
         }
 
         private void btnTestConnection_Click(object sender, EventArgs e)
@@ -177,6 +181,23 @@ namespace Library_System
             frmMain.userLoggedIn = "Guest";
             frmMain.triggerDesigner = true;
             this.Close();
+        }
+        private void EnableConnectionControls(bool enable)
+        {
+            txtPort.Enabled = enable;
+            txtPwd.Enabled = enable;
+            txtServer.Enabled = enable;
+            txtUID.Enabled = enable;
+            btnApplyConnection.Enabled = enable;
+            btnTestConnection.Enabled = enable;
+            btnCloseConnectionSet.Enabled = enable;
+            picLogo.Enabled = enable;
+
+            btnLogin.Enabled = !enable;
+            lnkLoginGuest.Enabled = !enable;
+            lnkRegister.Enabled = !enable;
+            txtPassword.Enabled = !enable;
+            txtUsername.Enabled = !enable;
         }
     }
 }

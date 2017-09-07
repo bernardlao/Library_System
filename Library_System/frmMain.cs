@@ -8,23 +8,29 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
+using RibbonSupport;
+using DevExpress.XtraSplashScreen;
 
 namespace Library_System
 {
     public partial class frmMain : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         private MySQLDBUtilities db = new MySQLDBUtilities();
-        private string ribbonPressed = "";
+        private RibbonSupportClass rsc;
+        private SaveSender ss;
         public static string userLoggedIn = null;
         public static bool triggerDesigner = false;
 
         public frmMain()
         {
             InitializeComponent();
+            rsc = new RibbonSupportClass(this);
+           
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ss = SaveSender.AddBook;
             rpgBookModifier.Enabled = false;
             ClearPanel();
             addBookInfo info = new addBookInfo();
@@ -41,13 +47,7 @@ namespace Library_System
 
         private void btnSaveBooks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            foreach (Control c in scMain.Panel2.Controls)
-            {
-                if (c is DevExpress.XtraEditors.XtraUserControl)
-                {
-                    XtraMessageBox.Show((c as addBookAuthor).Name);
-                }
-            }
+            rsc.SaveNow(ss);
         }
 
         private void frmMain_Load(object sender, EventArgs e)

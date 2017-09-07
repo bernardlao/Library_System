@@ -22,3 +22,4 @@ D:\Library_System\Library_System\obj\Debug\Library_System.frmMain.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Properties.Resources.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.csproj.GenerateResource.Cache
 D:\Library_System\Library_System\obj\Debug\Library_System.exe.licenses
+D:\Library_System\Library_System\obj\Debug\Library_System.ProcessProgress.resources

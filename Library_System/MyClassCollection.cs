@@ -98,6 +98,7 @@ namespace MyClassCollection
                 return null;
             }
         }
+        
         public void InsertQuery(string query)
         {
             com.CommandText = query;
@@ -202,7 +203,19 @@ namespace MyClassCollection
                 CloseConnection();
             }
         }
-        
+        public DataRow GetLastInsertItem(string query)
+        {
+            DataTable dt = SelectTable(query);
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow r = dt.Rows[0];
+                    return r;
+                }
+            }
+            return null;
+        }
     }
     class ConnectionStringSolution
     {
@@ -405,6 +418,10 @@ namespace MyClassCollection
                 {
                     (c as DevExpress.XtraEditors.TextEdit).Text = "";
                 }
+                if (c is DevExpress.XtraEditors.MemoEdit)
+                {
+                    (c as DevExpress.XtraEditors.MemoEdit).Text = "";
+                }
             }
         }
         /*public DataTable ConvertToDataTable<T>(List<T> data)
@@ -427,4 +444,5 @@ namespace MyClassCollection
             return table;
         }*/
     }
+    
 }

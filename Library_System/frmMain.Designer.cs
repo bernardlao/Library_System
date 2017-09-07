@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ribTabs = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             this.btnAddBook = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnEditBook = new DevExpress.XtraBars.BarButtonItem();
@@ -78,13 +79,16 @@
             this.rpgBorrowControl = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.scMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.tmDesigner = new System.Windows.Forms.Timer(this.components);
+            this.btnLogout = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribTabs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribTabs
             // 
+            this.ribTabs.ApplicationButtonDropDownControl = this.appMenu;
             this.ribTabs.ExpandCollapseItem.Id = 0;
             this.ribTabs.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribTabs.ExpandCollapseItem,
@@ -117,9 +121,10 @@
             this.btnRegisterBorrower,
             this.barButtonItem3,
             this.btnSearchBooks,
-            this.btnBorrowSelectedBook});
+            this.btnBorrowSelectedBook,
+            this.btnLogout});
             this.ribTabs.Location = new System.Drawing.Point(0, 0);
-            this.ribTabs.MaxItemId = 31;
+            this.ribTabs.MaxItemId = 3;
             this.ribTabs.Name = "ribTabs";
             this.ribTabs.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribBooks,
@@ -130,6 +135,12 @@
             this.ribTabs.ShowToolbarCustomizeItem = false;
             this.ribTabs.Size = new System.Drawing.Size(919, 143);
             this.ribTabs.Toolbar.ShowCustomizeItem = false;
+            // 
+            // appMenu
+            // 
+            this.appMenu.ItemLinks.Add(this.btnLogout);
+            this.appMenu.Name = "appMenu";
+            this.appMenu.Ribbon = this.ribTabs;
             // 
             // btnAddBook
             // 
@@ -480,6 +491,13 @@
             this.tmDesigner.Enabled = true;
             this.tmDesigner.Tick += new System.EventHandler(this.tmDesigner_Tick);
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Caption = "Logout";
+            this.btnLogout.Id = 2;
+            this.btnLogout.ImageUri.Uri = "Show";
+            this.btnLogout.Name = "btnLogout";
+            // 
             // frmMain
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -495,6 +513,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribTabs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
             this.scMain.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -553,6 +572,8 @@
         private System.Windows.Forms.Timer tmDesigner;
         public DevExpress.XtraEditors.SplitContainerControl scMain;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBookModifier;
+        private DevExpress.XtraBars.Ribbon.ApplicationMenu appMenu;
+        private DevExpress.XtraBars.BarButtonItem btnLogout;
     }
 }
 
