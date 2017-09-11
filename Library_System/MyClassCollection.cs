@@ -424,6 +424,16 @@ namespace MyClassCollection
                 }
             }
         }
+        public void TrimTextEdit(DevExpress.XtraEditors.XtraUserControl form)
+        {
+            foreach (Control c in form.Controls)
+            {
+                if (c is DevExpress.XtraEditors.TextEdit)
+                    (c as DevExpress.XtraEditors.TextEdit).Text = (c as DevExpress.XtraEditors.TextEdit).Text.Trim();
+                if (c is DevExpress.XtraEditors.MemoEdit)
+                    (c as DevExpress.XtraEditors.MemoEdit).Text = (c as DevExpress.XtraEditors.MemoEdit).Text.Trim();
+            }
+        }
         /*public DataTable ConvertToDataTable<T>(List<T> data)
         {
             DataTable table = new DataTable();

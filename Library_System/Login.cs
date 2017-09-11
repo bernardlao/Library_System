@@ -28,13 +28,13 @@ namespace Library_System
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
+            frmMain.userLoggedIn = null;
             if (db.OpenConnection() == null)
             {
                 this.Size = new Size(555, this.Size.Height);
                 this.Location = new Point(this.Location.X - 127, this.Location.Y);
                 btnLogin.Enabled = false;
                 lnkLoginGuest.Enabled = false;
-                lnkRegister.Enabled = false;
                 btnConnection.Enabled = false;
                 isConnected = false;
                 EnableConnectionControls(!btnApplyConnection.Enabled);
@@ -51,7 +51,7 @@ namespace Library_System
                         string salt = hm.GenerateSalt(("admin").Length);
                         string pass = hm.GenerateSHA256("admin" + salt);
                         db.InsertQuery("INSERT INTO tbluser (username, password, salt, librarianID, fname, mname, lname) VALUES('admin','" +
-                            pass + "','" + salt + "','','','','');");
+                            pass + "','" + salt + "','-1','','','');");
                     }
                 }
                 EnableConnectionControls(false);
@@ -69,10 +69,15 @@ namespace Library_System
 
         private void btnConnection_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(555, this.Size.Height);
-            this.Location = new Point(this.Location.X - 127, this.Location.Y);
-            btnConnection.Enabled = false;
-            EnableConnectionControls(!btnApplyConnection.Enabled);
+            SuperUserPassword sup = new SuperUserPassword();
+            sup.ShowDialog();
+            if (SuperUserPassword.allowEntry)
+            {
+                this.Size = new Size(555, this.Size.Height);
+                this.Location = new Point(this.Location.X - 127, this.Location.Y);
+                btnConnection.Enabled = false;
+                EnableConnectionControls(!btnApplyConnection.Enabled);
+            }
         }
 
         private void btnCloseConnectionSet_Click(object sender, EventArgs e)
@@ -112,7 +117,6 @@ namespace Library_System
                     isConnected = true;
                     btnLogin.Enabled = true;
                     lnkLoginGuest.Enabled = true;
-                    lnkRegister.Enabled = true;
                 }
             }
             else
@@ -124,13 +128,14 @@ namespace Library_System
             if (IsAccountValid())
             {
                 isValid = true;
+                frmMain.triggerDesigner = true;
                 this.Close();
             }
            
         }
         public bool IsAccountValid()
         {
-            if (txtUsername.Text.Equals("Username") || txtPassword.Text.Equals("Password"))
+            if (txtUsername.Text.Equals("Username") || txtPassword.Text.Equals("Password") || txtUsername.Text.Equals("") || txtPassword.Text.Equals(""))
             {
                 XtraMessageBox.Show("The username and password must not be empty.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
@@ -142,13 +147,29 @@ namespace Library_System
             {
                 if (dt.Rows.Count > 0)
                 {
-                    foreach (DataRow r in dt.Rows)
+                    DataRow r = dt.Rows[0];
+                    string salt = r["salt"].ToString();
+                    string saltedPassword = hm.GenerateSHA256(password + salt);
+                    if (salt.Equals(""))
                     {
-                        string salt = r["salt"].ToString();
-                        string saltedPassword = hm.GenerateSHA256(password + salt);
+                        if (DialogResult.Yes == XtraMessageBox.Show("You don't have an existing password.\n Would you like to use the current typed password as your password?\n" +
+                            "Note : You need to contact the administrator when you want to reset your password.", "Account Validation", MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question))
+                        {
+                            salt = hm.GenerateSalt(txtPassword.Text.Length);
+                            saltedPassword = hm.GenerateSHA256(txtPassword.Text + salt);
+                            db.InsertQuery("UPDATE tbluser SET password='" + saltedPassword + "', salt='" + salt + "' WHERE userID=" + r["userID"].ToString());
+                            frmMain.userLoggedIn = r["userID"].ToString();
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
+                    else
+                    {
                         if (r["password"].ToString().Equals(saltedPassword))
                         {
-                            frmMain.userLoggedIn = (r["userID"].ToString().Equals("1") ? "-1" : r["userID"].ToString());
+                            frmMain.userLoggedIn = r["userID"].ToString();
                             return true;
                         }
                     }
@@ -169,6 +190,7 @@ namespace Library_System
             {
                 if (IsAccountValid())
                 {
+                    frmMain.triggerDesigner = true;
                     isValid = true;
                     this.Close();
                 }
@@ -195,7 +217,6 @@ namespace Library_System
 
             btnLogin.Enabled = !enable;
             lnkLoginGuest.Enabled = !enable;
-            lnkRegister.Enabled = !enable;
             txtPassword.Enabled = !enable;
             txtUsername.Enabled = !enable;
         }

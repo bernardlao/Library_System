@@ -221,16 +221,12 @@ namespace Library_System
             foreach (string s in bookAuthors)
                 queries.Add("INSERT INTO tblbookauthor (bookID,authorID) VALUES(" + bookID + "," + s + ");");
             db.InsertMultiple(queries);
+            if (DialogResult.Yes == XtraMessageBox.Show("Save Successful!\nRefresh Now?", "Saved", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                hm.ClearTextEdit(this);
         }
         private void TrimTextBoxes()
         {
-            foreach (Control c in this.Controls)
-            {
-                if (c is TextEdit)
-                    (c as TextEdit).Text = (c as TextEdit).Text.Trim();
-                if (c is MemoEdit)
-                    (c as MemoEdit).Text = (c as MemoEdit).Text.Trim();
-            }
+            hm.TrimTextEdit(this);
         }
         private bool IsValid()
         {
@@ -372,6 +368,7 @@ namespace Library_System
         }
         private void GetPublisherID()
         {
+            publisherID = null;
             DataTable dt = db.SelectTable("SELECT publisherID FROM tblpublisher WHERE publisherName='" + txtPublisherName.Text.Replace("'", "''") +
                 "' AND address='" + txtPublisherAddress.Text.Replace("'", "''") + "' LIMIT 1");
             if (dt != null)
@@ -395,6 +392,7 @@ namespace Library_System
         }
         private void GetSubjectID()
         {
+            subjectID = null;
             DataTable dt = db.SelectTable("SELECT subjectID FROM tblsubject WHERE subjectName='" + txtSubject.Text.Replace("'", "''") +
                 "' LIMIT 1");
             if (dt != null)

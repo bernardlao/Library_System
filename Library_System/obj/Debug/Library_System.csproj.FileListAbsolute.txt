@@ -23,3 +23,6 @@ D:\Library_System\Library_System\obj\Debug\Library_System.Properties.Resources.r
 D:\Library_System\Library_System\obj\Debug\Library_System.csproj.GenerateResource.Cache
 D:\Library_System\Library_System\obj\Debug\Library_System.exe.licenses
 D:\Library_System\Library_System\obj\Debug\Library_System.ProcessProgress.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.SuperUserPassword.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.addUser.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.viewUsers.resources

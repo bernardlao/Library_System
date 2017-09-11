@@ -69,6 +69,7 @@ namespace Library_System
 
         private void btnAddAuthor_Click(object sender, EventArgs e)
         {
+            hm.TrimTextEdit(this);
             if (IsValid())
             {
                 if (!IsUserExist())
@@ -91,6 +92,7 @@ namespace Library_System
                         hm.ClearTextEdit(this);
                     }
                 }
+                hm.ClearTextEdit(this);
             }
         }
         private bool IsValid()
@@ -134,6 +136,11 @@ namespace Library_System
         {
             object id = lstBookAuthorItem.GetRowCellValue(e.RowHandle, lstBookAuthorItem.Columns[0]);
             dt.AsEnumerable().Where(s => s["authorID"].ToString().Equals(id.ToString())).Select(s=>s).Single()["isSelected"] = e.Value;
+        }
+
+        private void txtAuthorLname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            hm.TextHandle(ref sender, ref e, false);
         }
         //private void SetSelected()
         //{

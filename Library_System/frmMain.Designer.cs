@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.ribTabs = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
+            this.btnLogout = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddBook = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnEditBook = new DevExpress.XtraBars.BarButtonItem();
@@ -54,7 +55,7 @@
             this.btnReceiveReturn = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddAccount = new DevExpress.XtraBars.BarButtonItem();
             this.btnUpdateAccount = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDeleteAccount = new DevExpress.XtraBars.BarButtonItem();
+            this.btnResetPassword = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveAccount = new DevExpress.XtraBars.BarButtonItem();
             this.btnViewAccounts = new DevExpress.XtraBars.BarButtonItem();
             this.btnRegisterBorrower = new DevExpress.XtraBars.BarButtonItem();
@@ -79,7 +80,6 @@
             this.rpgBorrowControl = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.scMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.tmDesigner = new System.Windows.Forms.Timer(this.components);
-            this.btnLogout = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribTabs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -115,7 +115,7 @@
             this.btnReceiveReturn,
             this.btnAddAccount,
             this.btnUpdateAccount,
-            this.btnDeleteAccount,
+            this.btnResetPassword,
             this.btnSaveAccount,
             this.btnViewAccounts,
             this.btnRegisterBorrower,
@@ -135,12 +135,21 @@
             this.ribTabs.ShowToolbarCustomizeItem = false;
             this.ribTabs.Size = new System.Drawing.Size(919, 143);
             this.ribTabs.Toolbar.ShowCustomizeItem = false;
+            this.ribTabs.SelectedPageChanged += new System.EventHandler(this.ribTabs_SelectedPageChanged);
             // 
             // appMenu
             // 
             this.appMenu.ItemLinks.Add(this.btnLogout);
             this.appMenu.Name = "appMenu";
             this.appMenu.Ribbon = this.ribTabs;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Caption = "Logout";
+            this.btnLogout.Id = 2;
+            this.btnLogout.ImageUri.Uri = "Show";
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLogout_ItemClick);
             // 
             // btnAddBook
             // 
@@ -296,6 +305,7 @@
             this.btnAddAccount.Id = 22;
             this.btnAddAccount.ImageUri.Uri = "Add";
             this.btnAddAccount.Name = "btnAddAccount";
+            this.btnAddAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddAccount_ItemClick);
             // 
             // btnUpdateAccount
             // 
@@ -303,13 +313,15 @@
             this.btnUpdateAccount.Id = 23;
             this.btnUpdateAccount.ImageUri.Uri = "Edit";
             this.btnUpdateAccount.Name = "btnUpdateAccount";
+            this.btnUpdateAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpdateAccount_ItemClick);
             // 
-            // btnDeleteAccount
+            // btnResetPassword
             // 
-            this.btnDeleteAccount.Caption = "Delete Account";
-            this.btnDeleteAccount.Id = 24;
-            this.btnDeleteAccount.ImageUri.Uri = "Cut";
-            this.btnDeleteAccount.Name = "btnDeleteAccount";
+            this.btnResetPassword.Caption = "Reset Account Password";
+            this.btnResetPassword.Id = 24;
+            this.btnResetPassword.ImageUri.Uri = "Cut";
+            this.btnResetPassword.Name = "btnResetPassword";
+            this.btnResetPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResetPassword_ItemClick);
             // 
             // btnSaveAccount
             // 
@@ -317,6 +329,7 @@
             this.btnSaveAccount.Id = 25;
             this.btnSaveAccount.ImageUri.Uri = "Save";
             this.btnSaveAccount.Name = "btnSaveAccount";
+            this.btnSaveAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveAccount_ItemClick);
             // 
             // btnViewAccounts
             // 
@@ -324,6 +337,7 @@
             this.btnViewAccounts.Id = 26;
             this.btnViewAccounts.ImageUri.Uri = "Find";
             this.btnViewAccounts.Name = "btnViewAccounts";
+            this.btnViewAccounts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewAccounts_ItemClick);
             // 
             // btnRegisterBorrower
             // 
@@ -439,7 +453,7 @@
             // 
             this.rpgManageAccount.ItemLinks.Add(this.btnAddAccount);
             this.rpgManageAccount.ItemLinks.Add(this.btnUpdateAccount);
-            this.rpgManageAccount.ItemLinks.Add(this.btnDeleteAccount);
+            this.rpgManageAccount.ItemLinks.Add(this.btnResetPassword);
             this.rpgManageAccount.Name = "rpgManageAccount";
             this.rpgManageAccount.Text = "Manage Account";
             // 
@@ -490,13 +504,6 @@
             // 
             this.tmDesigner.Enabled = true;
             this.tmDesigner.Tick += new System.EventHandler(this.tmDesigner_Tick);
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Caption = "Logout";
-            this.btnLogout.Id = 2;
-            this.btnLogout.ImageUri.Uri = "Show";
-            this.btnLogout.Name = "btnLogout";
             // 
             // frmMain
             // 
@@ -558,7 +565,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgReceiveTools;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribManageAccounts;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgManageAccount;
-        private DevExpress.XtraBars.BarButtonItem btnDeleteAccount;
+        private DevExpress.XtraBars.BarButtonItem btnResetPassword;
         private DevExpress.XtraBars.BarButtonItem btnSaveAccount;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgAccountTools;
         private DevExpress.XtraBars.BarButtonItem btnViewAccounts;

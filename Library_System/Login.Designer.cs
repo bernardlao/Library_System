@@ -34,8 +34,6 @@
             this.lnkLoginGuest = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
             this.btnConnection = new DevExpress.XtraEditors.SimpleButton();
-            this.lnkRegister = new DevExpress.XtraEditors.HyperlinkLabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.picLogo = new DevExpress.XtraEditors.PictureEdit();
             this.txtServer = new DevExpress.XtraEditors.TextEdit();
@@ -79,7 +77,7 @@
             // lnkLoginGuest
             // 
             this.lnkLoginGuest.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkLoginGuest.Location = new System.Drawing.Point(179, 139);
+            this.lnkLoginGuest.Location = new System.Drawing.Point(112, 139);
             this.lnkLoginGuest.Name = "lnkLoginGuest";
             this.lnkLoginGuest.Size = new System.Drawing.Size(70, 13);
             this.lnkLoginGuest.TabIndex = 7;
@@ -106,23 +104,6 @@
             this.btnConnection.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Warning;
             this.btnConnection.ToolTipTitle = "For Administrator Only";
             this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
-            // 
-            // lnkRegister
-            // 
-            this.lnkRegister.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkRegister.Location = new System.Drawing.Point(40, 139);
-            this.lnkRegister.Name = "lnkRegister";
-            this.lnkRegister.Size = new System.Drawing.Size(64, 13);
-            this.lnkRegister.TabIndex = 6;
-            this.lnkRegister.Text = "Register Now";
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(139, 141);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(10, 13);
-            this.labelControl1.TabIndex = 9;
-            this.labelControl1.Text = "or";
             // 
             // separatorControl1
             // 
@@ -218,8 +199,6 @@
             this.Controls.Add(this.txtServer);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.separatorControl1);
-            this.Controls.Add(this.labelControl1);
-            this.Controls.Add(this.lnkRegister);
             this.Controls.Add(this.btnConnection);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lnkLoginGuest);
@@ -253,8 +232,6 @@
         private DevExpress.XtraEditors.HyperlinkLabelControl lnkLoginGuest;
         private DevExpress.XtraEditors.SimpleButton btnLogin;
         private DevExpress.XtraEditors.SimpleButton btnConnection;
-        private DevExpress.XtraEditors.HyperlinkLabelControl lnkRegister;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.SeparatorControl separatorControl1;
         private DevExpress.XtraEditors.PictureEdit picLogo;
         private DevExpress.XtraEditors.TextEdit txtServer;
