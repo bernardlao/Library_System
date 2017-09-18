@@ -34,6 +34,8 @@ namespace Library_System.Manage_Users
                 {
                     lstUsersItem.Columns[i].OptionsColumn.ReadOnly = true;
                 }
+                colSelected.Width = 60;
+                colSelected.OptionsColumn.FixedWidth = true;
             }
         }
 
@@ -51,7 +53,7 @@ namespace Library_System.Manage_Users
             if(currSS == SaveSender.ResetPassword)
                 dt = db.SelectTable("SELECT * FROM tbluser");
             else
-                dt = db.SelectTable("SELECT * FROM tbluser WHERE userID != 1");
+                dt = db.SelectTable("SELECT * FROM tbluser WHERE username != 'admin'");
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)

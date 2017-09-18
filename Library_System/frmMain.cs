@@ -202,6 +202,52 @@ namespace Library_System
             scMain.Panel1.Controls.Add(sm);
             ClearCheckDoCheck(btnDeleteSubjects);
         }
+        private void btnEditPublisher_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.EditPublisher;
+            publisherManage pm = new publisherManage(ss);
+            scMain.SplitterPosition = pm.Size.Width;
+            pm.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(pm);
+            ClearCheckDoCheck(btnEditPublisher);
+        }
+        private void btnDeletePublisher_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.DeletePublisher;
+            publisherManage pm = new publisherManage(ss);
+            scMain.SplitterPosition = pm.Size.Width;
+            pm.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(pm);
+            ClearCheckDoCheck(btnDeletePublisher);
+        }
+        private void btnEditAuthor_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.EditAuthor;
+            authorManage am = new authorManage(ss);
+            scMain.SplitterPosition = 0;
+            am.Dock = DockStyle.Fill;
+            scMain.Panel2.Enabled = true;
+            scMain.Panel2.Controls.Add(am);
+            ClearCheckDoCheck(btnEditAuthor);
+        }
+
+        private void btnDeleteAuthor_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.DeleteAuthor;
+            authorManage am = new authorManage(ss);
+            scMain.SplitterPosition = 0;
+            am.Dock = DockStyle.Fill;
+            scMain.Panel2.Enabled = true;
+            scMain.Panel2.Controls.Add(am);
+            ClearCheckDoCheck(btnDeleteAuthor);
+        }
+
         private void ClearCheckDoCheck(BarCheckItem itm)
         {
             foreach (BarItem c in ribTabs.Items)
@@ -213,5 +259,8 @@ namespace Library_System
             }
             itm.Checked = true;
         }
+
+        
+        
     }
 }

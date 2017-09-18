@@ -31,6 +31,10 @@ namespace RibbonSupport
                 case SaveSender.ResetPassword: ResetPassword(); break;
                 case SaveSender.EditSubject: UpdateSubject(); break;
                 case SaveSender.DeleteSubject: DeleteSubject(); break;
+                case SaveSender.EditPublisher: UpdatePublisher(); break;
+                case SaveSender.DeletePublisher: DeletePublisher(); break;
+                case SaveSender.EditAuthor: UpdateAuthor(); break;
+                case SaveSender.DeleteAuthor: DeleteAuthor(); break;
             }
         }
         private void SaveBook()
@@ -63,6 +67,26 @@ namespace RibbonSupport
             subjectManage sm = (subjectManage)mf.scMain.Panel1.Controls[0];
             sm.DeleteNow();
         }
+        private void UpdatePublisher()
+        {
+            publisherManage pm = (publisherManage)mf.scMain.Panel1.Controls[0];
+            pm.UpdateNow();
+        }
+        private void DeletePublisher()
+        {
+            publisherManage pm = (publisherManage)mf.scMain.Panel1.Controls[0];
+            pm.DeleteNow();
+        }
+        private void UpdateAuthor()
+        {
+            authorManage am = (authorManage)mf.scMain.Panel2.Controls[0];
+            am.UpdateNow();
+        }
+        private void DeleteAuthor()
+        {
+            authorManage am = (authorManage)mf.scMain.Panel2.Controls[0];
+            am.DeleteNow();
+        }
     }
     public enum SaveSender
     {
@@ -72,6 +96,10 @@ namespace RibbonSupport
         UpdateUser,
         ResetPassword,
         EditSubject,
-        DeleteSubject
+        DeleteSubject,
+        EditPublisher,
+        DeletePublisher,
+        EditAuthor,
+        DeleteAuthor
     }
 }

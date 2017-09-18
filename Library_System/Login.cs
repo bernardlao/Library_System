@@ -43,7 +43,7 @@ namespace Library_System
             {
                 this.Size = new Size(300, this.Size.Height);
                 isConnected = true;
-                DataTable dt = db.SelectTable("SELECT * FROM tbluser");
+                DataTable dt = db.SelectTable("SELECT * FROM tbluser WHERE username ='admin'");
                 if (dt != null)
                 {
                     if (dt.Rows.Count == 0)

@@ -25,9 +25,11 @@ namespace Library_System.Manage_Books
             ss = sSender;
             if (ss == SaveSender.DeleteSubject)
             {
-                colIsSelected.Width = 60;
                 colSubjectName.OptionsColumn.ReadOnly = true;
                 colIsSelected.Visible = true;
+                lstSubjectItem.RowCellStyle -= lstSubjectItem_RowCellStyle;
+                colIsSelected.Width = 60;
+                colIsSelected.OptionsColumn.FixedWidth = true;
             }
             else if (ss == SaveSender.EditSubject)
             {
@@ -157,7 +159,7 @@ namespace Library_System.Manage_Books
                 }
                 if (constraint.Length > 0)
                     constraint = constraint.Remove(constraint.Length - 1);
-                DataTable tbl = db.SelectTable("SELECT * FROM tblbook b INNER JOIN tblsubject s ON s.subjectID=b.subjectID WHERE s.subjectID IN(" + constraint + ");");
+                DataTable tbl = db.SelectTable("SELECT * FROM tblbook b INNER JOIN tblsubject s ON s.subjectID=b.subjectID WHERE s.subjectID IN(" + constraint + ") GROUP BY s.subjectID;");
                 if (tbl != null)
                 {
                     if (tbl.Rows.Count > 0)
@@ -165,8 +167,8 @@ namespace Library_System.Manage_Books
                         string subjectConflict = "";
                         foreach (DataRow r in tbl.Rows)
                             subjectConflict += r["subjectName"].ToString() + "\n";
-                        if (DialogResult.Yes == XtraMessageBox.Show("The following subject: \n" + subjectConflict + " has an associated record already." +
-                            " Are you sure to delete those subject(s). \nNote: The record(s) associated to the said subjects will also be deleted.",
+                        if (DialogResult.Yes == XtraMessageBox.Show("The following subject: \n" + subjectConflict + "has an associated record already." +
+                            " Are you sure to delete those subject(s)? \nNote: The record(s) associated to the said subjects will also be deleted.",
                             "Subject is in Use", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
                             return true;

@@ -27,3 +27,5 @@ D:\Library_System\Library_System\obj\Debug\Library_System.SuperUserPassword.reso
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.addUser.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.viewUsers.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.SubjectManage.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.publisherManage.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.authorManage.resources
