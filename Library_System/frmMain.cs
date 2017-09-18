@@ -11,6 +11,9 @@ using MyClassCollection;
 using RibbonSupport;
 using DevExpress.XtraSplashScreen;
 using Library_System.Manage_Users;
+using Library_System.Manage_Books;
+using DevExpress.Utils;
+using DevExpress.XtraBars;
 
 namespace Library_System
 {
@@ -37,6 +40,7 @@ namespace Library_System
             addBookInfo info = new addBookInfo();
             info.Dock = DockStyle.Fill;
             info.btnMultiAuthor.Checked = false;
+            scMain.SplitterPosition = info.Size.Width;
             scMain.Panel1.Controls.Add(info);
             scMain.Panel1.Enabled = true;
             addBookAuthor auth = new addBookAuthor();
@@ -44,6 +48,7 @@ namespace Library_System
             auth.Size = scMain.Size;
             scMain.Panel2.Controls.Add(auth);
             scMain.Panel2.Enabled = false;
+            ClearCheckDoCheck(btnAddBooks);
         }
 
         private void btnSaveBooks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -120,6 +125,7 @@ namespace Library_System
             vu.Dock = DockStyle.Fill;
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(vu);
+            ClearCheckDoCheck(btnAddAccount);
         }
 
         private void btnUpdateAccount_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -131,6 +137,7 @@ namespace Library_System
             vu.Dock = DockStyle.Fill;
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(vu);
+            ClearCheckDoCheck(btnUpdateAccount);
         }
 
         private void btnResetPassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -142,17 +149,19 @@ namespace Library_System
             vu.Dock = DockStyle.Fill;
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(vu);
+            ClearCheckDoCheck(btnResetPassword);
         }
 
         private void btnViewAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ClearPanel();
-            ss = SaveSender.AddUser;
+            ss = SaveSender.None;
             viewUsers vu = new viewUsers(ss);
             scMain.SplitterPosition = 0;
             vu.Dock = DockStyle.Fill;
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(vu);
+            ClearCheckDoCheck(btnViewAccount);
         }
 
         private void btnLogout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -168,6 +177,41 @@ namespace Library_System
         {
             ss = SaveSender.None;
             ClearPanel();
+        }
+
+        private void btnEditSubject_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.EditSubject;
+            subjectManage sm = new subjectManage(ss);
+            scMain.SplitterPosition = sm.Size.Width;
+            sm.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(sm);
+            ClearCheckDoCheck(btnEditSubject);
+        }
+
+        private void btnDeleteSubject_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.DeleteSubject;
+            subjectManage sm = new subjectManage(ss);
+            scMain.SplitterPosition = sm.Size.Width;
+            sm.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(sm);
+            ClearCheckDoCheck(btnDeleteSubjects);
+        }
+        private void ClearCheckDoCheck(BarCheckItem itm)
+        {
+            foreach (BarItem c in ribTabs.Items)
+            {
+                if (c is BarCheckItem)
+                {
+                    ((BarCheckItem)c).Checked = false;
+                }
+            }
+            itm.Checked = true;
         }
     }
 }

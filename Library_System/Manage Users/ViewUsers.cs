@@ -28,6 +28,7 @@ namespace Library_System.Manage_Users
             else if (ss == SaveSender.UpdateUser) { lstUsersItem.OptionsBehavior.Editable = true; }
             else if (ss == SaveSender.ResetPassword)
             {
+                lstUsersItem.RowCellStyle -= lstUsersItem_RowCellStyle;
                 lstUsersItem.Columns[0].VisibleIndex = 0;
                 for (int i = 1; i < lstUsersItem.Columns.Count; i++)
                 {
@@ -39,6 +40,10 @@ namespace Library_System.Manage_Users
         private void viewUsers_Load(object sender, EventArgs e)
         {
             LoadList();
+            //colFirstname.RealColumnEdit.KeyPress += name_KeyPress;
+            //colLastname.RealColumnEdit.KeyPress += name_KeyPress;
+            //colMiddlename.RealColumnEdit.KeyPress += name_KeyPress;
+            //colUsername.RealColumnEdit.KeyPress += user_KeyPress;
             
         }
         public void LoadList()
@@ -82,9 +87,9 @@ namespace Library_System.Manage_Users
                     allValid = false;
                 if (lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[3]).ToString().Equals(""))
                     allValid = false;
-                if (lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[4]).ToString().Equals(""))
+                if (lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[4]).ToString().Trim().Equals(""))
                     allValid = false;
-                if (lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[6]).ToString().Equals(""))
+                if (lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[6]).ToString().Trim().Equals(""))
                     allValid = false;
                 if (lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[2]).ToString().Equals("admin", StringComparison.CurrentCultureIgnoreCase))
                     allValid = false;
@@ -138,8 +143,9 @@ namespace Library_System.Manage_Users
             {
                 if (r["isEdited"].ToString().Equals("1"))
                 {
-                    string query = "UPDATE tbluser SET username='" + r["username"].ToString() + "', password='', salt='', librarianID='" + r["librarianID"].ToString() +
-                        "', fname='" + r["fname"].ToString() + "', mname='" + r["mname"].ToString() + "', lname='" + r["lname"].ToString() + "' WHERE userID=" +
+                    string query = "UPDATE tbluser SET username='" + r["username"].ToString() + "', password='" + r["password"].ToString() +
+                        "', salt='" + r["salt"].ToString() +"', librarianID='" + r["librarianID"].ToString() +
+                        "', fname='" + r["fname"].ToString().Trim() + "', mname='" + r["mname"].ToString().Trim() + "', lname='" + r["lname"].ToString().Trim() + "' WHERE userID=" +
                         r["userID"].ToString() + ";";
                     queries.Add(query);
                 }
@@ -149,15 +155,16 @@ namespace Library_System.Manage_Users
         public void ResetPasswordNow()
         {
             List<string> queries = new List<string>();
-            foreach (DataRow r in dt.Rows)
+            List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
+            if (dr.Count > 0)
             {
-                if (r["isSelected"].ToString().Equals("True"))
+                foreach (DataRow r in dr)
                 {
                     string query = "UPDATE tbluser SET password='', salt='' WHERE userID=" + r["userID"].ToString();
                     queries.Add(query);
                 }
+                db.InsertMultiple(queries);
             }
-            db.InsertMultiple(queries);
         }
 
         private void lstUsersItem_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
@@ -166,6 +173,34 @@ namespace Library_System.Manage_Users
             {
                 string id = lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[1]).ToString();
                 dt.AsEnumerable().Where(s => s["userID"].ToString().Equals(id)).Select(s => s).Single()["isSelected"] = e.Value;
+            }
+            if (currSS == SaveSender.UpdateUser)
+            {
+                string id = lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[1]).ToString();
+                string fieldName = lstUsersItem.FocusedColumn.FieldName;
+                dt.AsEnumerable().Where(s => s["userID"].ToString().Equals(id)).Select(s => s).Single()["isEdited"] = 1;
+                dt.AsEnumerable().Where(s => s["userID"].ToString().Equals(id)).Select(s => s).Single()[fieldName] = e.Value;
+            }
+        }
+        private void user_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            hm.AlphaNumericOnly(ref sender, ref e);
+        }
+
+        private void name_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            hm.TextHandle(ref sender, ref e, false);
+        }
+
+        private void lstUsersItem_ShownEditor(object sender, EventArgs e)
+        {
+            if (lstUsersItem.FocusedColumn.FieldName == "username")
+            {
+                lstUsersItem.ActiveEditor.KeyPress += user_KeyPress;
+            }
+            else if (lstUsersItem.FocusedColumn.FieldName == "fname" || lstUsersItem.FocusedColumn.FieldName == "mname" || lstUsersItem.FocusedColumn.FieldName == "fname")
+            {
+                lstUsersItem.ActiveEditor.KeyPress += name_KeyPress;
             }
         }
     }

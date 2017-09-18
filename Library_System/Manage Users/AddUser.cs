@@ -47,6 +47,12 @@ namespace Library_System.Manage_Users
         }
         private bool IsValidToSave()
         {
+            if (txtUsername.Text.Equals("") || txtPassword.Text.Equals("") || txtLibrarianID.Text.Equals("") ||
+                txtFirstname.Text.Equals("") || txtLastname.Text.Equals(""))
+            {
+                XtraMessageBox.Show("You must fill up all the informations indicated.\nMiddlename(Optional)", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             if (txtUsername.Text.Equals("admin", StringComparison.CurrentCultureIgnoreCase))
             {
                 XtraMessageBox.Show("The word ADMIN cannot be used as username!", "Username Restricted", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -75,12 +81,7 @@ namespace Library_System.Manage_Users
                     return false;
                 }
             }
-            if (txtUsername.Text.Equals("") || txtPassword.Text.Equals("") || txtLibrarianID.Text.Equals("") ||
-                txtFirstname.Text.Equals("") || txtLastname.Text.Equals(""))
-            {
-                XtraMessageBox.Show("You must fill up all the informations indicated.\nMiddlename(Optional)", "Incomplete Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            
             
             return true;
         }

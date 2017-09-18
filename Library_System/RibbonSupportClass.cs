@@ -8,6 +8,7 @@ using DevExpress.XtraEditors;
 using MyClassCollection;
 using Library_System;
 using Library_System.Manage_Users;
+using Library_System.Manage_Books;
 
 namespace RibbonSupport
 {
@@ -19,6 +20,7 @@ namespace RibbonSupport
         {
             mf = (frmMain)rf;
         }
+
         public void SaveNow(SaveSender ss)
         {
             switch (ss)
@@ -27,6 +29,8 @@ namespace RibbonSupport
                 case SaveSender.AddUser: SaveUser(); break;
                 case SaveSender.UpdateUser: UpdateUser(); break;
                 case SaveSender.ResetPassword: ResetPassword(); break;
+                case SaveSender.EditSubject: UpdateSubject(); break;
+                case SaveSender.DeleteSubject: DeleteSubject(); break;
             }
         }
         private void SaveBook()
@@ -49,6 +53,16 @@ namespace RibbonSupport
             viewUsers vu = (viewUsers)mf.scMain.Panel2.Controls[0];
             vu.ResetPasswordNow();
         }
+        private void UpdateSubject()
+        {
+            subjectManage sm = (subjectManage)mf.scMain.Panel1.Controls[0];
+            sm.UpdateNow();
+        }
+        private void DeleteSubject()
+        {
+            subjectManage sm = (subjectManage)mf.scMain.Panel1.Controls[0];
+            sm.DeleteNow();
+        }
     }
     public enum SaveSender
     {
@@ -56,6 +70,8 @@ namespace RibbonSupport
         AddBook,
         AddUser,
         UpdateUser,
-        ResetPassword
+        ResetPassword,
+        EditSubject,
+        DeleteSubject
     }
 }

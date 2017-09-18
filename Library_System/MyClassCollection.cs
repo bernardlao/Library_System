@@ -180,7 +180,7 @@ namespace MyClassCollection
                     command.ExecuteNonQuery();
                 }
                 trans.Commit();
-                MessageBox.Show("Committed successfully!");
+                DevExpress.XtraEditors.XtraMessageBox.Show("Success!","",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
@@ -432,6 +432,17 @@ namespace MyClassCollection
                     (c as DevExpress.XtraEditors.TextEdit).Text = (c as DevExpress.XtraEditors.TextEdit).Text.Trim();
                 if (c is DevExpress.XtraEditors.MemoEdit)
                     (c as DevExpress.XtraEditors.MemoEdit).Text = (c as DevExpress.XtraEditors.MemoEdit).Text.Trim();
+            }
+        }
+        public void TrimGridView(DevExpress.XtraGrid.Views.Grid.GridView gv)
+        {
+            for (int i = 0; i < gv.RowCount; i++)
+            {
+                for (int j = 0; j < gv.Columns.Count; j++)
+                {
+                    string s = gv.GetRowCellValue(i, gv.Columns[j]).ToString().Trim();
+                    gv.SetRowCellValue(i, gv.Columns[j], s);
+                }
             }
         }
         /*public DataTable ConvertToDataTable<T>(List<T> data)

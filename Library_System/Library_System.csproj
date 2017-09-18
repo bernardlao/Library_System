@@ -85,6 +85,18 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Manage Books\PublisherManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Manage Books\PublisherManage.Designer.cs">
+      <DependentUpon>PublisherManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manage Books\SubjectManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Manage Books\SubjectManage.Designer.cs">
+      <DependentUpon>SubjectManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Manage Users\AddUser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -124,6 +136,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage Books\PublisherManage.resx">
+      <DependentUpon>PublisherManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manage Books\SubjectManage.resx">
+      <DependentUpon>SubjectManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Manage Users\AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>

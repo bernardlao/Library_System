@@ -26,3 +26,4 @@ D:\Library_System\Library_System\obj\Debug\Library_System.ProcessProgress.resour
 D:\Library_System\Library_System\obj\Debug\Library_System.SuperUserPassword.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.addUser.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.viewUsers.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.SubjectManage.resources

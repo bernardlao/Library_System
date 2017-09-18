@@ -30,15 +30,15 @@
         {
             this.lstUsers = new DevExpress.XtraGrid.GridControl();
             this.lstUsersItem = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.colSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colUserID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colUsername = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLibrarianID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFirstname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMiddlename = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colLastname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIsEdited = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colUserID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.lstUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstUsersItem)).BeginInit();
             this.SuspendLayout();
@@ -69,26 +69,21 @@
             this.lstUsersItem.Name = "lstUsersItem";
             this.lstUsersItem.OptionsFind.AlwaysVisible = true;
             this.lstUsersItem.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.lstUsersItem_RowCellStyle);
+            this.lstUsersItem.ShownEditor += new System.EventHandler(this.lstUsersItem_ShownEditor);
             this.lstUsersItem.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.lstUsersItem_CellValueChanged);
             this.lstUsersItem.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.lstUsersItem_CellValueChanging);
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.labelControl1.Location = new System.Drawing.Point(15, 36);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(380, 11);
-            this.labelControl1.TabIndex = 36;
-            this.labelControl1.Text = "Note : When searching more than one word please enter \" at both ends for precise " +
-    "searching";
             // 
             // colSelected
             // 
             this.colSelected.Caption = "Selected";
             this.colSelected.FieldName = "isSelected";
             this.colSelected.Name = "colSelected";
+            // 
+            // colUserID
+            // 
+            this.colUserID.Caption = "User ID";
+            this.colUserID.FieldName = "userID";
+            this.colUserID.Name = "colUserID";
             // 
             // colUsername
             // 
@@ -136,11 +131,17 @@
             this.colIsEdited.FieldName = "isEdited";
             this.colIsEdited.Name = "colIsEdited";
             // 
-            // colUserID
+            // labelControl1
             // 
-            this.colUserID.Caption = "User ID";
-            this.colUserID.FieldName = "userID";
-            this.colUserID.Name = "colUserID";
+            this.labelControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.labelControl1.Location = new System.Drawing.Point(15, 36);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(380, 11);
+            this.labelControl1.TabIndex = 36;
+            this.labelControl1.Text = "Note : When searching more than one word please enter \" at both ends for precise " +
+    "searching";
             // 
             // viewUsers
             // 

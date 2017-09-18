@@ -69,10 +69,11 @@ namespace Library_System
                     {
                         DataRow r = dt.Rows[i];
                         subjectCol.Add(r["subjectName"].ToString());
+                        cmbSubject.Properties.Items.Add(r["subjectname"].ToString());
                     }
-                    txtSubject.MaskBox.AutoCompleteCustomSource = subjectCol;
-                    txtSubject.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                    txtSubject.MaskBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cmbSubject.MaskBox.AutoCompleteCustomSource = subjectCol;
+                    cmbSubject.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                    cmbSubject.MaskBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 }
             }
             dt = db.SelectTable("SELECT * FROM tblauthor WHERE corporation IS NULL");
@@ -393,7 +394,7 @@ namespace Library_System
         private void GetSubjectID()
         {
             subjectID = null;
-            DataTable dt = db.SelectTable("SELECT subjectID FROM tblsubject WHERE subjectName='" + txtSubject.Text.Replace("'", "''") +
+            DataTable dt = db.SelectTable("SELECT subjectID FROM tblsubject WHERE subjectName='" + cmbSubject.Text.Replace("'", "''") +
                 "' LIMIT 1");
             if (dt != null)
             {
@@ -404,9 +405,9 @@ namespace Library_System
                 }
                 else
                 {
-                    if (!txtSubject.Text.Equals(""))
+                    if (!cmbSubject.Text.Equals(""))
                     {
-                        db.InsertQuery("INSERT INTO tblsubject (subjectName) VALUES('" + txtSubject.Text.Replace("'", "''") + "');");
+                        db.InsertQuery("INSERT INTO tblsubject (subjectName) VALUES('" + cmbSubject.Text.Replace("'", "''") + "');");
                         DataRow r = db.GetLastInsertItem("SELECT subjectID FROM tblsubject ORDER BY subjectID DESC LIMIT 1");
                         subjectID = r["subjectID"].ToString();
                     }

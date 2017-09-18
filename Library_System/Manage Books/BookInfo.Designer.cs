@@ -68,7 +68,7 @@
             this.gpbCorporate = new DevExpress.XtraEditors.GroupControl();
             this.txtCorporate = new DevExpress.XtraEditors.TextEdit();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
-            this.txtSubject = new DevExpress.XtraEditors.TextEdit();
+            this.cmbSubject = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDewey.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCatters.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPub.Properties)).BeginInit();
@@ -92,7 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpbCorporate)).BeginInit();
             this.gpbCorporate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCorporate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSubject.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSubject.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -427,12 +427,14 @@
             this.labelControl17.TabIndex = 26;
             this.labelControl17.Text = "Corporate Name :";
             // 
-            // txtSubject
+            // cmbSubject
             // 
-            this.txtSubject.Location = new System.Drawing.Point(148, 411);
-            this.txtSubject.Name = "txtSubject";
-            this.txtSubject.Size = new System.Drawing.Size(239, 20);
-            this.txtSubject.TabIndex = 27;
+            this.cmbSubject.Location = new System.Drawing.Point(148, 411);
+            this.cmbSubject.Name = "cmbSubject";
+            this.cmbSubject.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbSubject.Size = new System.Drawing.Size(239, 20);
+            this.cmbSubject.TabIndex = 33;
             // 
             // addBookInfo
             // 
@@ -442,7 +444,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.txtSubject);
+            this.Controls.Add(this.cmbSubject);
             this.Controls.Add(this.gpbCorporate);
             this.Controls.Add(this.gpbPerson);
             this.Controls.Add(this.optCorporate);
@@ -502,7 +504,7 @@
             this.gpbCorporate.ResumeLayout(false);
             this.gpbCorporate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCorporate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSubject.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSubject.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -550,7 +552,7 @@
         private DevExpress.XtraEditors.TextEdit txtCorporate;
         private DevExpress.XtraEditors.LabelControl labelControl17;
         public DevExpress.XtraEditors.CheckButton btnMultiAuthor;
-        private DevExpress.XtraEditors.TextEdit txtSubject;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbSubject;
 
     }
 }

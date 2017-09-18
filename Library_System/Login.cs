@@ -51,7 +51,7 @@ namespace Library_System
                         string salt = hm.GenerateSalt(("admin").Length);
                         string pass = hm.GenerateSHA256("admin" + salt);
                         db.InsertQuery("INSERT INTO tbluser (username, password, salt, librarianID, fname, mname, lname) VALUES('admin','" +
-                            pass + "','" + salt + "','-1','','','');");
+                            pass + "','" + salt + "',null,'admin',null,'admin');");
                     }
                 }
                 EnableConnectionControls(false);

@@ -32,40 +32,18 @@
             this.ribTabs = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             this.btnLogout = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddBook = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnEditBook = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDeleteBook = new DevExpress.XtraBars.BarButtonItem();
-            this.btnViewBook = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveBook = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddBooks = new DevExpress.XtraBars.BarButtonItem();
-            this.btnViewSearch = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveBooks = new DevExpress.XtraBars.BarButtonItem();
-            this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnCancelChanges = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSubject = new DevExpress.XtraBars.BarButtonItem();
-            this.btnCheckRequest = new DevExpress.XtraBars.BarButtonItem();
-            this.btnReceiveReturns = new DevExpress.XtraBars.BarButtonItem();
-            this.btnCheckPenalties = new DevExpress.XtraBars.BarButtonItem();
-            this.btnCheckPenaltyStatus = new DevExpress.XtraBars.BarButtonItem();
-            this.btnBorrowApprove = new DevExpress.XtraBars.BarButtonItem();
-            this.btnRejectBorrow = new DevExpress.XtraBars.BarButtonItem();
             this.btnReceiveReturn = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddAccount = new DevExpress.XtraBars.BarButtonItem();
-            this.btnUpdateAccount = new DevExpress.XtraBars.BarButtonItem();
-            this.btnResetPassword = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveAccount = new DevExpress.XtraBars.BarButtonItem();
-            this.btnViewAccounts = new DevExpress.XtraBars.BarButtonItem();
-            this.btnRegisterBorrower = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSearchBooks = new DevExpress.XtraBars.BarButtonItem();
             this.btnBorrowSelectedBook = new DevExpress.XtraBars.BarButtonItem();
             this.ribBooks = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgBookManager = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBookModifier = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgSubject = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpgAuthor = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpgPublisher = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribBorrowing = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgManaging = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -80,6 +58,24 @@
             this.rpgBorrowControl = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.scMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.tmDesigner = new System.Windows.Forms.Timer(this.components);
+            this.btnAddBooks = new DevExpress.XtraBars.BarCheckItem();
+            this.btnViewSearch = new DevExpress.XtraBars.BarCheckItem();
+            this.btnEditBook = new DevExpress.XtraBars.BarCheckItem();
+            this.btnDeleteBooks = new DevExpress.XtraBars.BarCheckItem();
+            this.btnEditSubject = new DevExpress.XtraBars.BarCheckItem();
+            this.btnDeleteSubjects = new DevExpress.XtraBars.BarCheckItem();
+            this.btnCheckRequest = new DevExpress.XtraBars.BarCheckItem();
+            this.btnReceiveReturns = new DevExpress.XtraBars.BarCheckItem();
+            this.btnApproveRequest = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRejectRequest = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCheckPenalties = new DevExpress.XtraBars.BarCheckItem();
+            this.btnCheckPenaltyStatistics = new DevExpress.XtraBars.BarCheckItem();
+            this.btnAddAccount = new DevExpress.XtraBars.BarCheckItem();
+            this.btnUpdateAccount = new DevExpress.XtraBars.BarCheckItem();
+            this.btnResetPassword = new DevExpress.XtraBars.BarCheckItem();
+            this.btnViewAccount = new DevExpress.XtraBars.BarCheckItem();
+            this.btnRegisterBorrower = new DevExpress.XtraBars.BarCheckItem();
+            this.btnSearchBorrowBook = new DevExpress.XtraBars.BarCheckItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribTabs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -92,39 +88,33 @@
             this.ribTabs.ExpandCollapseItem.Id = 0;
             this.ribTabs.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribTabs.ExpandCollapseItem,
-            this.btnAddBook,
-            this.barButtonItem1,
-            this.btnEditBook,
-            this.btnDeleteBook,
-            this.btnViewBook,
             this.btnSaveBook,
-            this.barButtonItem2,
+            this.btnSaveBooks,
+            this.btnCancelChanges,
+            this.btnReceiveReturn,
+            this.btnSaveAccount,
+            this.btnBorrowSelectedBook,
+            this.btnLogout,
             this.btnAddBooks,
             this.btnViewSearch,
-            this.btnSaveBooks,
-            this.btnEdit,
-            this.btnDelete,
-            this.btnCancelChanges,
-            this.btnSubject,
+            this.btnEditBook,
+            this.btnDeleteBooks,
+            this.btnEditSubject,
+            this.btnDeleteSubjects,
             this.btnCheckRequest,
             this.btnReceiveReturns,
+            this.btnApproveRequest,
+            this.btnRejectRequest,
             this.btnCheckPenalties,
-            this.btnCheckPenaltyStatus,
-            this.btnBorrowApprove,
-            this.btnRejectBorrow,
-            this.btnReceiveReturn,
+            this.btnCheckPenaltyStatistics,
             this.btnAddAccount,
             this.btnUpdateAccount,
             this.btnResetPassword,
-            this.btnSaveAccount,
-            this.btnViewAccounts,
+            this.btnViewAccount,
             this.btnRegisterBorrower,
-            this.barButtonItem3,
-            this.btnSearchBooks,
-            this.btnBorrowSelectedBook,
-            this.btnLogout});
+            this.btnSearchBorrowBook});
             this.ribTabs.Location = new System.Drawing.Point(0, 0);
-            this.ribTabs.MaxItemId = 3;
+            this.ribTabs.MaxItemId = 27;
             this.ribTabs.Name = "ribTabs";
             this.ribTabs.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribBooks,
@@ -151,68 +141,12 @@
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLogout_ItemClick);
             // 
-            // btnAddBook
-            // 
-            this.btnAddBook.Caption = "Add Book";
-            this.btnAddBook.Id = 1;
-            this.btnAddBook.ImageUri.Uri = "Add";
-            this.btnAddBook.Name = "btnAddBook";
-            this.btnAddBook.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "barButtonItem1";
-            this.barButtonItem1.Id = 2;
-            this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // btnEditBook
-            // 
-            this.btnEditBook.Caption = "Edit Book";
-            this.btnEditBook.Id = 3;
-            this.btnEditBook.ImageUri.Uri = "Edit";
-            this.btnEditBook.Name = "btnEditBook";
-            // 
-            // btnDeleteBook
-            // 
-            this.btnDeleteBook.Caption = "Delete Book";
-            this.btnDeleteBook.Id = 4;
-            this.btnDeleteBook.ImageUri.Uri = "Cancel";
-            this.btnDeleteBook.Name = "btnDeleteBook";
-            // 
-            // btnViewBook
-            // 
-            this.btnViewBook.Caption = "View Books";
-            this.btnViewBook.Id = 5;
-            this.btnViewBook.ImageUri.Uri = "Find";
-            this.btnViewBook.Name = "btnViewBook";
-            // 
             // btnSaveBook
             // 
             this.btnSaveBook.Caption = "Save";
             this.btnSaveBook.Id = 6;
             this.btnSaveBook.ImageUri.Uri = "Save";
             this.btnSaveBook.Name = "btnSaveBook";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "barButtonItem2";
-            this.barButtonItem2.Id = 7;
-            this.barButtonItem2.Name = "barButtonItem2";
-            // 
-            // btnAddBooks
-            // 
-            this.btnAddBooks.Caption = "Add Books";
-            this.btnAddBooks.Id = 8;
-            this.btnAddBooks.ImageUri.Uri = "AddItem";
-            this.btnAddBooks.Name = "btnAddBooks";
-            this.btnAddBooks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
-            // 
-            // btnViewSearch
-            // 
-            this.btnViewSearch.Caption = "View and Search Books";
-            this.btnViewSearch.Id = 9;
-            this.btnViewSearch.ImageUri.Uri = "Zoom";
-            this.btnViewSearch.Name = "btnViewSearch";
             // 
             // btnSaveBooks
             // 
@@ -222,20 +156,6 @@
             this.btnSaveBooks.Name = "btnSaveBooks";
             this.btnSaveBooks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveBooks_ItemClick);
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Caption = "Edit Book";
-            this.btnEdit.Id = 11;
-            this.btnEdit.ImageUri.Uri = "Edit";
-            this.btnEdit.Name = "btnEdit";
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Caption = "Delete Book(s)";
-            this.btnDelete.Id = 12;
-            this.btnDelete.ImageUri.Uri = "Cancel";
-            this.btnDelete.Name = "btnDelete";
-            // 
             // btnCancelChanges
             // 
             this.btnCancelChanges.Caption = "Cancel Changes";
@@ -243,85 +163,13 @@
             this.btnCancelChanges.ImageUri.Uri = "SaveAndClose";
             this.btnCancelChanges.Name = "btnCancelChanges";
             // 
-            // btnSubject
-            // 
-            this.btnSubject.Caption = "Book Subject";
-            this.btnSubject.Id = 14;
-            this.btnSubject.ImageUri.Uri = "Strikeout";
-            this.btnSubject.Name = "btnSubject";
-            // 
-            // btnCheckRequest
-            // 
-            this.btnCheckRequest.Caption = "Check Borrow Request";
-            this.btnCheckRequest.Id = 15;
-            this.btnCheckRequest.ImageUri.Uri = "Apply";
-            this.btnCheckRequest.Name = "btnCheckRequest";
-            // 
-            // btnReceiveReturns
-            // 
-            this.btnReceiveReturns.Caption = "Receive Return(s)";
-            this.btnReceiveReturns.Id = 16;
-            this.btnReceiveReturns.ImageUri.Uri = "Reset";
-            this.btnReceiveReturns.Name = "btnReceiveReturns";
-            // 
-            // btnCheckPenalties
-            // 
-            this.btnCheckPenalties.Caption = "Check Penalty Statistics";
-            this.btnCheckPenalties.Id = 17;
-            this.btnCheckPenalties.ImageUri.Uri = "Chart";
-            this.btnCheckPenalties.Name = "btnCheckPenalties";
-            // 
-            // btnCheckPenaltyStatus
-            // 
-            this.btnCheckPenaltyStatus.Caption = "Check Penalty";
-            this.btnCheckPenaltyStatus.Id = 18;
-            this.btnCheckPenaltyStatus.ImageUri.Uri = "Chart";
-            this.btnCheckPenaltyStatus.Name = "btnCheckPenaltyStatus";
-            // 
-            // btnBorrowApprove
-            // 
-            this.btnBorrowApprove.Caption = "Approve";
-            this.btnBorrowApprove.Id = 19;
-            this.btnBorrowApprove.ImageUri.Uri = "Apply";
-            this.btnBorrowApprove.Name = "btnBorrowApprove";
-            // 
-            // btnRejectBorrow
-            // 
-            this.btnRejectBorrow.Caption = "Reject";
-            this.btnRejectBorrow.Id = 20;
-            this.btnRejectBorrow.ImageUri.Uri = "Delete";
-            this.btnRejectBorrow.Name = "btnRejectBorrow";
-            // 
             // btnReceiveReturn
             // 
+            this.btnReceiveReturn.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
             this.btnReceiveReturn.Caption = "Receive Selected";
             this.btnReceiveReturn.Id = 21;
             this.btnReceiveReturn.ImageUri.Uri = "Squeeze";
             this.btnReceiveReturn.Name = "btnReceiveReturn";
-            // 
-            // btnAddAccount
-            // 
-            this.btnAddAccount.Caption = "Add Account";
-            this.btnAddAccount.Id = 22;
-            this.btnAddAccount.ImageUri.Uri = "Add";
-            this.btnAddAccount.Name = "btnAddAccount";
-            this.btnAddAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddAccount_ItemClick);
-            // 
-            // btnUpdateAccount
-            // 
-            this.btnUpdateAccount.Caption = "Update Account";
-            this.btnUpdateAccount.Id = 23;
-            this.btnUpdateAccount.ImageUri.Uri = "Edit";
-            this.btnUpdateAccount.Name = "btnUpdateAccount";
-            this.btnUpdateAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpdateAccount_ItemClick);
-            // 
-            // btnResetPassword
-            // 
-            this.btnResetPassword.Caption = "Reset Account Password";
-            this.btnResetPassword.Id = 24;
-            this.btnResetPassword.ImageUri.Uri = "Cut";
-            this.btnResetPassword.Name = "btnResetPassword";
-            this.btnResetPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResetPassword_ItemClick);
             // 
             // btnSaveAccount
             // 
@@ -331,36 +179,9 @@
             this.btnSaveAccount.Name = "btnSaveAccount";
             this.btnSaveAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveAccount_ItemClick);
             // 
-            // btnViewAccounts
-            // 
-            this.btnViewAccounts.Caption = "View Accounts";
-            this.btnViewAccounts.Id = 26;
-            this.btnViewAccounts.ImageUri.Uri = "Find";
-            this.btnViewAccounts.Name = "btnViewAccounts";
-            this.btnViewAccounts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewAccounts_ItemClick);
-            // 
-            // btnRegisterBorrower
-            // 
-            this.btnRegisterBorrower.Caption = "Register";
-            this.btnRegisterBorrower.Id = 27;
-            this.btnRegisterBorrower.ImageUri.Uri = "AddItem";
-            this.btnRegisterBorrower.Name = "btnRegisterBorrower";
-            // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "barButtonItem3";
-            this.barButtonItem3.Id = 28;
-            this.barButtonItem3.Name = "barButtonItem3";
-            // 
-            // btnSearchBooks
-            // 
-            this.btnSearchBooks.Caption = "Search Book";
-            this.btnSearchBooks.Id = 29;
-            this.btnSearchBooks.ImageUri.Uri = "Zoom";
-            this.btnSearchBooks.Name = "btnSearchBooks";
-            // 
             // btnBorrowSelectedBook
             // 
+            this.btnBorrowSelectedBook.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
             this.btnBorrowSelectedBook.Caption = "Borrow Selected Book";
             this.btnBorrowSelectedBook.Id = 30;
             this.btnBorrowSelectedBook.ImageUri.Uri = "Up";
@@ -372,6 +193,8 @@
             this.rpgBookManager,
             this.rpgBookModifier,
             this.rpgSubject,
+            this.rpgAuthor,
+            this.rpgPublisher,
             this.rpgTools});
             this.ribBooks.Name = "ribBooks";
             this.ribBooks.Text = "Manage Books";
@@ -385,16 +208,27 @@
             // 
             // rpgBookModifier
             // 
-            this.rpgBookModifier.ItemLinks.Add(this.btnEdit);
-            this.rpgBookModifier.ItemLinks.Add(this.btnDelete);
+            this.rpgBookModifier.ItemLinks.Add(this.btnEditBook);
+            this.rpgBookModifier.ItemLinks.Add(this.btnDeleteBooks);
             this.rpgBookModifier.Name = "rpgBookModifier";
             this.rpgBookModifier.Text = "Book Modifier";
             // 
             // rpgSubject
             // 
-            this.rpgSubject.ItemLinks.Add(this.btnSubject);
+            this.rpgSubject.ItemLinks.Add(this.btnEditSubject);
+            this.rpgSubject.ItemLinks.Add(this.btnDeleteSubjects);
             this.rpgSubject.Name = "rpgSubject";
             this.rpgSubject.Text = "Subject";
+            // 
+            // rpgAuthor
+            // 
+            this.rpgAuthor.Name = "rpgAuthor";
+            this.rpgAuthor.Text = "Author";
+            // 
+            // rpgPublisher
+            // 
+            this.rpgPublisher.Name = "rpgPublisher";
+            this.rpgPublisher.Text = "Publisher";
             // 
             // rpgTools
             // 
@@ -422,8 +256,8 @@
             // 
             // rpgBorrowingTools
             // 
-            this.rpgBorrowingTools.ItemLinks.Add(this.btnBorrowApprove);
-            this.rpgBorrowingTools.ItemLinks.Add(this.btnRejectBorrow);
+            this.rpgBorrowingTools.ItemLinks.Add(this.btnApproveRequest);
+            this.rpgBorrowingTools.ItemLinks.Add(this.btnRejectRequest);
             this.rpgBorrowingTools.Name = "rpgBorrowingTools";
             this.rpgBorrowingTools.Text = "Borrowing Tools";
             // 
@@ -436,8 +270,8 @@
             // 
             // rpgPenalty
             // 
-            this.rpgPenalty.ItemLinks.Add(this.btnCheckPenaltyStatus);
             this.rpgPenalty.ItemLinks.Add(this.btnCheckPenalties);
+            this.rpgPenalty.ItemLinks.Add(this.btnCheckPenaltyStatistics);
             this.rpgPenalty.Name = "rpgPenalty";
             this.rpgPenalty.Text = "Penalties";
             // 
@@ -460,7 +294,7 @@
             // rpgAccountTools
             // 
             this.rpgAccountTools.ItemLinks.Add(this.btnSaveAccount);
-            this.rpgAccountTools.ItemLinks.Add(this.btnViewAccounts);
+            this.rpgAccountTools.ItemLinks.Add(this.btnViewAccount);
             this.rpgAccountTools.Name = "rpgAccountTools";
             this.rpgAccountTools.Text = "Tools";
             // 
@@ -481,7 +315,7 @@
             // 
             // rpgBorrowControl
             // 
-            this.rpgBorrowControl.ItemLinks.Add(this.btnSearchBooks);
+            this.rpgBorrowControl.ItemLinks.Add(this.btnSearchBorrowBook);
             this.rpgBorrowControl.ItemLinks.Add(this.btnBorrowSelectedBook);
             this.rpgBorrowControl.Name = "rpgBorrowControl";
             this.rpgBorrowControl.Text = "Borrow Control";
@@ -504,6 +338,139 @@
             // 
             this.tmDesigner.Enabled = true;
             this.tmDesigner.Tick += new System.EventHandler(this.tmDesigner_Tick);
+            // 
+            // btnAddBooks
+            // 
+            this.btnAddBooks.Caption = "Add Book";
+            this.btnAddBooks.Id = 7;
+            this.btnAddBooks.ImageUri.Uri = "AddItem";
+            this.btnAddBooks.Name = "btnAddBooks";
+            this.btnAddBooks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
+            // 
+            // btnViewSearch
+            // 
+            this.btnViewSearch.Caption = "View/Search Books";
+            this.btnViewSearch.Id = 9;
+            this.btnViewSearch.ImageUri.Uri = "Zoom";
+            this.btnViewSearch.Name = "btnViewSearch";
+            // 
+            // btnEditBook
+            // 
+            this.btnEditBook.Caption = "Edit Book";
+            this.btnEditBook.Id = 10;
+            this.btnEditBook.ImageUri.Uri = "Edit";
+            this.btnEditBook.Name = "btnEditBook";
+            // 
+            // btnDeleteBooks
+            // 
+            this.btnDeleteBooks.Caption = "Delete Book(s)";
+            this.btnDeleteBooks.Id = 11;
+            this.btnDeleteBooks.ImageUri.Uri = "Delete";
+            this.btnDeleteBooks.Name = "btnDeleteBooks";
+            // 
+            // btnEditSubject
+            // 
+            this.btnEditSubject.Caption = "Edit Subject";
+            this.btnEditSubject.Id = 12;
+            this.btnEditSubject.ImageUri.Uri = "Strikeout";
+            this.btnEditSubject.Name = "btnEditSubject";
+            this.btnEditSubject.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditSubject_ItemClick);
+            // 
+            // btnDeleteSubjects
+            // 
+            this.btnDeleteSubjects.Caption = "Delete Subject(s)";
+            this.btnDeleteSubjects.Id = 13;
+            this.btnDeleteSubjects.ImageUri.Uri = "StrikeoutDouble";
+            this.btnDeleteSubjects.Name = "btnDeleteSubjects";
+            this.btnDeleteSubjects.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteSubject_ItemClick);
+            // 
+            // btnCheckRequest
+            // 
+            this.btnCheckRequest.Caption = "Check Borrow Request";
+            this.btnCheckRequest.Id = 14;
+            this.btnCheckRequest.ImageUri.Uri = "Apply";
+            this.btnCheckRequest.Name = "btnCheckRequest";
+            // 
+            // btnReceiveReturns
+            // 
+            this.btnReceiveReturns.Caption = "Receive Returns";
+            this.btnReceiveReturns.Id = 15;
+            this.btnReceiveReturns.ImageUri.Uri = "Reset";
+            this.btnReceiveReturns.Name = "btnReceiveReturns";
+            // 
+            // btnApproveRequest
+            // 
+            this.btnApproveRequest.Caption = "Approve Request";
+            this.btnApproveRequest.Id = 17;
+            this.btnApproveRequest.ImageUri.Uri = "Previous";
+            this.btnApproveRequest.Name = "btnApproveRequest";
+            // 
+            // btnRejectRequest
+            // 
+            this.btnRejectRequest.Caption = "Reject Request";
+            this.btnRejectRequest.Id = 18;
+            this.btnRejectRequest.ImageUri.Uri = "Cancel";
+            this.btnRejectRequest.Name = "btnRejectRequest";
+            // 
+            // btnCheckPenalties
+            // 
+            this.btnCheckPenalties.Caption = "Check Penalties";
+            this.btnCheckPenalties.Id = 19;
+            this.btnCheckPenalties.ImageUri.Uri = "AlignJustify";
+            this.btnCheckPenalties.Name = "btnCheckPenalties";
+            // 
+            // btnCheckPenaltyStatistics
+            // 
+            this.btnCheckPenaltyStatistics.Caption = "Check Penalty Statistics";
+            this.btnCheckPenaltyStatistics.Id = 20;
+            this.btnCheckPenaltyStatistics.ImageUri.Uri = "Chart";
+            this.btnCheckPenaltyStatistics.Name = "btnCheckPenaltyStatistics";
+            // 
+            // btnAddAccount
+            // 
+            this.btnAddAccount.Caption = "Add Account";
+            this.btnAddAccount.Id = 21;
+            this.btnAddAccount.ImageUri.Uri = "Add";
+            this.btnAddAccount.Name = "btnAddAccount";
+            this.btnAddAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddAccount_ItemClick);
+            // 
+            // btnUpdateAccount
+            // 
+            this.btnUpdateAccount.Caption = "Update Account";
+            this.btnUpdateAccount.Id = 22;
+            this.btnUpdateAccount.ImageUri.Uri = "Edit";
+            this.btnUpdateAccount.Name = "btnUpdateAccount";
+            this.btnUpdateAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpdateAccount_ItemClick);
+            // 
+            // btnResetPassword
+            // 
+            this.btnResetPassword.Caption = "Reset Account Password";
+            this.btnResetPassword.Id = 23;
+            this.btnResetPassword.ImageUri.Uri = "Cut";
+            this.btnResetPassword.Name = "btnResetPassword";
+            this.btnResetPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResetPassword_ItemClick);
+            // 
+            // btnViewAccount
+            // 
+            this.btnViewAccount.Caption = "View Account";
+            this.btnViewAccount.Id = 24;
+            this.btnViewAccount.ImageUri.Uri = "Find";
+            this.btnViewAccount.Name = "btnViewAccount";
+            this.btnViewAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewAccounts_ItemClick);
+            // 
+            // btnRegisterBorrower
+            // 
+            this.btnRegisterBorrower.Caption = "Register";
+            this.btnRegisterBorrower.Id = 25;
+            this.btnRegisterBorrower.ImageUri.Uri = "AddNewDataSource";
+            this.btnRegisterBorrower.Name = "btnRegisterBorrower";
+            // 
+            // btnSearchBorrowBook
+            // 
+            this.btnSearchBorrowBook.Caption = "Search Books";
+            this.btnSearchBorrowBook.Id = 26;
+            this.btnSearchBorrowBook.ImageUri.Uri = "Zoom";
+            this.btnSearchBorrowBook.Name = "btnSearchBorrowBook";
             // 
             // frmMain
             // 
@@ -532,48 +499,24 @@
 
         private DevExpress.XtraBars.Ribbon.RibbonControl ribTabs;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribBooks;
-        private DevExpress.XtraBars.BarButtonItem btnAddBook;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem btnEditBook;
-        private DevExpress.XtraBars.BarButtonItem btnDeleteBook;
-        private DevExpress.XtraBars.BarButtonItem btnViewBook;
         private DevExpress.XtraBars.BarButtonItem btnSaveBook;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBookManager;
-        private DevExpress.XtraBars.BarButtonItem btnAddBooks;
-        private DevExpress.XtraBars.BarButtonItem btnViewSearch;
         private DevExpress.XtraBars.BarButtonItem btnSaveBooks;
-        private DevExpress.XtraBars.BarButtonItem btnEdit;
-        private DevExpress.XtraBars.BarButtonItem btnDelete;
         private DevExpress.XtraBars.BarButtonItem btnCancelChanges;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgTools;
-        private DevExpress.XtraBars.BarButtonItem btnSubject;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgSubject;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribBorrowing;
-        private DevExpress.XtraBars.BarButtonItem btnCheckRequest;
-        private DevExpress.XtraBars.BarButtonItem btnReceiveReturns;
-        private DevExpress.XtraBars.BarButtonItem btnCheckPenalties;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgManaging;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPenalty;
-        private DevExpress.XtraBars.BarButtonItem btnCheckPenaltyStatus;
-        private DevExpress.XtraBars.BarButtonItem btnBorrowApprove;
-        private DevExpress.XtraBars.BarButtonItem btnRejectBorrow;
         private DevExpress.XtraBars.BarButtonItem btnReceiveReturn;
-        private DevExpress.XtraBars.BarButtonItem btnAddAccount;
-        private DevExpress.XtraBars.BarButtonItem btnUpdateAccount;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBorrowingTools;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgReceiveTools;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribManageAccounts;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgManageAccount;
-        private DevExpress.XtraBars.BarButtonItem btnResetPassword;
         private DevExpress.XtraBars.BarButtonItem btnSaveAccount;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgAccountTools;
-        private DevExpress.XtraBars.BarButtonItem btnViewAccounts;
-        private DevExpress.XtraBars.BarButtonItem btnRegisterBorrower;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribBorrower;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBorrowerAccount;
-        private DevExpress.XtraBars.BarButtonItem btnSearchBooks;
         private DevExpress.XtraBars.BarButtonItem btnBorrowSelectedBook;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBorrowControl;
         private System.Windows.Forms.Timer tmDesigner;
@@ -581,6 +524,26 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBookModifier;
         private DevExpress.XtraBars.Ribbon.ApplicationMenu appMenu;
         private DevExpress.XtraBars.BarButtonItem btnLogout;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgAuthor;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPublisher;
+        private DevExpress.XtraBars.BarCheckItem btnAddBooks;
+        private DevExpress.XtraBars.BarCheckItem btnViewSearch;
+        private DevExpress.XtraBars.BarCheckItem btnEditBook;
+        private DevExpress.XtraBars.BarCheckItem btnDeleteBooks;
+        private DevExpress.XtraBars.BarCheckItem btnEditSubject;
+        private DevExpress.XtraBars.BarCheckItem btnDeleteSubjects;
+        private DevExpress.XtraBars.BarCheckItem btnCheckRequest;
+        private DevExpress.XtraBars.BarCheckItem btnReceiveReturns;
+        private DevExpress.XtraBars.BarButtonItem btnApproveRequest;
+        private DevExpress.XtraBars.BarButtonItem btnRejectRequest;
+        private DevExpress.XtraBars.BarCheckItem btnCheckPenalties;
+        private DevExpress.XtraBars.BarCheckItem btnCheckPenaltyStatistics;
+        private DevExpress.XtraBars.BarCheckItem btnAddAccount;
+        private DevExpress.XtraBars.BarCheckItem btnUpdateAccount;
+        private DevExpress.XtraBars.BarCheckItem btnResetPassword;
+        private DevExpress.XtraBars.BarCheckItem btnViewAccount;
+        private DevExpress.XtraBars.BarCheckItem btnRegisterBorrower;
+        private DevExpress.XtraBars.BarCheckItem btnSearchBorrowBook;
     }
 }
 
