@@ -37,7 +37,7 @@ namespace Library_System
                 lnkLoginGuest.Enabled = false;
                 btnConnection.Enabled = false;
                 isConnected = false;
-                EnableConnectionControls(!btnApplyConnection.Enabled);
+                EnableConnectionControls(true);
             }
             else
             {
