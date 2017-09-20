@@ -38,6 +38,7 @@ namespace Library_System
                 btnConnection.Enabled = false;
                 isConnected = false;
                 EnableConnectionControls(true);
+                //Edited.
             }
             else
             {
