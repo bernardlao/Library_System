@@ -14,7 +14,6 @@ D:\Library_System\Library_System\obj\Debug\Library_System.exe
 D:\Library_System\Library_System\obj\Debug\Library_System.pdb
 D:\Library_System\Library_System\bin\Debug\Library_System.exe
 D:\Library_System\Library_System\bin\Debug\Library_System.pdb
-D:\Library_System\Library_System\obj\Debug\Library_System.csprojResolveAssemblyReference.cache
 D:\Library_System\Library_System\obj\Debug\Library_System.frmLogin.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.addBookAuthor.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.addBookInfo.resources

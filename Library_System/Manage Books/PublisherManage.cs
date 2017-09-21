@@ -124,17 +124,32 @@ namespace Library_System.Manage_Books
 
         public void UpdateNow()
         {
+            lstPublisherItem.HideEditor();
+            bool hasError = false;
             List<string> queries = new List<string>();
             List<DataRow> toUpdate = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
             foreach (DataRow r in toUpdate)
             {
-                string query = "UPDATE tblpublisher SET publisherName = '" + r["publisherName"].ToString().Trim().Replace("'", "''") +
+                if (!db.IsDataExist("tblpublisher", "publisherName='" + r["publisherName"].ToString() + "' AND publisherID!=" + r["publisherID"].ToString()))
+                {
+                    r["isEdited"] = 0;
+                    string query = "UPDATE tblpublisher SET publisherName = '" + r["publisherName"].ToString().Trim().Replace("'", "''") +
                     "', address='" + r["address"].ToString().Trim().Replace("'", "''") + "' WHERE publisherID =" + r["publisherID"].ToString();
-                queries.Add(query);
+                    queries.Add(query);
+                }
+                else
+                {
+                    hasError = true;
+                    r["isEdited"] = -1;
+                }
             }
             if (queries.Count > 0)
+            {
+                XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
+                "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 db.InsertMultiple(queries);
-            LoadList();
+            }
+            db.UpdateList("tblpublisher", "publisherID", new string[] { "publisherID", "publisherName", "address" }, dt);
         }
 
         public void DeleteNow()
@@ -152,7 +167,7 @@ namespace Library_System.Manage_Books
                     }
                     if (queries.Count > 0)
                         db.InsertMultiple(queries);
-                    LoadList();
+                    db.UpdateList("tblpublisher", "publisherID", new string[] { "publisherID", "publisherName", "address" }, dt);
                 }
             }
         }

@@ -127,32 +127,44 @@ namespace Library_System.Manage_Users
             List<DataRow> rs = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("-1")).Select(s => s).ToList();
             if (rs.Count > 0)
             {
-                XtraMessageBox.Show("There are still unresolved issue on your update!", "Error on Updating", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("Those items colored red will not be updated.", "Has Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UpdateDB();
             }
             else
-            {
-                rs = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
-                if (rs.Count == 0)
-                    XtraMessageBox.Show("There is nothing to be updated!", "No Updates Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else
-                    UpdateDB();
-            }
+                UpdateDB();
         }
         private void UpdateDB()
         {
+            lstUsersItem.HideEditor();
             List<string> queries = new List<string>();
-            foreach (DataRow r in dt.Rows)
+            bool hasError = false;
+            List<DataRow> dr = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
+            foreach (DataRow r in dr)
             {
-                if (r["isEdited"].ToString().Equals("1"))
+                if (db.IsDataExist("tbluser", "username='" + r["username"].ToString() + "' AND userID !=" + r["userID"].ToString()))
                 {
+                    r["isEdited"] = -1;
+                    hasError = true;
+                }
+                else
+                {
+                    r["isEdited"] = 0;
                     string query = "UPDATE tbluser SET username='" + r["username"].ToString() + "', password='" + r["password"].ToString() +
-                        "', salt='" + r["salt"].ToString() +"', librarianID='" + r["librarianID"].ToString() +
+                        "', salt='" + r["salt"].ToString() + "', librarianID='" + r["librarianID"].ToString() +
                         "', fname='" + r["fname"].ToString().Trim() + "', mname='" + r["mname"].ToString().Trim() + "', lname='" + r["lname"].ToString().Trim() + "' WHERE userID=" +
                         r["userID"].ToString() + ";";
                     queries.Add(query);
                 }
             }
-            db.InsertMultiple(queries);
+            if (queries.Count > 0)
+            {
+                db.InsertMultiple(queries);
+                XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
+                "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            db.UpdateList("tbluser", "userID", new string[] { "userID", "username", "password", "librarianID", "fname", "lname", "lname" },  dt);
+            dt.AsEnumerable().Where(s => s["username"].ToString().Equals("admin")).Select(s => s).Single().Delete();
+            
         }
         public void ResetPasswordNow()
         {
@@ -166,6 +178,8 @@ namespace Library_System.Manage_Users
                     queries.Add(query);
                 }
                 db.InsertMultiple(queries);
+                db.UpdateList("tbluser", "userID", new string[] { "userID", "username", "password", "librarianID", "fname", "lname", "lname" }, dt);
+                dt.AsEnumerable().Where(s => s["username"].ToString().Equals("admin")).Select(s => s).Single().Delete();
             }
         }
 

@@ -239,24 +239,52 @@ namespace Library_System.Manage_Books
 
         public void UpdateNow()
         {
+            personView.HideEditor();
+            corporateView.HideEditor();
             List<string> queries = new List<string>();
             List<DataRow> dr = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
+            bool hasError = false;
             if (dr.Count > 0)
             {
                 foreach (DataRow r in dr)
                 {
                     string query = "";
                     if (r["fname"].ToString().Equals(""))
-                        query = "UPDATE tblauthor SET corporation='" + r["corporation"].ToString().Trim().Replace("'", "''") + "' WHERE authorID=" + r["authorID"].ToString();
+                    {
+                        if (!db.IsDataExist("tblauthor", "corporation='" + r["corporation"].ToString().Trim().Replace("'", "''") + "' AND authorID!=" + r["authorID"].ToString()))
+                            query = "UPDATE tblauthor SET corporation='" + r["corporation"].ToString().Trim().Replace("'", "''") + "' WHERE authorID=" + r["authorID"].ToString();
+                        else 
+                        {
+                            hasError = false;
+                            r["isEdited"] = -1;
+                        }
+                    }
                     else
-                        query = "UPDATE tblauthor SET fname='" + r["fname"].ToString().Trim() + "', mname='" + r["mname"].ToString().Trim() +
-                            "', lname='" + r["lname"].ToString() + "' WHERE authorID=" + r["authorID"].ToString();
+                    {
+                        if (!db.IsDataExist("tblauthor", "fname='" + r["fname"].ToString().Trim() + "' AND mname='" + r["mname"].ToString().Trim() +
+                            "' AND lname='" + r["lname"].ToString().Trim() + "' AND authorID!=" + r["authorID"].ToString()))
+                            query = "UPDATE tblauthor SET fname='" + r["fname"].ToString().Trim() + "', mname='" + r["mname"].ToString().Trim() +
+                                "', lname='" + r["lname"].ToString() + "' WHERE authorID=" + r["authorID"].ToString();
+                        else
+                        {
+                            hasError = false;
+                            r["isEdited"] = -1;
+                        }
+                    }
                     if (!query.Equals(""))
+                    {
+                        r["isEdited"] = -1;
                         queries.Add(query);
+                    }
                 }
                 if (queries.Count > 0)
+                {
+                    XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
+                    "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     db.InsertMultiple(queries);
-                LoadList();
+                }
+                db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
+                SetAuthorType();
                 RefreshList();
             }
         }
@@ -275,9 +303,20 @@ namespace Library_System.Manage_Books
                     }
                     if (queries.Count > 0)
                         db.InsertMultiple(queries);
-                    LoadList();
+                    db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
+                    SetAuthorType();
                     RefreshList();
                 }
+            }
+        }
+        private void SetAuthorType()
+        {
+            foreach (DataRow r in dt.Rows)
+            {
+                if (r["fname"].ToString().Equals(""))
+                    r["authorType"] = "Corporate";
+                else
+                    r["authorType"] = "Person";
             }
         }
         private bool IsToDelete(List<DataRow> dr)

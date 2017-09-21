@@ -72,9 +72,10 @@ namespace Library_System
             hm.TrimTextEdit(this);
             if (IsValid())
             {
-                if (!IsUserExist())
+                if (!db.IsDataExist("tblauthor", "fname='" + txtAuthorFname.Text + "' AND mname='" + txtAuthorMname.Text +
+                            "' AND lname='" + txtAuthorLname.Text + "'"))
                 {
-                    db.InsertQuery("INSERT INTO tblauthor(fname,mname,lname) VALUES('" + 
+                    db.InsertQuery("INSERT INTO tblauthor(fname,mname,lname) VALUES('" +
                         txtAuthorFname.Text + "','" + txtAuthorMname.Text + "','" + txtAuthorLname.Text + "');");
                     DataRow row = db.GetLastInsertItem("SELECT * FROM tblauthor ORDER BY authorID DESC LIMIT 1;");
                     if (row != null)
@@ -92,7 +93,18 @@ namespace Library_System
                         hm.ClearTextEdit(this);
                     }
                 }
-                hm.ClearTextEdit(this);
+                else
+                {
+                    db.UpdateListWithoutEditor("tblauthor WHERE corporation IS NULL", "authorID", new string[] { "authorID", "fname", "mname", "lname" }, dt);
+                    List<DataRow> dr = dt.AsEnumerable().Where(s => s["fname"].ToString().ToLower().Equals(txtAuthorFname.Text.ToLower()) &&
+                        s["mname"].ToString().ToLower().Equals(txtAuthorMname.Text.ToLower()) &&
+                        s["lname"].ToString().ToLower().Equals(txtAuthorLname.Text.ToLower())).Select(s => s).ToList();
+                    if (dr.Count > 0)
+                        dr[0]["isSelected"] = true;
+                    hm.ClearTextEdit(this);
+                }
+                db.UpdateListWithoutEditor("tblauthor WHERE corporation IS NULL", "authorID", new string[] { "authorID", "fname", "mname", "lname" }, dt);
+
             }
         }
         private bool IsValid()

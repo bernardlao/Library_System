@@ -122,15 +122,31 @@ namespace Library_System.Manage_Books
         }
         public void UpdateNow()
         {
+            lstSubjectItem.HideEditor();
             List<string> queries = new List<string>();
+            bool hasError = false;
             List<DataRow> dr = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
             foreach (DataRow r in dr)
             {
-                string query = "UPDATE tblsubject SET subjectName='" + r["subjectName"].ToString().Trim().Replace("'","''") + "' WHERE subjectID=" + r["subjectID"].ToString();
-                queries.Add(query);
+                if (!db.IsDataExist("tblsubject", "subjectName='" + r["subjectName"].ToString() + "' AND subjectID!=" + r["subjectID"].ToString()))
+                {
+                    r["isEdited"] = 0;
+                    string query = "UPDATE tblsubject SET subjectName='" + r["subjectName"].ToString().Trim().Replace("'", "''") + "' WHERE subjectID=" + r["subjectID"].ToString();
+                    queries.Add(query);
+                }
+                else
+                {
+                    hasError = true;
+                    r["isEdited"] = -1;
+                }
             }
-            db.InsertMultiple(queries);
-            LoadList();
+            if (queries.Count > 0)
+            {
+                XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
+                "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                db.InsertMultiple(queries);
+            }
+            db.UpdateList("tblsubject", "subjectID", new string[] { "subjectID", "subjectName" }, dt);
         }
         public void DeleteNow()
         {
@@ -144,7 +160,7 @@ namespace Library_System.Manage_Books
                     queries.Add(query);
                 }
                 db.InsertMultiple(queries);
-                LoadList();
+                db.UpdateList("tblsubject", "subjectID", new string[] { "subjectID", "subjectName" }, dt);
             }
         }
         private bool IsToDelete()

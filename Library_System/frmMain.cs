@@ -107,7 +107,7 @@ namespace Library_System
             if (ss != SaveSender.None)
             {
                 rsc.SaveNow(ss);
-                ((viewUsers)scMain.Panel2.Controls[0]).LoadList();
+                //((viewUsers)scMain.Panel2.Controls[0]).LoadList();
             }
         }
 

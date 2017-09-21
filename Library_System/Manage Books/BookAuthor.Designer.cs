@@ -159,6 +159,7 @@
             this.btnAddAuthor.Size = new System.Drawing.Size(38, 23);
             this.btnAddAuthor.TabIndex = 38;
             this.btnAddAuthor.Text = "+";
+            this.btnAddAuthor.Click += new System.EventHandler(this.btnAddAuthor_Click);
             // 
             // txtAuthorLname
             // 

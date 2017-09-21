@@ -180,7 +180,7 @@ namespace MyClassCollection
                     command.ExecuteNonQuery();
                 }
                 trans.Commit();
-                DevExpress.XtraEditors.XtraMessageBox.Show("Success!","",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                //DevExpress.XtraEditors.XtraMessageBox.Show("Success!","",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
@@ -215,6 +215,65 @@ namespace MyClassCollection
                 }
             }
             return null;
+        }
+        public bool IsDataExist(string tablename, string criteria)
+        {
+            DataTable dt = SelectTable("SELECT COUNT(*) FROM " + tablename + (criteria.Length > 0 ? " WHERE " + criteria : ""));
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow r = dt.Rows[0];
+                    if (!r[0].ToString().Equals("0"))
+                        return true;
+                }
+            }
+            return false;
+        }
+        public void UpdateList(string tablename, string key, string[] fields, DataTable table)
+        {
+            DataTable dt = SelectTable("SELECT * FROM " + tablename);
+            foreach (DataRow r in dt.Rows)
+            {
+                List<DataRow> dr = table.AsEnumerable().Where(s => s[key].ToString().Equals(r[key].ToString())).Select(s => s).ToList();
+                if (dr.Count == 0)
+                {
+                    DataRow row = table.NewRow();
+                    foreach (string field in fields)
+                        row[field] = r[field];
+                    table.Rows.Add(row);
+                }
+                else 
+                {
+                    DataRow row = dr[0];
+                    if (!row["isEdited"].ToString().Equals("-1"))
+                    {
+                        foreach (string field in fields)
+                            row[field] = r[field];
+                    }
+                }
+            }
+        }
+        public void UpdateListWithoutEditor(string tablename, string key, string[] fields, DataTable table)
+        {
+            DataTable dt = SelectTable("SELECT * FROM " + tablename);
+            foreach (DataRow r in dt.Rows)
+            {
+                List<DataRow> dr = table.AsEnumerable().Where(s => s[key].ToString().Equals(r[key].ToString())).Select(s => s).ToList();
+                if (dr.Count == 0)
+                {
+                    DataRow row = table.NewRow();
+                    foreach (string field in fields)
+                        row[field] = r[field];
+                    table.Rows.Add(row);
+                }
+                else
+                {
+                    DataRow row = dr[0];
+                    foreach (string field in fields)
+                        row[field] = r[field];
+                }
+            }
         }
     }
     class ConnectionStringSolution
@@ -422,6 +481,28 @@ namespace MyClassCollection
                 {
                     (c as DevExpress.XtraEditors.MemoEdit).Text = "";
                 }
+                if (c is DevExpress.XtraEditors.GroupControl)
+                {
+                    ClearTextEditInGroupControl(c as DevExpress.XtraEditors.GroupControl);
+                }
+            }
+        }
+        private void ClearTextEditInGroupControl(DevExpress.XtraEditors.GroupControl gc)
+        {
+            foreach (Control c in gc.Controls)
+            {
+                if (c is DevExpress.XtraEditors.TextEdit)
+                {
+                    (c as DevExpress.XtraEditors.TextEdit).Text = "";
+                }
+                if (c is DevExpress.XtraEditors.MemoEdit)
+                {
+                    (c as DevExpress.XtraEditors.MemoEdit).Text = "";
+                }
+                if (c is DevExpress.XtraEditors.GroupControl)
+                {
+                    ClearTextEditInGroupControl(c as DevExpress.XtraEditors.GroupControl);
+                }
             }
         }
         public void TrimTextEdit(DevExpress.XtraEditors.XtraUserControl form)
@@ -432,6 +513,20 @@ namespace MyClassCollection
                     (c as DevExpress.XtraEditors.TextEdit).Text = (c as DevExpress.XtraEditors.TextEdit).Text.Trim();
                 if (c is DevExpress.XtraEditors.MemoEdit)
                     (c as DevExpress.XtraEditors.MemoEdit).Text = (c as DevExpress.XtraEditors.MemoEdit).Text.Trim();
+                if (c is DevExpress.XtraEditors.GroupControl)
+                    TrimTextEditInGroupControl(c as DevExpress.XtraEditors.GroupControl);
+            }
+        }
+        private void TrimTextEditInGroupControl(DevExpress.XtraEditors.GroupControl gc)
+        {
+            foreach (Control c in gc.Controls)
+            {
+                if (c is DevExpress.XtraEditors.TextEdit)
+                    (c as DevExpress.XtraEditors.TextEdit).Text = (c as DevExpress.XtraEditors.TextEdit).Text.Trim();
+                if (c is DevExpress.XtraEditors.MemoEdit)
+                    (c as DevExpress.XtraEditors.MemoEdit).Text = (c as DevExpress.XtraEditors.MemoEdit).Text.Trim();
+                if (c is DevExpress.XtraEditors.GroupControl)
+                    TrimTextEditInGroupControl(c as DevExpress.XtraEditors.GroupControl);
             }
         }
         public void TrimGridView(DevExpress.XtraGrid.Views.Grid.GridView gv)
