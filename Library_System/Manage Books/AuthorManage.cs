@@ -302,8 +302,11 @@ namespace Library_System.Manage_Books
                         queries.Add(query);
                     }
                     if (queries.Count > 0)
+                    {
                         db.InsertMultiple(queries);
-                    db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
+                        LoadList();
+                    }
+                    //db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
                     SetAuthorType();
                     RefreshList();
                 }

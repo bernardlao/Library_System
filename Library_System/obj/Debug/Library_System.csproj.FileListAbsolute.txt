@@ -28,3 +28,8 @@ D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.viewUsers
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.SubjectManage.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.publisherManage.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.authorManage.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.csprojResolveAssemblyReference.cache
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Books.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Authors.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.RegisterBorrower.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.BorrowMenu.resources

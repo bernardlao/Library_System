@@ -159,8 +159,12 @@ namespace Library_System.Manage_Books
                     string query = "DELETE FROM tblsubject WHERE subjectID=" + r["subjectID"].ToString();
                     queries.Add(query);
                 }
-                db.InsertMultiple(queries);
-                db.UpdateList("tblsubject", "subjectID", new string[] { "subjectID", "subjectName" }, dt);
+                if (queries.Count > 0)
+                {
+                    db.InsertMultiple(queries);
+                    LoadList();
+                }
+                
             }
         }
         private bool IsToDelete()

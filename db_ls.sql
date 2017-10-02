@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: localhost    Database: db_ls
+-- Host: localhost    Database: db_library
 -- ------------------------------------------------------
 -- Server version	5.6.21-log
 
@@ -16,189 +16,104 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tblauthor`
+-- Dumping data for table `tblauthor`
 --
 
-DROP TABLE IF EXISTS `tblauthor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblauthor` (
-  `authorID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `fname` varchar(100) DEFAULT NULL,
-  `mname` varchar(100) DEFAULT NULL,
-  `lname` varchar(100) DEFAULT NULL,
-  `corporation` varchar(300) DEFAULT NULL,
-  PRIMARY KEY (`authorID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblauthor` WRITE;
+/*!40000 ALTER TABLE `tblauthor` DISABLE KEYS */;
+INSERT INTO `tblauthor` VALUES (1,'John','L','Doe',NULL),(2,'Susan','Tayo','Baker',NULL),(3,'Susana','M','Tayo',NULL),(4,'Dennis','L','Ritchie',NULL),(5,'Steven','M','Jobs',NULL),(6,NULL,NULL,NULL,'Department of Education'),(7,'Susan','M','Baker',NULL),(8,'Billy','','Gates',NULL),(10,'Billy','Joe','Crawford',NULL),(11,'Richard','J','Bullock',NULL),(20,'John','Le','Doe',NULL);
+/*!40000 ALTER TABLE `tblauthor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tblbook`
+-- Dumping data for table `tblbook`
 --
 
-DROP TABLE IF EXISTS `tblbook`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblbook` (
-  `bookID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `callNumber` varchar(100) DEFAULT NULL,
-  `title` varchar(300) NOT NULL,
-  `deweyDecimal` varchar(100) DEFAULT NULL,
-  `cattersNo` varchar(100) DEFAULT NULL,
-  `yearOfPublication` int(11) DEFAULT NULL,
-  `pages` int(11) DEFAULT NULL,
-  `volume` int(11) DEFAULT NULL,
-  `quantity` int(11) NOT NULL,
-  `noteArea` varchar(300) DEFAULT NULL,
-  `typeOfIllustration` varchar(100) DEFAULT NULL,
-  `publisherID` bigint(20) NOT NULL,
-  `ISBN` varchar(100) DEFAULT NULL,
-  `isCopyright` bit(1) NOT NULL,
-  `subjectID` bigint(20) NOT NULL,
-  PRIMARY KEY (`bookID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1489 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblbook` WRITE;
+/*!40000 ALTER TABLE `tblbook` DISABLE KEYS */;
+INSERT INTO `tblbook` VALUES (1,'100.1 D64t c2001','The hunter\'s hobby','100.1','D64t',2001,199,1,3,'1. includes\r\nAlgebra and Chemistry','ill.',1,NULL,'',2),(2,'100.1 D64t c2001','The hunter\'s hobby','100.1','D64t',2001,199,2,3,NULL,'ill.',1,NULL,'',2),(3,'200.1 J25s c2000','Science and Everything','200.1','J25s',2000,200,NULL,5,'1. Includes Biological Structure of Life','ill',2,'1111-1111-1111-1111','',3),(5,'123.12 D12h c2000','Hanabi','123.12','D12h',2000,200,NULL,1,'1. Includes japanese language',NULL,2,NULL,'',3);
+/*!40000 ALTER TABLE `tblbook` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tblbookauthor`
+-- Dumping data for table `tblbookauthor`
 --
 
-DROP TABLE IF EXISTS `tblbookauthor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblbookauthor` (
-  `bookAuthorID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `bookID` bigint(20) NOT NULL,
-  `authorID` bigint(20) NOT NULL,
-  PRIMARY KEY (`bookAuthorID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblbookauthor` WRITE;
+/*!40000 ALTER TABLE `tblbookauthor` DISABLE KEYS */;
+INSERT INTO `tblbookauthor` VALUES (9,2,1),(10,5,6),(39,3,2),(40,3,5),(41,3,8),(42,3,10),(43,3,11),(44,1,1);
+/*!40000 ALTER TABLE `tblbookauthor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tblborrowedbook`
+-- Dumping data for table `tblborrowedbook`
 --
 
-DROP TABLE IF EXISTS `tblborrowedbook`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblborrowedbook` (
-  `borrowedBookID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `bookID` bigint(20) NOT NULL,
-  `borrowerID` varchar(100) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `dateBorrowed` date NOT NULL,
-  `dateReturned` date DEFAULT NULL,
-  `dateAllowance` int(11) NOT NULL,
-  `ApproverUserID` bigint(20) DEFAULT NULL,
-  `ReceiverUserID` bigint(20) DEFAULT NULL,
-  `status` varchar(100) NOT NULL,
-  PRIMARY KEY (`borrowedBookID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblborrowedbook` WRITE;
+/*!40000 ALTER TABLE `tblborrowedbook` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblborrowedbook` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tblborrower`
+-- Dumping data for table `tblborrower`
 --
 
-DROP TABLE IF EXISTS `tblborrower`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblborrower` (
-  `borrowerID` varchar(100) NOT NULL,
-  `borrowerType` varchar(100) NOT NULL,
-  `fname` varchar(100) NOT NULL,
-  `mname` varchar(100) NOT NULL,
-  `lname` varchar(100) NOT NULL,
-  `bdate` date NOT NULL,
-  `address` varchar(300) NOT NULL,
-  `status` varchar(100) NOT NULL,
-  PRIMARY KEY (`borrowerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblborrower` WRITE;
+/*!40000 ALTER TABLE `tblborrower` DISABLE KEYS */;
+INSERT INTO `tblborrower` VALUES ('110562','Others','Bernard','Herrera','Lao','1993-09-28','Sitio 6. Barangay Catmon\r\nMalabon City','Approved');
+/*!40000 ALTER TABLE `tblborrower` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tbllogs`
+-- Dumping data for table `tbllogs`
 --
 
-DROP TABLE IF EXISTS `tbllogs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbllogs` (
-  `logID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userID` bigint(20) NOT NULL,
-  `logTable` varchar(100) NOT NULL,
-  `logType` varchar(100) NOT NULL,
-  `logDescription` text NOT NULL,
-  PRIMARY KEY (`logID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tbllogs` WRITE;
+/*!40000 ALTER TABLE `tbllogs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbllogs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tblpenalty`
+-- Dumping data for table `tblpenalty`
 --
 
-DROP TABLE IF EXISTS `tblpenalty`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblpenalty` (
-  `penaltyID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `borrowedBookID` bigint(20) NOT NULL,
-  `status` varchar(100) NOT NULL,
-  PRIMARY KEY (`penaltyID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblpenalty` WRITE;
+/*!40000 ALTER TABLE `tblpenalty` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblpenalty` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tblpublisher`
+-- Dumping data for table `tblpublisher`
 --
 
-DROP TABLE IF EXISTS `tblpublisher`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblpublisher` (
-  `publisherID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `publisherName` varchar(300) DEFAULT NULL,
-  `address` varchar(300) DEFAULT NULL,
-  PRIMARY KEY (`publisherID`)
-) ENGINE=InnoDB AUTO_INCREMENT=557 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblpublisher` WRITE;
+/*!40000 ALTER TABLE `tblpublisher` DISABLE KEYS */;
+INSERT INTO `tblpublisher` VALUES (1,'Ligaya Publishing House','Quezon City'),(2,'Liwayway Publishing Corporation','Navotas City');
+/*!40000 ALTER TABLE `tblpublisher` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tblsubject`
+-- Dumping data for table `tblsubject`
 --
 
-DROP TABLE IF EXISTS `tblsubject`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tblsubject` (
-  `subjectID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `subjectName` varchar(300) NOT NULL,
-  PRIMARY KEY (`subjectID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tblsubject` WRITE;
+/*!40000 ALTER TABLE `tblsubject` DISABLE KEYS */;
+INSERT INTO `tblsubject` VALUES (2,'T.L.E'),(3,'Science'),(4,'Mathematics'),(6,'Filipino');
+/*!40000 ALTER TABLE `tblsubject` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `tbluser`
+-- Dumping data for table `tbluser`
 --
 
-DROP TABLE IF EXISTS `tbluser`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbluser` (
-  `userID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `salt` varchar(100) NOT NULL,
-  `librarianID` varchar(100) DEFAULT NULL,
-  `fname` varchar(100) NOT NULL,
-  `mname` varchar(100) DEFAULT NULL,
-  `lname` varchar(100) NOT NULL,
-  PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `tbluser` WRITE;
+/*!40000 ALTER TABLE `tbluser` DISABLE KEYS */;
+INSERT INTO `tbluser` VALUES (1,'admin','7EF2EE6C9A2B3DBF19FA5A5CEEC7EE8ED51A0C03B0D4E21BE8CFE74C79A25990','vPNpT',NULL,'admin',NULL,'admin'),(2,'ivy','3E118E34C1FDC4CCF44B38AC9D69F7ECD47274EF6A34D979CE84E1FAEA6D0FE3','IPNe','140134','Ivyrose','Veranda','Ruiz'),(3,'bernard','73AB4E50877EA25656E3DD580550F192020D1096B7A27AEBEBB098213D1A34E9','EDg','110562','Bernard','Herrera','Lao'),(4,'leo','as','as',NULL,'fn',NULL,'ln');
+/*!40000 ALTER TABLE `tbluser` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Dumping routines for database 'db_ls'
+-- Dumping routines for database 'db_library'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -210,4 +125,4 @@ CREATE TABLE `tbluser` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-19  4:57:59
+-- Dump completed on 2017-10-03  0:24:59

@@ -14,6 +14,7 @@ using Library_System.Manage_Users;
 using Library_System.Manage_Books;
 using DevExpress.Utils;
 using DevExpress.XtraBars;
+using Library_System.Borrowers_Menu;
 
 namespace Library_System
 {
@@ -21,7 +22,7 @@ namespace Library_System
     {
         private MySQLDBUtilities db = new MySQLDBUtilities();
         private RibbonSupportClass rsc;
-        private SaveSender ss = SaveSender.None;
+        public static SaveSender ss = SaveSender.None;
         public static string userLoggedIn = null;
         public static bool triggerDesigner = false;
 
@@ -29,13 +30,11 @@ namespace Library_System
         {
             InitializeComponent();
             rsc = new RibbonSupportClass(this);
-           
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ss = SaveSender.AddBook;
-            rpgBookModifier.Enabled = false;
             ClearPanel();
             addBookInfo info = new addBookInfo();
             info.Dock = DockStyle.Fill;
@@ -184,7 +183,7 @@ namespace Library_System
             ClearPanel();
             ss = SaveSender.EditSubject;
             subjectManage sm = new subjectManage(ss);
-            scMain.SplitterPosition = sm.Size.Width;
+            scMain.SplitterPosition = this.Size.Width;
             sm.Dock = DockStyle.Fill;
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(sm);
@@ -196,7 +195,7 @@ namespace Library_System
             ClearPanel();
             ss = SaveSender.DeleteSubject;
             subjectManage sm = new subjectManage(ss);
-            scMain.SplitterPosition = sm.Size.Width;
+            scMain.SplitterPosition = this.Size.Width;
             sm.Dock = DockStyle.Fill;
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(sm);
@@ -207,7 +206,7 @@ namespace Library_System
             ClearPanel();
             ss = SaveSender.EditPublisher;
             publisherManage pm = new publisherManage(ss);
-            scMain.SplitterPosition = pm.Size.Width;
+            scMain.SplitterPosition = this.Size.Width;
             pm.Dock = DockStyle.Fill;
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(pm);
@@ -218,7 +217,7 @@ namespace Library_System
             ClearPanel();
             ss = SaveSender.DeletePublisher;
             publisherManage pm = new publisherManage(ss);
-            scMain.SplitterPosition = pm.Size.Width;
+            scMain.SplitterPosition = this.Size.Width;
             pm.Dock = DockStyle.Fill;
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(pm);
@@ -247,6 +246,72 @@ namespace Library_System
             scMain.Panel2.Controls.Add(am);
             ClearCheckDoCheck(btnDeleteAuthor);
         }
+        private void btnEditBook_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.EditBook;
+            Books b = new Books(ss);
+            scMain.SplitterPosition = b.Size.Width;
+            b.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(b);
+            Authors a = new Authors(new DataTable());
+            scMain.Panel2.Enabled = true;
+            a.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(a);
+            ClearCheckDoCheck(btnEditBook);
+        }
+
+        private void btnDeleteBooks_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.DeleteBook;
+            Books b = new Books(ss);
+            scMain.SplitterPosition = b.Size.Width;
+            b.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(b);
+            Authors a = new Authors(new DataTable());
+            scMain.Panel2.Enabled = true;
+            a.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(a);
+            ClearCheckDoCheck(btnDeleteBooks);
+        }
+        private void btnViewSearch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.ViewSearch;
+            Books b = new Books(ss);
+            scMain.SplitterPosition = b.Size.Width;
+            b.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(b);
+            Authors a = new Authors(new DataTable());
+            scMain.Panel2.Enabled = true;
+            a.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(a);
+            ClearCheckDoCheck(btnViewSearch);
+        }
+
+        private void btnRegisterBorrower_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.RegisterBorrower;
+            RegisterBorrower rb = new RegisterBorrower();
+            scMain.SplitterPosition = 0;
+            rb.Dock = DockStyle.Fill;
+            scMain.Panel2.Enabled = true;
+            scMain.Panel2.Controls.Add(rb);
+            ClearCheckDoCheck(btnRegisterBorrower);
+        }
+
+        private void btnBorrowSelected_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (ss == SaveSender.ViewSearch)
+            {
+                rsc.BorrowNow(ss);
+            }
+        }
 
         private void ClearCheckDoCheck(BarCheckItem itm)
         {
@@ -261,6 +326,12 @@ namespace Library_System
         }
 
         
+
         
+
+        
+
+        
+
     }
 }

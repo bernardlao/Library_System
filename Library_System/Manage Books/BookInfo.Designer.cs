@@ -479,6 +479,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "addBookInfo";
             this.Size = new System.Drawing.Size(447, 714);
+            this.Load += new System.EventHandler(this.addBookInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtDewey.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCatters.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtYearOfPub.Properties)).EndInit();

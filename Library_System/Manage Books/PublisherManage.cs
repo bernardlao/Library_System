@@ -166,8 +166,11 @@ namespace Library_System.Manage_Books
                         queries.Add(query);
                     }
                     if (queries.Count > 0)
+                    {
                         db.InsertMultiple(queries);
-                    db.UpdateList("tblpublisher", "publisherID", new string[] { "publisherID", "publisherName", "address" }, dt);
+                        LoadList();
+                    }
+                   
                 }
             }
         }

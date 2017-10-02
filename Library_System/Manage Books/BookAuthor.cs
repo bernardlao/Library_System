@@ -21,6 +21,8 @@ namespace Library_System
         private HelperMethods hm = new HelperMethods();
         List<int> checkIndexes = new List<int>();
         DataTable dt = new DataTable();
+
+        public static List<string> ids;
         public addBookAuthor()
         {
             InitializeComponent();
@@ -34,6 +36,17 @@ namespace Library_System
             dt.Columns.Add(isSelected);
             SetAutoComplete(dt);
             lstBookAuthor.DataSource = dt;
+            if (frmMain.ss == RibbonSupport.SaveSender.EditBook && ids != null)
+                SetSelected();
+        }
+        private void SetSelected()
+        {
+            foreach (string id in ids)
+            {
+                List<DataRow> dr = dt.AsEnumerable().Where(s => s["authorID"].ToString().Equals(id)).Select(s => s).ToList();
+                if (dr.Count > 0)
+                    dr[0]["isSelected"] = true;
+            }
         }
         private void SetAutoComplete(DataTable dt)
         {
@@ -146,14 +159,21 @@ namespace Library_System
 
         private void lstBookAuthorItem_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            object id = lstBookAuthorItem.GetRowCellValue(e.RowHandle, lstBookAuthorItem.Columns[0]);
-            dt.AsEnumerable().Where(s => s["authorID"].ToString().Equals(id.ToString())).Select(s=>s).Single()["isSelected"] = e.Value;
+            if (e.Column == colIsSelected)
+            {
+                string id = lstBookAuthorItem.GetRowCellValue(e.RowHandle, colAuthorID).ToString();
+                List<DataRow>dr = dt.AsEnumerable().Where(s => s["authorID"].ToString().Equals(id)).Select(s => s).ToList();
+                if (dr.Count > 0)
+                    dr[0]["isSelected"] = e.Value;
+            }
         }
 
         private void txtAuthorLname_KeyPress(object sender, KeyPressEventArgs e)
         {
             hm.TextHandle(ref sender, ref e, false);
         }
+
+
         //private void SetSelected()
         //{
         //    for (int i = 0; i < lstBookAuthorItem.RowCount; i++)

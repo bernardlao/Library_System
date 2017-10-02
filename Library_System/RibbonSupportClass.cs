@@ -9,6 +9,7 @@ using MyClassCollection;
 using Library_System;
 using Library_System.Manage_Users;
 using Library_System.Manage_Books;
+using Library_System.Borrowers_Menu;
 
 namespace RibbonSupport
 {
@@ -35,12 +36,30 @@ namespace RibbonSupport
                 case SaveSender.DeletePublisher: DeletePublisher(); break;
                 case SaveSender.EditAuthor: UpdateAuthor(); break;
                 case SaveSender.DeleteAuthor: DeleteAuthor(); break;
+                case SaveSender.EditBook: UpdateBook(); break;
+                case SaveSender.DeleteBook: DeleteBook(); break;
+                case SaveSender.RegisterBorrower: RegisterBorrowers(); break;
             }
+        }
+        public void BorrowNow(SaveSender ss)
+        {
+            if (ss == SaveSender.ViewSearch)
+                BorrowSelected();
         }
         private void SaveBook()
         {
             addBookInfo abi = (addBookInfo)mf.scMain.Panel1.Controls[0];
             abi.SaveDB();
+        }
+        private void UpdateBook()
+        {
+            addBookInfo abi = (addBookInfo)mf.scMain.Panel1.Controls[0];
+            abi.UpdateNow();
+        }
+        private void DeleteBook()
+        {
+            Books b = (Books)mf.scMain.Panel1.Controls[0];
+            b.DeleteNow();
         }
         private void SaveUser()
         {
@@ -87,11 +106,25 @@ namespace RibbonSupport
             authorManage am = (authorManage)mf.scMain.Panel2.Controls[0];
             am.DeleteNow();
         }
+        private void RegisterBorrowers()
+        {
+            RegisterBorrower rb = (RegisterBorrower)mf.scMain.Panel2.Controls[0];
+            rb.SaveNow();
+        }
+        private void BorrowSelected()
+        {
+            Books b = (Books)mf.scMain.Panel1.Controls[0];
+            b.BorrowSelected();
+            frmMain.ss = SaveSender.None;
+        }
     }
     public enum SaveSender
     {
         None,
         AddBook,
+        EditBook,
+        DeleteBook,
+        ViewSearch,
         AddUser,
         UpdateUser,
         ResetPassword,
@@ -100,6 +133,7 @@ namespace RibbonSupport
         EditPublisher,
         DeletePublisher,
         EditAuthor,
-        DeleteAuthor
+        DeleteAuthor,
+        RegisterBorrower
     }
 }

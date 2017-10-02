@@ -99,17 +99,19 @@ namespace MyClassCollection
             }
         }
         
-        public void InsertQuery(string query)
+        public int InsertQuery(string query)
         {
             com.CommandText = query;
             try
             {
                 com.Connection = OpenConnection();
                 int res = com.ExecuteNonQuery();
+                return res;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+                return -1;
             }
         }
         public string[] GetColumnDatas(string query, string colname)
@@ -122,7 +124,23 @@ namespace MyClassCollection
                 temp.Add("");
             return temp.ToArray();
         }
-
+        public DateTime GetServerDateTime()
+        {
+            DataTable dt = SelectTable("SELECT NOW();");
+            try
+            {
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        DateTime now = Convert.ToDateTime(dt.Rows[0][0].ToString());
+                        return now;
+                    }
+                }
+                return new DateTime();
+            }
+            catch { return new DateTime(); }
+        }
         public long GetID(string query, string colname)
         {
             DataTable dt = SelectTable(query);
@@ -434,6 +452,19 @@ namespace MyClassCollection
             if (txt.Text.Length == 0 && e.KeyChar == '-')
                 e.Handled = true;
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
+                e.Handled = true;
+        }
+        public void PossibleIDHandler(ref object sender, ref KeyPressEventArgs e)
+        {
+            DevExpress.XtraEditors.TextEdit txt = (DevExpress.XtraEditors.TextEdit)sender;
+            if (txt.Text.Length > 0)
+            {
+                if (txt.Text[txt.Text.Length - 1].Equals('-') && e.KeyChar == '-')
+                    e.Handled = true;
+            }
+            if (txt.Text.Length == 0 && e.KeyChar == '-')
+                e.Handled = true;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-' && !char.IsWhiteSpace(e.KeyChar))
                 e.Handled = true;
         }
         public string GenerateSalt(int len)

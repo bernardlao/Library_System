@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using MyClassCollection;
+using RibbonSupport;
+using Library_System.Manage_Books;
 
 namespace Library_System
 {
@@ -29,11 +31,16 @@ namespace Library_System
         List<string> bookAuthors;
         string subjectID,publisherID,callNumber,bookID;
 
+        //editBook
+        public static string editID;
+
         public addBookInfo()
         {
             InitializeComponent();
             SetAutoComplete();
+            
         }
+        
         private void SetAutoComplete()
         {
             //publisher
@@ -123,7 +130,7 @@ namespace Library_System
         }
         private void optPerson_CheckedChanged(object sender, EventArgs e)
         {
-            scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
+            //scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
             if (optPerson.Checked)
             {
                 gpbCorporate.Enabled = false;
@@ -140,7 +147,7 @@ namespace Library_System
 
         private void btnMultiAuthor_CheckedChanged(object sender, EventArgs e)
         {
-            scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
+            //scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
             if (btnMultiAuthor.Checked)
             {
                 txtAuthorFname.Enabled = false;
@@ -194,12 +201,29 @@ namespace Library_System
             GenerateCallNumber();
             if (IsValid())
             {
-                if (IsBookUnique())
+                if (IsBookUnique(""))
                 {
                     DoSaving();
                 }
             }
             //XtraMessageBox.Show(isPersonAuthor.ToString(),isMultipleAuthor.ToString());
+        }
+        public void UpdateNow()
+        {
+            TrimTextBoxes();
+            isPersonAuthor = optPerson.Checked;
+            isMultipleAuthor = btnMultiAuthor.Checked;
+            GetAuthors();
+            GetPublisherID();
+            GetSubjectID();
+            GenerateCallNumber();
+            if (IsValid())
+            {
+                if (IsBookUnique("bookID!=" + editID))
+                {
+                    DoUpdate();
+                }
+            }
         }
         private void DoSaving()
         {
@@ -224,6 +248,46 @@ namespace Library_System
             db.InsertMultiple(queries);
             if (DialogResult.Yes == XtraMessageBox.Show("Save Successful!\nRefresh Now?", "Saved", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 hm.ClearTextEdit(this);
+        }
+        private void DoUpdate()
+        {
+            List<string> qs = new List<string>();
+            qs.Add("DELETE FROM tblbookauthor WHERE bookID=" + editID);
+            db.InsertMultiple(qs);
+            string query = "UPDATE tblbook SET callNumber='" + callNumber + "', title='" + txtTitle.Text.Replace("'", "''") + "', deweyDecimal=" +
+                (txtDewey.Text.Equals("") ? "NULL" : "'" + txtDewey.Text + "'") + ", cattersNo=" + (txtCatters.Text.Equals("") ? "NULL" : "'" + txtCatters.Text + "'") +
+                ", yearOfPublication=" + (txtYearOfPub.Text.Equals("") ? "NULL" : txtYearOfPub.Text) + ", pages=" + (txtPage.Text.Equals("") ? "NULL" : txtPage.Text) +
+                ", volume=" + (txtVolume.Text.Equals("") ? "NULL" : txtVolume.Text) + ", quantity=" + txtQuantity.Text + ", noteArea=" +
+                (txtNoteArea.Text.Equals("") ? "NULL" : "'" + txtNoteArea.Text.Replace("'", "''") + "'") + ", typeOfIllustration=" +
+                (txtTypeOfIll.Text.Equals("") ? "NULL" : "'" + txtTypeOfIll.Text.Replace("'", "''") + "'") + ", publisherID=" + publisherID +
+                ", ISBN=" + (txtISBN.Text.Equals("") ? "NULL" : "'" + txtISBN.Text + "'") + ", isCopyright=" + (chkCopyright.Checked ? 1 : 0) +
+                ", subjectID=" + subjectID + " WHERE bookID=" + editID + ";";
+            qs.Clear();
+            qs.Add(query);
+            db.InsertMultiple(qs);
+            qs.Clear();
+            foreach (string s in bookAuthors)
+                qs.Add("INSERT INTO tblbookauthor (bookID,authorID) VALUES(" + editID + "," + s + ");");
+            db.InsertMultiple(qs);
+            if (DialogResult.Yes == XtraMessageBox.Show("Update Successful!\nReturn to List?", "Saved", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                GoBack();
+        }
+        private void GoBack()
+        {
+            scc.Panel1.Controls.Clear();
+            scc.Panel2.Controls.Clear();
+            frmMain.ss = SaveSender.ViewSearch;
+            Books b = new Books(frmMain.ss);
+            scc.SplitterPosition = b.Size.Width;
+            b.Dock = DockStyle.Fill;
+            scc.Panel1.Enabled = true;
+            scc.Panel1.Controls.Add(b);
+            Authors a = new Authors(new DataTable());
+            scc.Panel2.Enabled = true;
+            a.Dock = DockStyle.Fill;
+            scc.Panel2.Controls.Add(a);
+
+            this.Dispose();
         }
         private void TrimTextBoxes()
         {
@@ -276,10 +340,10 @@ namespace Library_System
             }
             return true;
         }
-        private bool IsBookUnique()
+        private bool IsBookUnique(string criteria)
         {
             DataTable dt = db.SelectTable("SELECT * FROM tblbook WHERE title='" + txtTitle.Text.Replace("'", "''") + "' AND volume " +
-                (txtVolume.Text.Equals("") ? "IS NULL" : "=" + txtVolume.Text) + " LIMIT 1");
+                (txtVolume.Text.Equals("") ? "IS NULL" : "=" + txtVolume.Text) + (criteria.Length > 0?" AND " + criteria:"") + " LIMIT 1");
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
@@ -424,6 +488,96 @@ namespace Library_System
             if (!txtYearOfPub.Text.Equals(""))
                 callNumber += (chkCopyright.Checked ? "c" : "") + txtYearOfPub.Text;
             callNumber = callNumber.Trim();
+        }
+
+        private void addBookInfo_Load(object sender, EventArgs e)
+        {
+            scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
+            if (frmMain.ss == SaveSender.EditBook)
+            {
+                SetDetails();
+            }
+        }
+        private void SetDetails()
+        {
+            scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
+            DataTable tbl = db.SelectTable("SELECT * FROM (((tblbookauthor ba INNER JOIN tblbook b ON ba.bookID=b.bookID) INNER JOIN " +
+                "tblauthor a ON ba.authorID=a.authorID) INNER JOIN tblpublisher p ON b.publisherID=p.publisherID) INNER JOIN tblsubject s ON b.subjectID=s.subjectID" + 
+                " WHERE b.bookID=" + editID);
+            if (tbl != null)
+            {
+                if (tbl.Rows.Count > 1)
+                {
+                    DataRow r = tbl.Rows[0];
+                    txtCatters.Text = r["cattersNo"].ToString();
+                    txtDewey.Text = r["deweyDecimal"].ToString();
+                    txtISBN.Text = r["ISBN"].ToString();
+                    txtNoteArea.Text = r["noteArea"].ToString();
+                    txtPage.Text = r["pages"].ToString();
+                    txtPublisherAddress.Text = r["address"].ToString();
+                    txtPublisherName.Text = r["publisherName"].ToString();
+                    txtQuantity.Text = r["quantity"].ToString();
+                    txtTitle.Text = r["title"].ToString();
+                    txtTypeOfIll.Text = r["typeOfIllustration"].ToString();
+                    txtVolume.Text = r["volume"].ToString();
+                    txtYearOfPub.Text = r["yearOfPublication"].ToString();
+                    if (r["isCopyright"].ToString().Equals("1"))
+                        chkCopyright.Checked = true;
+                    else
+                        chkCopyright.Checked = false;
+                    cmbSubject.Text = r["subjectName"].ToString();
+                    List<string> auID = new List<string>();
+                    foreach (DataRow row in tbl.Rows)
+                        auID.Add(row["authorID"].ToString());
+
+                    //scc.Panel2.Controls.Clear();
+                    //addBookAuthor ab = new addBookAuthor();
+                    addBookAuthor.ids = auID;
+                    btnMultiAuthor.Checked = true;
+                    optPerson.Checked = true;
+                    //ab.Dock = DockStyle.Fill;
+                    //ab.Size = scc.Size;
+                    //scc.Panel2.Enabled = true;
+                    //scc.Panel2.Controls.Add(ab);
+                    //scc.Panel2.Controls.Clear();
+                }
+                else if (tbl.Rows.Count == 1)
+                {
+                    addBookAuthor.ids = null;
+                    DataRow r = tbl.Rows[0];
+                    txtCatters.Text = r["cattersNo"].ToString();
+                    txtDewey.Text = r["deweyDecimal"].ToString();
+                    txtISBN.Text = r["ISBN"].ToString();
+                    txtNoteArea.Text = r["noteArea"].ToString();
+                    txtPage.Text = r["pages"].ToString();
+                    txtPublisherAddress.Text = r["address"].ToString();
+                    txtPublisherName.Text = r["publisherName"].ToString();
+                    txtQuantity.Text = r["quantity"].ToString();
+                    txtTitle.Text = r["title"].ToString();
+                    txtTypeOfIll.Text = r["typeOfIllustration"].ToString();
+                    txtVolume.Text = r["volume"].ToString();
+                    txtYearOfPub.Text = r["yearOfPublication"].ToString();
+                    if (r["isCopyright"].ToString().Equals("1"))
+                        chkCopyright.Checked = true;
+                    else
+                        chkCopyright.Checked = false;
+                    cmbSubject.Text = r["subjectName"].ToString();
+                    if (r["fname"].ToString().Equals(""))
+                    {
+                        optCorporate.Checked = true;
+                        txtCorporate.Text = r["corporation"].ToString();
+                        btnMultiAuthor.Checked = false;
+                    }
+                    else
+                    {
+                        optPerson.Checked = true;
+                        txtAuthorFname.Text = r["fname"].ToString();
+                        txtAuthorMname.Text = r["mname"].ToString();
+                        txtAuthorLname.Text = r["lname"].ToString();
+                        btnMultiAuthor.Checked = false;
+                    }
+                }
+            }
         }
     }
 }
