@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Borrowers Menu\Borrowers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Borrowers Menu\Borrowers.Designer.cs">
+      <DependentUpon>Borrowers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Borrowers Menu\BorrowMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,6 +78,12 @@
     </Compile>
     <Compile Include="Borrowers Menu\RegisterBorrower.Designer.cs">
       <DependentUpon>RegisterBorrower.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Borrowing Menu\BorrowedBooks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Borrowing Menu\BorrowedBooks.Designer.cs">
+      <DependentUpon>BorrowedBooks.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -155,11 +167,17 @@
     <Compile Include="SuperUserPassword.Designer.cs">
       <DependentUpon>SuperUserPassword.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Borrowers Menu\Borrowers.resx">
+      <DependentUpon>Borrowers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Borrowers Menu\BorrowMenu.resx">
       <DependentUpon>BorrowMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Borrowers Menu\RegisterBorrower.resx">
       <DependentUpon>RegisterBorrower.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Borrowing Menu\BorrowedBooks.resx">
+      <DependentUpon>BorrowedBooks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

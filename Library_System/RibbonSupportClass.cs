@@ -39,6 +39,9 @@ namespace RibbonSupport
                 case SaveSender.EditBook: UpdateBook(); break;
                 case SaveSender.DeleteBook: DeleteBook(); break;
                 case SaveSender.RegisterBorrower: RegisterBorrowers(); break;
+                case SaveSender.ApproveBorrower: ApproveRegistration(); break;
+                case SaveSender.EditBorrower: UpdateBorrower(); break;
+                case SaveSender.DeleteBorrower: DeleteBorrower(); break;
             }
         }
         public void BorrowNow(SaveSender ss)
@@ -115,7 +118,27 @@ namespace RibbonSupport
         {
             Books b = (Books)mf.scMain.Panel1.Controls[0];
             b.BorrowSelected();
-            frmMain.ss = SaveSender.None;
+            
+        }
+        private void ApproveRegistration()
+        {
+            Borrowers b = (Borrowers)mf.scMain.Panel2.Controls[0];
+            b.ApproveRegistration();
+        }
+        private void UpdateBorrower()
+        {
+            if (mf.scMain.Panel2.Controls.Count > 0)
+            {
+                RegisterBorrower rb = (RegisterBorrower)mf.scMain.Panel2.Controls[0];
+                rb.UpdateNow();
+                Borrowers b = (Borrowers)mf.scMain.Panel1.Controls[0];
+                b.LoadList();
+            }
+        }
+        private void DeleteBorrower()
+        {
+            Borrowers b = (Borrowers)mf.scMain.Panel2.Controls[0];
+            b.DeleteBorrower();
         }
     }
     public enum SaveSender
@@ -134,6 +157,9 @@ namespace RibbonSupport
         DeletePublisher,
         EditAuthor,
         DeleteAuthor,
-        RegisterBorrower
+        RegisterBorrower,
+        ApproveBorrower,
+        EditBorrower,
+        DeleteBorrower
     }
 }

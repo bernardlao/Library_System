@@ -292,7 +292,21 @@ namespace Library_System
             scMain.Panel2.Controls.Add(a);
             ClearCheckDoCheck(btnViewSearch);
         }
-
+        private void btnSearchBorrowBook_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.ViewSearch;
+            Books b = new Books(ss);
+            scMain.SplitterPosition = b.Size.Width;
+            b.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(b);
+            Authors a = new Authors(new DataTable());
+            scMain.Panel2.Enabled = true;
+            a.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(a);
+            ClearCheckDoCheck(btnSearchBorrowBook);
+        }
         private void btnRegisterBorrower_ItemClick(object sender, ItemClickEventArgs e)
         {
             ClearPanel();
@@ -304,13 +318,58 @@ namespace Library_System
             scMain.Panel2.Controls.Add(rb);
             ClearCheckDoCheck(btnRegisterBorrower);
         }
-
+        
         private void btnBorrowSelected_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (ss == SaveSender.ViewSearch)
             {
                 rsc.BorrowNow(ss);
             }
+        }
+        
+        private void btnApproveRegistration_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.ApproveBorrower;
+            scMain.SplitterPosition = 0;
+            Borrowers b = new Borrowers(ss);
+            b.Dock = DockStyle.Fill;
+            scMain.Panel2.Enabled = true;
+            scMain.Panel2.Controls.Add(b);
+            ClearCheckDoCheck(btnApproveRegistration);
+        }
+        private void btnApproveBorrowerRegistration_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.ApproveBorrower;
+            scMain.SplitterPosition = 0;
+            Borrowers b = new Borrowers(ss);
+            b.Dock = DockStyle.Fill;
+            scMain.Panel2.Enabled = true;
+            scMain.Panel2.Controls.Add(b);
+            ClearCheckDoCheck(btnApproveBorrowerRegistration);
+        }
+        private void btnDeleteBorrower_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.DeleteBorrower;
+            scMain.SplitterPosition = 0;
+            Borrowers b = new Borrowers(ss);
+            b.Dock = DockStyle.Fill;
+            scMain.Panel2.Enabled = true;
+            scMain.Panel2.Controls.Add(b);
+            ClearCheckDoCheck(btnDeleteBorrower);
+        }
+        private void btnEditBorrower_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.EditBorrower;
+            scMain.SplitterPosition = this.Size.Width;
+            Borrowers b = new Borrowers(ss);
+            b.Dock = DockStyle.Fill;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(b);
+            ClearCheckDoCheck(btnEditBorrower);
         }
 
         private void ClearCheckDoCheck(BarCheckItem itm)
@@ -324,10 +383,6 @@ namespace Library_System
             }
             itm.Checked = true;
         }
-
-        
-
-        
 
         
 

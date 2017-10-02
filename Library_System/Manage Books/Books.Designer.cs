@@ -44,6 +44,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.txtSearch = new DevExpress.XtraEditors.TextEdit();
+            this.lblForEdit = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.lstBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBooksItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -222,11 +223,25 @@
             this.txtSearch.TabIndex = 0;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
+            // lblForEdit
+            // 
+            this.lblForEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblForEdit.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.lblForEdit.Appearance.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblForEdit.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.lblForEdit.Location = new System.Drawing.Point(926, 49);
+            this.lblForEdit.Name = "lblForEdit";
+            this.lblForEdit.Size = new System.Drawing.Size(163, 11);
+            this.lblForEdit.TabIndex = 41;
+            this.lblForEdit.Text = "Edit Note : Double click an Item to Edit";
+            this.lblForEdit.Visible = false;
+            // 
             // Books
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Controls.Add(this.lblForEdit);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.lstBooks);
@@ -261,5 +276,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.TextEdit txtSearch;
+        private DevExpress.XtraEditors.LabelControl lblForEdit;
     }
 }

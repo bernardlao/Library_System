@@ -42,10 +42,10 @@
             this.txtBorrowerID = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.gpbBorrowInfo = new DevExpress.XtraEditors.GroupControl();
-            this.btnBorrow = new DevExpress.XtraEditors.SimpleButton();
             this.txtQuantity = new DevExpress.XtraEditors.TextEdit();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.tmSetter = new System.Windows.Forms.Timer(this.components);
+            this.btnBorrow = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gpbBookInfo)).BeginInit();
             this.gpbBookInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAuthors.Properties)).BeginInit();
@@ -152,6 +152,7 @@
             this.txtBorrowerID.Size = new System.Drawing.Size(241, 20);
             this.txtBorrowerID.TabIndex = 1;
             this.txtBorrowerID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBorrowerID_KeyDown);
+            this.txtBorrowerID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBorrowerID_KeyPress);
             // 
             // labelControl3
             // 
@@ -172,16 +173,6 @@
             this.gpbBorrowInfo.Size = new System.Drawing.Size(361, 137);
             this.gpbBorrowInfo.TabIndex = 2;
             this.gpbBorrowInfo.Text = "Borrow Information";
-            // 
-            // btnBorrow
-            // 
-            this.btnBorrow.Image = ((System.Drawing.Image)(resources.GetObject("btnBorrow.Image")));
-            this.btnBorrow.Location = new System.Drawing.Point(115, 77);
-            this.btnBorrow.Name = "btnBorrow";
-            this.btnBorrow.Size = new System.Drawing.Size(134, 39);
-            this.btnBorrow.TabIndex = 4;
-            this.btnBorrow.Text = "Borrow this Book";
-            this.btnBorrow.Click += new System.EventHandler(this.btnBorrow_Click);
             // 
             // txtQuantity
             // 
@@ -205,6 +196,16 @@
             // 
             this.tmSetter.Enabled = true;
             this.tmSetter.Tick += new System.EventHandler(this.tmSetter_Tick);
+            // 
+            // btnBorrow
+            // 
+            this.btnBorrow.Image = ((System.Drawing.Image)(resources.GetObject("btnBorrow.Image")));
+            this.btnBorrow.Location = new System.Drawing.Point(115, 77);
+            this.btnBorrow.Name = "btnBorrow";
+            this.btnBorrow.Size = new System.Drawing.Size(134, 39);
+            this.btnBorrow.TabIndex = 4;
+            this.btnBorrow.Text = "Borrow this Book";
+            this.btnBorrow.Click += new System.EventHandler(this.btnBorrow_Click);
             // 
             // BorrowMenu
             // 

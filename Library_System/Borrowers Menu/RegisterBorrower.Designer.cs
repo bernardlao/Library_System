@@ -260,20 +260,20 @@
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txtBorrowerID;
-        private DevExpress.XtraEditors.MemoEdit txtAddress;
         private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.DateEdit dtpBday;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.TextEdit txtLname;
         private DevExpress.XtraEditors.LabelControl labelControl4;
-        private DevExpress.XtraEditors.TextEdit txtMname;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.TextEdit txtFname;
-        private DevExpress.XtraEditors.CheckEdit optOthers;
-        private DevExpress.XtraEditors.CheckEdit optTeacher;
-        private DevExpress.XtraEditors.CheckEdit optStudent;
+        public DevExpress.XtraEditors.TextEdit txtBorrowerID;
+        public DevExpress.XtraEditors.MemoEdit txtAddress;
+        public DevExpress.XtraEditors.DateEdit dtpBday;
+        public DevExpress.XtraEditors.TextEdit txtLname;
+        public DevExpress.XtraEditors.TextEdit txtMname;
+        public DevExpress.XtraEditors.TextEdit txtFname;
+        public DevExpress.XtraEditors.CheckEdit optOthers;
+        public DevExpress.XtraEditors.CheckEdit optTeacher;
+        public DevExpress.XtraEditors.CheckEdit optStudent;
 
     }
 }

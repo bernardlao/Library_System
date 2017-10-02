@@ -32,6 +32,7 @@ namespace Library_System.Manage_Books
             {
                 colIsSelected.Visible = false;
                 lstBooksItem.OptionsBehavior.Editable = false;
+                lblForEdit.Visible = true;
             }
             else if (ss == SaveSender.DeleteBook)
             {
@@ -232,6 +233,7 @@ namespace Library_System.Manage_Books
                 scc.Panel1.Controls.Clear();
                 scc.Panel2.Controls.Clear();
                 scc.Panel2.Controls.Add(bm);
+                frmMain.ss = SaveSender.None;
             }
             else
                 XtraMessageBox.Show("The book you selected is currently unavailable. Please consider searching for books related to it.", "Insufficient Stock",

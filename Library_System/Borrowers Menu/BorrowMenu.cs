@@ -109,5 +109,10 @@ namespace Library_System.Borrowers_Menu
                 }
             }
         }
+
+        private void txtBorrowerID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            hm.PossibleIDHandler(ref sender, ref e);
+        }
     }
 }

@@ -33,3 +33,4 @@ D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Books.res
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Authors.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.RegisterBorrower.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.BorrowMenu.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.Borrowers.resources

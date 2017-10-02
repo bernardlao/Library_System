@@ -16,6 +16,7 @@ namespace Library_System.Borrowers_Menu
     {
         MySQLDBUtilities db = new MySQLDBUtilities();
         HelperMethods hm = new HelperMethods();
+        public string editID;
 
         public RegisterBorrower()
         {
@@ -24,7 +25,10 @@ namespace Library_System.Borrowers_Menu
 
         private void RegisterBorrower_Load(object sender, EventArgs e)
         {
-
+            if (editID == null)
+            {
+                dtpBday.DateTime = DateTime.Now;
+            }
         }
 
         private void optStudent_CheckedChanged(object sender, EventArgs e)
@@ -61,6 +65,19 @@ namespace Library_System.Borrowers_Menu
                 }
             }
         }
+        public void UpdateNow()
+        {
+            if (editID != null)
+            {
+                hm.TrimTextEdit(this);
+                if (IsAllValid())
+                {
+                    string query = "UPDATE tblborrower SET fname='" + txtFname.Text + "', mname=" + (txtMname.Text.Equals("")?"NULL":"'" + txtMname.Text + "'") + 
+                        ", lname='" + txtLname.Text + "', bdate='" + dtpBday.DateTime.ToString("yyyy-MM-dd") + "', address='" + txtAddress.Text.Replace("'","''") + "';";
+                    db.InsertQuery(query);
+                }
+            }
+        }
         private void SaveDB()
         {
             string type = "";
@@ -72,7 +89,7 @@ namespace Library_System.Borrowers_Menu
                 type = "Teacher";
             
             string query = "INSERT INTO tblborrower(borrowerID, borrowerType, fname, mname, lname, bdate, address, status) VALUES('" +
-                txtBorrowerID.Text + "','" + type + "','" + txtFname.Text + "','" + txtMname.Text + "','" + txtLname.Text + "','" + 
+                txtBorrowerID.Text + "','" + type + "','" + txtFname.Text + "'," + (txtMname.Text.Equals("")? "NULL":"'" + txtMname.Text + "'") + ",'" + txtLname.Text + "','" + 
                 dtpBday.DateTime.ToString("yyyy-MM-dd") + "','" + txtAddress.Text.Replace("'","''") + "','Request');";
             int res = db.InsertQuery(query);
             if (res != -1)
@@ -102,22 +119,27 @@ namespace Library_System.Borrowers_Menu
             }
             if (txtBorrowerID.Text.Equals(""))
             {
-                XtraMessageBox.Show("Please input your ID#.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Please specify your ID#.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (txtFname.Text.Equals(""))
             {
-                XtraMessageBox.Show("Please input your firstname.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Please specify your firstname.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (txtLname.Text.Equals(""))
             {
-                XtraMessageBox.Show("Please input your lastname.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Please specify your lastname.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (dtpBday.EditValue == null)
             {
-                XtraMessageBox.Show("Please input your birthday.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Please specify your birthday.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (txtAddress.Text.Equals(""))
+            {
+                XtraMessageBox.Show("Please specify your address.", "Information Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return true;
