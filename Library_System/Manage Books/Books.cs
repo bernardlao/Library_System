@@ -27,12 +27,21 @@ namespace Library_System.Manage_Books
         public Books(SaveSender ss)
         {
             InitializeComponent();
+            
             this.ss = ss;
+            
+        }
+
+        private void Books_Load(object sender, EventArgs e)
+        {
+            LoadList();
+            lstBooksItem.BestFitColumns();
+            scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
             if (ss == SaveSender.EditBook)
             {
+                lblForEdit.Visible = true;
                 colIsSelected.Visible = false;
                 lstBooksItem.OptionsBehavior.Editable = false;
-                lblForEdit.Visible = true;
             }
             else if (ss == SaveSender.DeleteBook)
             {
@@ -47,12 +56,6 @@ namespace Library_System.Manage_Books
                 lstBooksItem.OptionsBehavior.Editable = false;
             }
         }
-
-        private void Books_Load(object sender, EventArgs e)
-        {
-            scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
-            LoadList();
-        }
         private void LoadList()
         {
             string query = "SELECT * FROM (tblbook b INNER JOIN tblpublisher p ON b.publisherID=p.publisherID) INNER JOIN tblsubject s ON b.subjectID=s.subjectID;";
@@ -63,6 +66,7 @@ namespace Library_System.Manage_Books
             lstBooks.DataSource = dt;
 
             tblauthor = db.SelectTable("SELECT * FROM tblauthor;");
+            
         }
 
         private void lstBooksItem_Click(object sender, EventArgs e)
@@ -164,12 +168,13 @@ namespace Library_System.Manage_Books
 
         private void lstBooksItem_DoubleClick(object sender, EventArgs e)
         {
+            scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
             if (ss == SaveSender.EditBook && lstBooksItem.RowCount > 0)
             {
                 int count = ((Authors)scc.Panel2.Controls[0]).lstAuthorsItem.RowCount;
                 string bookID = lstBooksItem.GetRowCellValue(lstBooksItem.FocusedRowHandle, colBookID).ToString();
                 addBookInfo.editID = bookID;
-                frmMain.ss = SaveSender.EditBook;
+                //frmMain.ss = SaveSender.EditBook;
                 scc.Panel1.Controls.Clear();
                 scc.Panel2.Controls.Clear();
                 addBookInfo info = new addBookInfo();

@@ -160,7 +160,7 @@ namespace Library_System
                             salt = hm.GenerateSalt(txtPassword.Text.Length);
                             saltedPassword = hm.GenerateSHA256(txtPassword.Text + salt);
                             db.InsertQuery("UPDATE tbluser SET password='" + saltedPassword + "', salt='" + salt + "' WHERE userID=" + r["userID"].ToString());
-                            frmMain.userLoggedIn = r["userID"].ToString();
+                            frmMain.userLoggedIn = (r["username"].ToString().Equals("admin") ? "Admin" : r["userID"].ToString());
                             return true;
                         }
                         else
@@ -170,7 +170,7 @@ namespace Library_System
                     {
                         if (r["password"].ToString().Equals(saltedPassword))
                         {
-                            frmMain.userLoggedIn = r["userID"].ToString();
+                            frmMain.userLoggedIn = (r["username"].ToString().Equals("admin") ? "Admin" : r["userID"].ToString());
                             return true;
                         }
                     }

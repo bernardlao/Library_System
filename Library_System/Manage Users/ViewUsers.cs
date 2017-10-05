@@ -42,6 +42,7 @@ namespace Library_System.Manage_Users
         private void viewUsers_Load(object sender, EventArgs e)
         {
             LoadList();
+            lstUsersItem.BestFitColumns();
             //colFirstname.RealColumnEdit.KeyPress += name_KeyPress;
             //colLastname.RealColumnEdit.KeyPress += name_KeyPress;
             //colMiddlename.RealColumnEdit.KeyPress += name_KeyPress;
@@ -75,7 +76,7 @@ namespace Library_System.Manage_Users
             bool allValid = true;
             try
             {
-                string id = lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns[1]).ToString();
+                string id = lstUsersItem.GetRowCellValue(lstUsersItem.FocusedRowHandle, colUserID).ToString();
                 List<DataRow> r = null;
                 r = dt.AsEnumerable().Where(s => s["username"].ToString().Equals(lstUsersItem.GetRowCellValue(e.RowHandle, lstUsersItem.Columns["username"]).ToString()) &&
                                     !s["userID"].ToString().Equals(id)).ToList(); ;
@@ -100,7 +101,7 @@ namespace Library_System.Manage_Users
                 else
                     dt.AsEnumerable().Where(s => s["userID"].ToString().Equals(id)).Select(s => s).Single()["isEdited"] = -1;
             }
-            catch (StackOverflowException ex)
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message);
             }
@@ -178,11 +179,13 @@ namespace Library_System.Manage_Users
                     queries.Add(query);
                 }
                 db.InsertMultiple(queries);
-                db.UpdateList("tbluser", "userID", new string[] { "userID", "username", "password", "librarianID", "fname", "lname", "lname" }, dt);
-                dt.AsEnumerable().Where(s => s["username"].ToString().Equals("admin")).Select(s => s).Single().Delete();
+                LoadList();
             }
         }
-
+        public void RefreshUsers()
+        {
+            LoadList();
+        }
         private void lstUsersItem_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (currSS == SaveSender.ResetPassword)

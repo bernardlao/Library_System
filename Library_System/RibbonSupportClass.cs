@@ -10,6 +10,7 @@ using Library_System;
 using Library_System.Manage_Users;
 using Library_System.Manage_Books;
 using Library_System.Borrowers_Menu;
+using Library_System.Borrowing_Menu;
 
 namespace RibbonSupport
 {
@@ -42,6 +43,7 @@ namespace RibbonSupport
                 case SaveSender.ApproveBorrower: ApproveRegistration(); break;
                 case SaveSender.EditBorrower: UpdateBorrower(); break;
                 case SaveSender.DeleteBorrower: DeleteBorrower(); break;
+                case SaveSender.CheckAndSanctionPenalty: ApplySanction(); break;
             }
         }
         public void BorrowNow(SaveSender ss)
@@ -49,6 +51,18 @@ namespace RibbonSupport
             if (ss == SaveSender.ViewSearch)
                 BorrowSelected();
         }
+        public void ApproveBorrow(bool isApproved)
+        {
+            if (isApproved)
+                Approve();
+            else
+                Reject();
+        }
+        public void ReceiveBookReturns()
+        {
+            ReceiveReturns();
+        }
+
         private void SaveBook()
         {
             addBookInfo abi = (addBookInfo)mf.scMain.Panel1.Controls[0];
@@ -67,7 +81,9 @@ namespace RibbonSupport
         private void SaveUser()
         {
             addUser au = (addUser)mf.scMain.Panel1.Controls[0];
+            viewUsers vu = (viewUsers)mf.scMain.Panel2.Controls[0];
             au.SaveUser();
+            vu.RefreshUsers();
         }
         private void UpdateUser()
         {
@@ -140,6 +156,26 @@ namespace RibbonSupport
             Borrowers b = (Borrowers)mf.scMain.Panel2.Controls[0];
             b.DeleteBorrower();
         }
+        private void Approve()
+        {
+            BorrowedBooks bb = (BorrowedBooks)mf.scMain.Panel2.Controls[0];
+            bb.ApproveBorrowRequest();
+        }
+        private void Reject()
+        {
+            BorrowedBooks bb = (BorrowedBooks)mf.scMain.Panel2.Controls[0];
+            bb.RejectBorrowRequest();
+        }
+        private void ReceiveReturns()
+        {
+            BorrowedBooks bb = (BorrowedBooks)mf.scMain.Panel2.Controls[0];
+            bb.ReceiveBookReturns();
+        }
+        private void ApplySanction() 
+        {
+            Penalties p = (Penalties)mf.scMain.Panel2.Controls[0];
+            p.ApplySanction();
+        }
     }
     public enum SaveSender
     {
@@ -160,6 +196,11 @@ namespace RibbonSupport
         RegisterBorrower,
         ApproveBorrower,
         EditBorrower,
-        DeleteBorrower
+        DeleteBorrower,
+        BorrowList,
+        ReceiveList,
+        CheckTransactionRecord,
+        CheckAndSanctionPenalty,
+        CheckAllPenalties
     }
 }

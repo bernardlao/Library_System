@@ -15,6 +15,7 @@ using Library_System.Manage_Books;
 using DevExpress.Utils;
 using DevExpress.XtraBars;
 using Library_System.Borrowers_Menu;
+using Library_System.Borrowing_Menu;
 
 namespace Library_System
 {
@@ -30,6 +31,7 @@ namespace Library_System
         {
             InitializeComponent();
             rsc = new RibbonSupportClass(this);
+            
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -78,7 +80,7 @@ namespace Library_System
                     ribManageAccounts.Visible = false;
                     ribBorrower.Visible = true;
                 }
-                else if (userLoggedIn.Equals("1"))
+                else if (userLoggedIn.Equals("Admin"))
                 {
                     ribBooks.Visible = false;
                     ribBorrowing.Visible = false;
@@ -165,6 +167,7 @@ namespace Library_System
 
         private void btnLogout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ClearCheckDoCheck(null);
             userLoggedIn = null;
             ribTabs.Visible = false;
             ClearPanel();
@@ -176,6 +179,7 @@ namespace Library_System
         {
             ss = SaveSender.None;
             ClearPanel();
+            ClearCheckDoCheck(null);
         }
 
         private void btnEditSubject_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -371,7 +375,61 @@ namespace Library_System
             scMain.Panel1.Controls.Add(b);
             ClearCheckDoCheck(btnEditBorrower);
         }
-
+        private void btnCheckRequest_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.BorrowList;
+            scMain.Panel2.Enabled = true;
+            scMain.SplitterPosition = 0;
+            BorrowedBooks bb = new BorrowedBooks(ss);
+            bb.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(bb);
+            ClearCheckDoCheck(btnCheckRequest);
+        }
+        private void btnReceiveReturns_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.ReceiveList;
+            scMain.Panel2.Enabled = true;
+            scMain.SplitterPosition = 0;
+            BorrowedBooks bb = new BorrowedBooks(ss);
+            bb.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(bb);
+            ClearCheckDoCheck(btnReceiveReturns);
+        }
+        private void btnCheckTransaction_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.CheckTransactionRecord;
+            scMain.Panel2.Enabled = true;
+            scMain.SplitterPosition = 0;
+            BorrowedBooks bb = new BorrowedBooks(ss);
+            bb.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(bb);
+            ClearCheckDoCheck(btnCheckTransaction);
+        }
+        private void btnCheckPenalties_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.CheckAndSanctionPenalty;
+            scMain.Panel2.Enabled = true;
+            scMain.SplitterPosition = 0;
+            Penalties p = new Penalties(ss);
+            p.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(p);
+            ClearCheckDoCheck(btnCheckPenalties);
+        }
+        private void btnCheckPenaltyStatistics_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            ss = SaveSender.CheckAllPenalties;
+            scMain.Panel2.Enabled = true;
+            scMain.SplitterPosition = 0;
+            Penalties p = new Penalties(ss);
+            p.Dock = DockStyle.Fill;
+            scMain.Panel2.Controls.Add(p);
+            ClearCheckDoCheck(btnCheckPenaltyStatistics);
+        }
         private void ClearCheckDoCheck(BarCheckItem itm)
         {
             foreach (BarItem c in ribTabs.Items)
@@ -381,12 +439,40 @@ namespace Library_System
                     ((BarCheckItem)c).Checked = false;
                 }
             }
-            itm.Checked = true;
+            if (itm != null)
+            {
+                itm.Checked = true;
+            }
+        }
+
+        private void btnApproveRequest_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (ss == SaveSender.BorrowList)
+            {
+                rsc.ApproveBorrow(true);
+            }
+        }
+
+        private void btnRejectRequest_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (ss == SaveSender.BorrowList)
+            {
+                rsc.ApproveBorrow(false);
+            }
+        }
+
+        private void btnReceiveSelected_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (ss == SaveSender.ReceiveList)
+            {
+                rsc.ReceiveBookReturns();
+            }
         }
 
         
 
         
 
+       
     }
 }

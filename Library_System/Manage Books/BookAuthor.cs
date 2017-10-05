@@ -38,6 +38,7 @@ namespace Library_System
             lstBookAuthor.DataSource = dt;
             if (frmMain.ss == RibbonSupport.SaveSender.EditBook && ids != null)
                 SetSelected();
+            lstBookAuthorItem.BestFitColumns();
         }
         private void SetSelected()
         {

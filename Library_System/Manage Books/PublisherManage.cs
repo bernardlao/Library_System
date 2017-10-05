@@ -44,6 +44,7 @@ namespace Library_System.Manage_Books
         private void publisherManage_Load(object sender, EventArgs e)
         {
             LoadList();
+            lstPublisherItem.BestFitColumns();
         }
         private void LoadList()
         {

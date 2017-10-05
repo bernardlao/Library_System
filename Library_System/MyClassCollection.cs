@@ -571,6 +571,33 @@ namespace MyClassCollection
                 }
             }
         }
+        public int GetDateDifferenceWithoutWeekends(DateTime from, DateTime to)
+        {
+            int count = 0;
+            DateTime fromDateOnly = Convert.ToDateTime(from.ToString("MM/dd/yyyy"));
+            DateTime toDateOnly = Convert.ToDateTime(to.ToString("MM/dd/yyyy"));
+            if (fromDateOnly < toDateOnly)
+            {
+                while (fromDateOnly < toDateOnly)
+                {
+                    fromDateOnly = fromDateOnly.AddDays(1);
+                    if (!fromDateOnly.DayOfWeek.ToString().Equals("Saturday") && !fromDateOnly.DayOfWeek.ToString().Equals("Sunday"))
+                        count++;
+                }
+            }
+            else if (fromDateOnly == toDateOnly)
+                return 0;
+            else
+            {
+                while (toDateOnly < fromDateOnly)
+                {
+                    toDateOnly = toDateOnly.AddDays(1);
+                    if (!toDateOnly.DayOfWeek.ToString().Equals("Saturday") && !toDateOnly.DayOfWeek.ToString().Equals("Sunday"))
+                        count--;
+                }
+            }
+            return count;
+        }
         /*public DataTable ConvertToDataTable<T>(List<T> data)
         {
             DataTable table = new DataTable();

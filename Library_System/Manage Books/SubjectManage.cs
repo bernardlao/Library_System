@@ -41,6 +41,7 @@ namespace Library_System.Manage_Books
         private void SubjectManage_Load(object sender, EventArgs e)
         {
             LoadList();
+            lstSubjectItem.BestFitColumns();
         }
         private void LoadList()
         {

@@ -29,6 +29,7 @@ namespace Library_System.Borrowers_Menu
         private void Borrowers_Load(object sender, EventArgs e)
         {
             LoadList();
+            lstBorrowerItem.BestFitColumns();
             scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
             if (ss == SaveSender.EditBorrower)
             {

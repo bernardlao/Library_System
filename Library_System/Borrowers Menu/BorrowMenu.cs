@@ -106,6 +106,8 @@ namespace Library_System.Borrowers_Menu
                             this.Dispose();
                         }
                     }
+                    else
+                        XtraMessageBox.Show("The requested quantity must be less than the book in stock and greater than 0.", "Request Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

@@ -229,10 +229,10 @@
             this.lblForEdit.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.lblForEdit.Appearance.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblForEdit.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.lblForEdit.Location = new System.Drawing.Point(926, 49);
+            this.lblForEdit.Location = new System.Drawing.Point(928, 49);
             this.lblForEdit.Name = "lblForEdit";
             this.lblForEdit.Size = new System.Drawing.Size(163, 11);
-            this.lblForEdit.TabIndex = 41;
+            this.lblForEdit.TabIndex = 43;
             this.lblForEdit.Text = "Edit Note : Double click an Item to Edit";
             this.lblForEdit.Visible = false;
             // 

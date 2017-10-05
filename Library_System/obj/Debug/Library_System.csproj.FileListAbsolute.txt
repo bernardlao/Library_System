@@ -10,27 +10,29 @@ c:\users\bernard lao\documents\visual studio 2012\Projects\Library_System\Librar
 c:\users\bernard lao\documents\visual studio 2012\Projects\Library_System\Library_System\obj\Debug\Library_System.addBookInfo.resources
 C:\Users\Bernard Lao\documents\visual studio 2012\Projects\Library_System\Library_System\obj\Debug\Library_System.addBookAuthor.resources
 C:\Users\Bernard Lao\Documents\Visual Studio 2012\Projects\Library_System\Library_System\obj\Debug\Library_System.frmLogin.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.exe
-D:\Library_System\Library_System\obj\Debug\Library_System.pdb
 D:\Library_System\Library_System\bin\Debug\Library_System.exe
 D:\Library_System\Library_System\bin\Debug\Library_System.pdb
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.Borrowers.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.BorrowMenu.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.RegisterBorrower.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.BorrowedBooks.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.frmLogin.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.authorManage.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Authors.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.addBookAuthor.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.addBookInfo.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.frmMain.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Properties.Resources.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.csproj.GenerateResource.Cache
-D:\Library_System\Library_System\obj\Debug\Library_System.exe.licenses
-D:\Library_System\Library_System\obj\Debug\Library_System.ProcessProgress.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.SuperUserPassword.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Books.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.publisherManage.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.subjectManage.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.addUser.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Users.viewUsers.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.SubjectManage.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.publisherManage.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.authorManage.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.ProcessProgress.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Properties.Resources.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.SuperUserPassword.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.csproj.GenerateResource.Cache
+D:\Library_System\Library_System\obj\Debug\Library_System.exe.licenses
+D:\Library_System\Library_System\obj\Debug\Library_System.exe
+D:\Library_System\Library_System\obj\Debug\Library_System.pdb
 D:\Library_System\Library_System\obj\Debug\Library_System.csprojResolveAssemblyReference.cache
-D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Books.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Authors.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.RegisterBorrower.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.BorrowMenu.resources
-D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.Borrowers.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.Penalties.resources

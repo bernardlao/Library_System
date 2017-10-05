@@ -85,6 +85,12 @@
     <Compile Include="Borrowing Menu\BorrowedBooks.Designer.cs">
       <DependentUpon>BorrowedBooks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Borrowing Menu\Penalties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Borrowing Menu\Penalties.Designer.cs">
+      <DependentUpon>Penalties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Borrowing Menu\BorrowedBooks.resx">
       <DependentUpon>BorrowedBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Borrowing Menu\Penalties.resx">
+      <DependentUpon>Penalties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
