@@ -31,6 +31,7 @@
             this.lstBorrowed = new DevExpress.XtraGrid.GridControl();
             this.lstBorrowedItem = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBookID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colBorrowedBookID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCallNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTitle = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,7 +56,6 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.colBookID = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.lstBorrowed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBorrowedItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpDateAllowance)).BeginInit();
@@ -98,6 +98,7 @@
             this.lstBorrowedItem.GridControl = this.lstBorrowed;
             this.lstBorrowedItem.Name = "lstBorrowedItem";
             this.lstBorrowedItem.OptionsBehavior.Editable = false;
+            this.lstBorrowedItem.OptionsBehavior.ImmediateUpdateRowPosition = false;
             this.lstBorrowedItem.OptionsFind.AlwaysVisible = true;
             this.lstBorrowedItem.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.lstBorrowedItem_RowCellClick);
             this.lstBorrowedItem.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.lstBorrowedItem_RowCellStyle);
@@ -109,6 +110,12 @@
             this.colIsSelected.Name = "colIsSelected";
             this.colIsSelected.Visible = true;
             this.colIsSelected.VisibleIndex = 0;
+            // 
+            // colBookID
+            // 
+            this.colBookID.Caption = "BookID";
+            this.colBookID.FieldName = "bookID";
+            this.colBookID.Name = "colBookID";
             // 
             // colBorrowedBookID
             // 
@@ -122,7 +129,7 @@
             this.colCallNumber.FieldName = "callNumber";
             this.colCallNumber.Name = "colCallNumber";
             this.colCallNumber.Visible = true;
-            this.colCallNumber.VisibleIndex = 2;
+            this.colCallNumber.VisibleIndex = 1;
             // 
             // colTitle
             // 
@@ -130,7 +137,7 @@
             this.colTitle.FieldName = "title";
             this.colTitle.Name = "colTitle";
             this.colTitle.Visible = true;
-            this.colTitle.VisibleIndex = 3;
+            this.colTitle.VisibleIndex = 2;
             // 
             // colBorrowerID
             // 
@@ -138,7 +145,7 @@
             this.colBorrowerID.FieldName = "borrowerID";
             this.colBorrowerID.Name = "colBorrowerID";
             this.colBorrowerID.Visible = true;
-            this.colBorrowerID.VisibleIndex = 4;
+            this.colBorrowerID.VisibleIndex = 3;
             // 
             // colBorrowerName
             // 
@@ -146,7 +153,7 @@
             this.colBorrowerName.FieldName = "bfullname";
             this.colBorrowerName.Name = "colBorrowerName";
             this.colBorrowerName.Visible = true;
-            this.colBorrowerName.VisibleIndex = 5;
+            this.colBorrowerName.VisibleIndex = 4;
             // 
             // colQuantity
             // 
@@ -154,7 +161,7 @@
             this.colQuantity.FieldName = "quantity";
             this.colQuantity.Name = "colQuantity";
             this.colQuantity.Visible = true;
-            this.colQuantity.VisibleIndex = 6;
+            this.colQuantity.VisibleIndex = 5;
             // 
             // colDateBorrowed
             // 
@@ -163,7 +170,7 @@
             this.colDateBorrowed.FieldName = "dateBorrowed";
             this.colDateBorrowed.Name = "colDateBorrowed";
             this.colDateBorrowed.Visible = true;
-            this.colDateBorrowed.VisibleIndex = 7;
+            this.colDateBorrowed.VisibleIndex = 6;
             // 
             // colDateAllowance
             // 
@@ -171,7 +178,7 @@
             this.colDateAllowance.FieldName = "dateAllowance";
             this.colDateAllowance.Name = "colDateAllowance";
             this.colDateAllowance.Visible = true;
-            this.colDateAllowance.VisibleIndex = 8;
+            this.colDateAllowance.VisibleIndex = 7;
             // 
             // colDateReturned
             // 
@@ -180,7 +187,7 @@
             this.colDateReturned.FieldName = "dateReturned";
             this.colDateReturned.Name = "colDateReturned";
             this.colDateReturned.Visible = true;
-            this.colDateReturned.VisibleIndex = 9;
+            this.colDateReturned.VisibleIndex = 8;
             // 
             // colLibrarianID1
             // 
@@ -188,7 +195,7 @@
             this.colLibrarianID1.FieldName = "librarianID1";
             this.colLibrarianID1.Name = "colLibrarianID1";
             this.colLibrarianID1.Visible = true;
-            this.colLibrarianID1.VisibleIndex = 10;
+            this.colLibrarianID1.VisibleIndex = 9;
             // 
             // colApproverName
             // 
@@ -196,7 +203,7 @@
             this.colApproverName.FieldName = "afullname";
             this.colApproverName.Name = "colApproverName";
             this.colApproverName.Visible = true;
-            this.colApproverName.VisibleIndex = 11;
+            this.colApproverName.VisibleIndex = 10;
             // 
             // colLibrarianID2
             // 
@@ -204,7 +211,7 @@
             this.colLibrarianID2.FieldName = "librarianID2";
             this.colLibrarianID2.Name = "colLibrarianID2";
             this.colLibrarianID2.Visible = true;
-            this.colLibrarianID2.VisibleIndex = 12;
+            this.colLibrarianID2.VisibleIndex = 11;
             // 
             // colReceiverName
             // 
@@ -212,7 +219,7 @@
             this.colReceiverName.FieldName = "rfullname";
             this.colReceiverName.Name = "colReceiverName";
             this.colReceiverName.Visible = true;
-            this.colReceiverName.VisibleIndex = 13;
+            this.colReceiverName.VisibleIndex = 12;
             // 
             // colStatus
             // 
@@ -220,7 +227,7 @@
             this.colStatus.FieldName = "status";
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 14;
+            this.colStatus.VisibleIndex = 13;
             // 
             // labelControl1
             // 
@@ -319,12 +326,6 @@
             this.labelControl2.Size = new System.Drawing.Size(33, 13);
             this.labelControl2.TabIndex = 0;
             this.labelControl2.Text = "GREEN";
-            // 
-            // colBookID
-            // 
-            this.colBookID.Caption = "BookID";
-            this.colBookID.FieldName = "bookID";
-            this.colBookID.Name = "colBookID";
             // 
             // BorrowedBooks
             // 

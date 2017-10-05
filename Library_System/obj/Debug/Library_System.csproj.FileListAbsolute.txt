@@ -16,6 +16,7 @@ D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.Borrowe
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.BorrowMenu.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.RegisterBorrower.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.BorrowedBooks.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.Penalties.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.frmLogin.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.authorManage.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Manage_Books.Authors.resources
@@ -34,5 +35,3 @@ D:\Library_System\Library_System\obj\Debug\Library_System.csproj.GenerateResourc
 D:\Library_System\Library_System\obj\Debug\Library_System.exe.licenses
 D:\Library_System\Library_System\obj\Debug\Library_System.exe
 D:\Library_System\Library_System\obj\Debug\Library_System.pdb
-D:\Library_System\Library_System\obj\Debug\Library_System.csprojResolveAssemblyReference.cache
-D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.Penalties.resources

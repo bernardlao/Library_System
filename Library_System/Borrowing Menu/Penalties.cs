@@ -47,7 +47,7 @@ namespace Library_System.Borrowing_Menu
                 " AS 'rfullname', p.status, bb.dateBorrowed,bb.dateAllowance FROM (((tblpenalty p INNER JOIN" + 
                 " tblborrowedbook bb ON p.borrowedBookID=bb.borrowedBookID) INNER JOIN tblbook b ON bb.bookID=b.bookID)" + 
                 " INNER JOIN tblborrower bo ON bb.borrowerID=bo.borrowerID) INNER JOIN tbluser u2 ON bb.ReceiverUserID=u2.userID" +
-                (ss == SaveSender.CheckAllPenalties ? ";" : " WHERE p.status='Penaltied';");
+                (ss == SaveSender.CheckAllPenalties ? " ORDER BY dateReturned DESC;" : " WHERE p.status='Penaltied' ORDER BY dateReturned DESC;");
             dt = db.SelectTable(query);
             DataColumn isSelected = new DataColumn("isSelected", typeof(bool));
             isSelected.DefaultValue = false;

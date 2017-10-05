@@ -69,13 +69,13 @@ namespace Library_System.Borrowing_Menu
                 "CONCAT(u2.fname,' ', u2.lname) AS 'rfullname', bb.status AS 'status' FROM" +
                 " (((tblborrowedbook bb INNER JOIN tblbook b ON bb.bookID=b.bookID) INNER JOIN tblborrower bo ON" +
                 " bb.borrowerID=bo.borrowerID) INNER JOIN tbluser u1 ON bb.ApproverUserID=u1.userID) INNER JOIN tbluser" +
-                " u2 ON bb.ReceiverUserID=u2.userID WHERE bb.status='Received' ORDER BY borrowedBookID DESC;";
+                " u2 ON bb.ReceiverUserID=u2.userID WHERE bb.status='Received' ORDER BY bb.dateReturned DESC;";
             }
             else if (ss == SaveSender.BorrowList)
             {
                 query = "SELECT b.bookID,borrowedBookID,callNumber,title,bo.borrowerID,CONCAT(bo.fname,' ', bo.lname) AS 'bfullname', bb.quantity FROM " +
                     "(tblborrowedbook bb INNER JOIN tblbook b ON bb.bookID=b.bookID) INNER JOIN tblborrower bo ON bb.borrowerID=bo.borrowerID " +
-                    "WHERE bb.status='Request' ORDER BY borrowedBookID DESC;";
+                    "WHERE bb.status='Request' ORDER BY bb.borrowedBookID DESC;";
             }
             else if (ss == SaveSender.ReceiveList)
             {
@@ -84,7 +84,7 @@ namespace Library_System.Borrowing_Menu
                 "CONCAT(u1.fname,' ', u1.lname) AS 'afullname',  bb.status AS 'status' FROM" +
                 " ((tblborrowedbook bb INNER JOIN tblbook b ON bb.bookID=b.bookID) INNER JOIN tblborrower bo ON" +
                 " bb.borrowerID=bo.borrowerID) INNER JOIN tbluser u1 ON bb.ApproverUserID=u1.userID WHERE bb.status='Approved'" +
-                " ORDER BY borrowedBookID DESC;";
+                " ORDER BY bb.dateBorrowed DESC;";
             }
             dt = db.SelectTable(query);
             DataColumn isSelected = new DataColumn("isSelected", typeof(bool));
