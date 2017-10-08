@@ -45,12 +45,9 @@
             this.btnReceiveReturns = new DevExpress.XtraBars.BarCheckItem();
             this.btnApproveRequest = new DevExpress.XtraBars.BarButtonItem();
             this.btnRejectRequest = new DevExpress.XtraBars.BarButtonItem();
-            this.btnCheckPenalties = new DevExpress.XtraBars.BarCheckItem();
-            this.btnCheckPenaltyStatistics = new DevExpress.XtraBars.BarCheckItem();
             this.btnAddAccount = new DevExpress.XtraBars.BarCheckItem();
             this.btnUpdateAccount = new DevExpress.XtraBars.BarCheckItem();
             this.btnResetPassword = new DevExpress.XtraBars.BarCheckItem();
-            this.btnViewAccount = new DevExpress.XtraBars.BarCheckItem();
             this.btnRegisterBorrower = new DevExpress.XtraBars.BarCheckItem();
             this.btnSearchBorrowBook = new DevExpress.XtraBars.BarCheckItem();
             this.btnEditPublisher = new DevExpress.XtraBars.BarCheckItem();
@@ -61,12 +58,15 @@
             this.btnSaveBorrower = new DevExpress.XtraBars.BarButtonItem();
             this.btnBorrowSelected = new DevExpress.XtraBars.BarButtonItem();
             this.btnEditBorrower = new DevExpress.XtraBars.BarCheckItem();
-            this.btnDeleteBorrower = new DevExpress.XtraBars.BarCheckItem();
             this.btnApproveBorrowerRegistration = new DevExpress.XtraBars.BarCheckItem();
             this.btnSaveBorrowing = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
             this.btnCheckTransaction = new DevExpress.XtraBars.BarCheckItem();
             this.btnReceiveSelected = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApplySanction = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCheckPenalties = new DevExpress.XtraBars.BarCheckItem();
+            this.btnCheckPenaltyStatistics = new DevExpress.XtraBars.BarCheckItem();
+            this.btnPrintCatalog = new DevExpress.XtraBars.BarButtonItem();
             this.ribBooks = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgBookManager = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBookModifier = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -74,11 +74,11 @@
             this.rpgAuthor = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgPublisher = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpgPrintingTool = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribBorrowing = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgManaging = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBorrowingTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgReceiveTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.rpgPenalty = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBorrowerRequest = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBorrowingSave = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribManageAccounts = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -90,11 +90,13 @@
             this.rpgBorrowerAccount = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBorrowControl = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBorrowerTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribSettings = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.rpgPenaltiesSanction = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpgPenaltyTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.scMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.tmDesigner = new System.Windows.Forms.Timer(this.components);
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
-            this.rpgPenaltyTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.btnApplySanction = new DevExpress.XtraBars.BarButtonItem();
+            this.rpgPenalty = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribTabs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -121,12 +123,9 @@
             this.btnReceiveReturns,
             this.btnApproveRequest,
             this.btnRejectRequest,
-            this.btnCheckPenalties,
-            this.btnCheckPenaltyStatistics,
             this.btnAddAccount,
             this.btnUpdateAccount,
             this.btnResetPassword,
-            this.btnViewAccount,
             this.btnRegisterBorrower,
             this.btnSearchBorrowBook,
             this.btnEditPublisher,
@@ -137,21 +136,24 @@
             this.btnSaveBorrower,
             this.btnBorrowSelected,
             this.btnEditBorrower,
-            this.btnDeleteBorrower,
             this.btnApproveBorrowerRegistration,
             this.btnSaveBorrowing,
             this.barCheckItem2,
             this.btnCheckTransaction,
             this.btnReceiveSelected,
-            this.btnApplySanction});
+            this.btnApplySanction,
+            this.btnCheckPenalties,
+            this.btnCheckPenaltyStatistics,
+            this.btnPrintCatalog});
             this.ribTabs.Location = new System.Drawing.Point(0, 0);
-            this.ribTabs.MaxItemId = 45;
+            this.ribTabs.MaxItemId = 6;
             this.ribTabs.Name = "ribTabs";
             this.ribTabs.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribBooks,
             this.ribBorrowing,
             this.ribManageAccounts,
-            this.ribBorrower});
+            this.ribBorrower,
+            this.ribSettings});
             this.ribTabs.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribTabs.ShowToolbarCustomizeItem = false;
             this.ribTabs.Size = new System.Drawing.Size(1032, 143);
@@ -275,22 +277,6 @@
             this.btnRejectRequest.Name = "btnRejectRequest";
             this.btnRejectRequest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRejectRequest_ItemClick);
             // 
-            // btnCheckPenalties
-            // 
-            this.btnCheckPenalties.Caption = "Check and Sanction Penalties";
-            this.btnCheckPenalties.Id = 19;
-            this.btnCheckPenalties.ImageUri.Uri = "AlignJustify";
-            this.btnCheckPenalties.Name = "btnCheckPenalties";
-            this.btnCheckPenalties.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckPenalties_ItemClick);
-            // 
-            // btnCheckPenaltyStatistics
-            // 
-            this.btnCheckPenaltyStatistics.Caption = "Check Borrower Penalty Count";
-            this.btnCheckPenaltyStatistics.Id = 20;
-            this.btnCheckPenaltyStatistics.ImageUri.Uri = "Chart";
-            this.btnCheckPenaltyStatistics.Name = "btnCheckPenaltyStatistics";
-            this.btnCheckPenaltyStatistics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckPenaltyStatistics_ItemClick);
-            // 
             // btnAddAccount
             // 
             this.btnAddAccount.Caption = "Add Account";
@@ -314,14 +300,6 @@
             this.btnResetPassword.ImageUri.Uri = "Cut";
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResetPassword_ItemClick);
-            // 
-            // btnViewAccount
-            // 
-            this.btnViewAccount.Caption = "View Account";
-            this.btnViewAccount.Id = 24;
-            this.btnViewAccount.ImageUri.Uri = "Find";
-            this.btnViewAccount.Name = "btnViewAccount";
-            this.btnViewAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewAccounts_ItemClick);
             // 
             // btnRegisterBorrower
             // 
@@ -403,14 +381,6 @@
             this.btnEditBorrower.Name = "btnEditBorrower";
             this.btnEditBorrower.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditBorrower_ItemClick);
             // 
-            // btnDeleteBorrower
-            // 
-            this.btnDeleteBorrower.Caption = "Delete Borrower(s)";
-            this.btnDeleteBorrower.Id = 36;
-            this.btnDeleteBorrower.ImageUri.Uri = "Delete";
-            this.btnDeleteBorrower.Name = "btnDeleteBorrower";
-            this.btnDeleteBorrower.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteBorrower_ItemClick);
-            // 
             // btnApproveBorrowerRegistration
             // 
             this.btnApproveBorrowerRegistration.Caption = "Approve Borrower Registration";
@@ -449,6 +419,38 @@
             this.btnReceiveSelected.Name = "btnReceiveSelected";
             this.btnReceiveSelected.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReceiveSelected_ItemClick);
             // 
+            // btnApplySanction
+            // 
+            this.btnApplySanction.Caption = "Apply Sanction";
+            this.btnApplySanction.Id = 44;
+            this.btnApplySanction.ImageUri.Uri = "Clear";
+            this.btnApplySanction.Name = "btnApplySanction";
+            this.btnApplySanction.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveBooks_ItemClick);
+            // 
+            // btnCheckPenalties
+            // 
+            this.btnCheckPenalties.Caption = "Check Penalties and Sanction";
+            this.btnCheckPenalties.Id = 2;
+            this.btnCheckPenalties.ImageUri.Uri = "Columns";
+            this.btnCheckPenalties.Name = "btnCheckPenalties";
+            this.btnCheckPenalties.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckPenalties_ItemClick);
+            // 
+            // btnCheckPenaltyStatistics
+            // 
+            this.btnCheckPenaltyStatistics.Caption = "Check Borrower Penalty Count";
+            this.btnCheckPenaltyStatistics.Id = 3;
+            this.btnCheckPenaltyStatistics.ImageUri.Uri = "Chart";
+            this.btnCheckPenaltyStatistics.Name = "btnCheckPenaltyStatistics";
+            this.btnCheckPenaltyStatistics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckPenaltyStatistics_ItemClick);
+            // 
+            // btnPrintCatalog
+            // 
+            this.btnPrintCatalog.Caption = "Print Selected Book Catalog";
+            this.btnPrintCatalog.Id = 5;
+            this.btnPrintCatalog.ImageUri.Uri = "Print";
+            this.btnPrintCatalog.Name = "btnPrintCatalog";
+            this.btnPrintCatalog.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrintCatalog_ItemClick);
+            // 
             // ribBooks
             // 
             this.ribBooks.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -457,7 +459,8 @@
             this.rpgSubject,
             this.rpgAuthor,
             this.rpgPublisher,
-            this.rpgTools});
+            this.rpgTools,
+            this.rpgPrintingTool});
             this.ribBooks.Name = "ribBooks";
             this.ribBooks.Text = "Manage Books";
             // 
@@ -503,14 +506,19 @@
             this.rpgTools.Name = "rpgTools";
             this.rpgTools.Text = "Book Tools";
             // 
+            // rpgPrintingTool
+            // 
+            this.rpgPrintingTool.ItemLinks.Add(this.btnPrintCatalog);
+            this.rpgPrintingTool.Name = "rpgPrintingTool";
+            this.rpgPrintingTool.Text = "Printing Tool";
+            this.rpgPrintingTool.Visible = false;
+            // 
             // ribBorrowing
             // 
             this.ribBorrowing.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.rpgManaging,
             this.rpgBorrowingTools,
             this.rpgReceiveTools,
-            this.rpgPenalty,
-            this.rpgPenaltyTools,
             this.rpgBorrowerRequest,
             this.rpgBorrowingSave});
             this.ribBorrowing.Name = "ribBorrowing";
@@ -530,6 +538,7 @@
             this.rpgBorrowingTools.ItemLinks.Add(this.btnRejectRequest);
             this.rpgBorrowingTools.Name = "rpgBorrowingTools";
             this.rpgBorrowingTools.Text = "Borrowing Tools";
+            this.rpgBorrowingTools.Visible = false;
             // 
             // rpgReceiveTools
             // 
@@ -537,13 +546,7 @@
             this.rpgReceiveTools.ItemLinks.Add(this.btnReceiveSelected);
             this.rpgReceiveTools.Name = "rpgReceiveTools";
             this.rpgReceiveTools.Text = "Receiving Tools";
-            // 
-            // rpgPenalty
-            // 
-            this.rpgPenalty.ItemLinks.Add(this.btnCheckPenalties);
-            this.rpgPenalty.ItemLinks.Add(this.btnCheckPenaltyStatistics);
-            this.rpgPenalty.Name = "rpgPenalty";
-            this.rpgPenalty.Text = "Penalties";
+            this.rpgReceiveTools.Visible = false;
             // 
             // rpgBorrowerRequest
             // 
@@ -558,6 +561,7 @@
             this.rpgBorrowingSave.ItemLinks.Add(this.btnSaveBorrowing);
             this.rpgBorrowingSave.Name = "rpgBorrowingSave";
             this.rpgBorrowingSave.Text = "Tools";
+            this.rpgBorrowingSave.Visible = false;
             // 
             // ribManageAccounts
             // 
@@ -586,15 +590,14 @@
             // 
             // rpgBorrower
             // 
+            this.rpgBorrower.AllowTextClipping = false;
             this.rpgBorrower.ItemLinks.Add(this.btnEditBorrower);
-            this.rpgBorrower.ItemLinks.Add(this.btnDeleteBorrower);
             this.rpgBorrower.Name = "rpgBorrower";
             this.rpgBorrower.Text = "Borrower Tools";
             // 
             // rpgAccountTools
             // 
             this.rpgAccountTools.ItemLinks.Add(this.btnSaveAccount);
-            this.rpgAccountTools.ItemLinks.Add(this.btnViewAccount);
             this.rpgAccountTools.Name = "rpgAccountTools";
             this.rpgAccountTools.Text = "Tools";
             // 
@@ -627,6 +630,31 @@
             this.rpgBorrowerTools.ItemLinks.Add(this.btnSaveBorrower);
             this.rpgBorrowerTools.Name = "rpgBorrowerTools";
             this.rpgBorrowerTools.Text = "Tools";
+            this.rpgBorrowerTools.Visible = false;
+            // 
+            // ribSettings
+            // 
+            this.ribSettings.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.rpgPenaltiesSanction,
+            this.rpgPenaltyTools});
+            this.ribSettings.Name = "ribSettings";
+            this.ribSettings.Text = "Settings";
+            // 
+            // rpgPenaltiesSanction
+            // 
+            this.rpgPenaltiesSanction.AllowTextClipping = false;
+            this.rpgPenaltiesSanction.ItemLinks.Add(this.btnCheckPenalties);
+            this.rpgPenaltiesSanction.ItemLinks.Add(this.btnCheckPenaltyStatistics);
+            this.rpgPenaltiesSanction.Name = "rpgPenaltiesSanction";
+            this.rpgPenaltiesSanction.Text = "Penalties and Sanctions";
+            // 
+            // rpgPenaltyTools
+            // 
+            this.rpgPenaltyTools.AllowTextClipping = false;
+            this.rpgPenaltyTools.ItemLinks.Add(this.btnApplySanction);
+            this.rpgPenaltyTools.Name = "rpgPenaltyTools";
+            this.rpgPenaltyTools.Text = "Penalty Tools";
+            this.rpgPenaltyTools.Visible = false;
             // 
             // scMain
             // 
@@ -655,20 +683,10 @@
             this.barCheckItem1.ImageUri.Uri = "Apply";
             this.barCheckItem1.Name = "barCheckItem1";
             // 
-            // rpgPenaltyTools
+            // rpgPenalty
             // 
-            this.rpgPenaltyTools.AllowTextClipping = false;
-            this.rpgPenaltyTools.ItemLinks.Add(this.btnApplySanction);
-            this.rpgPenaltyTools.Name = "rpgPenaltyTools";
-            this.rpgPenaltyTools.Text = "Penalty Tools";
-            // 
-            // btnApplySanction
-            // 
-            this.btnApplySanction.Caption = "Apply Sanction";
-            this.btnApplySanction.Id = 44;
-            this.btnApplySanction.ImageUri.Uri = "Clear";
-            this.btnApplySanction.Name = "btnApplySanction";
-            this.btnApplySanction.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveBooks_ItemClick);
+            this.rpgPenalty.Name = "rpgPenalty";
+            this.rpgPenalty.Text = "Penalties";
             // 
             // frmMain
             // 
@@ -703,7 +721,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgSubject;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribBorrowing;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgManaging;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPenalty;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBorrowingTools;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgReceiveTools;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribManageAccounts;
@@ -730,12 +747,9 @@
         private DevExpress.XtraBars.BarCheckItem btnReceiveReturns;
         private DevExpress.XtraBars.BarButtonItem btnApproveRequest;
         private DevExpress.XtraBars.BarButtonItem btnRejectRequest;
-        private DevExpress.XtraBars.BarCheckItem btnCheckPenalties;
-        private DevExpress.XtraBars.BarCheckItem btnCheckPenaltyStatistics;
         private DevExpress.XtraBars.BarCheckItem btnAddAccount;
         private DevExpress.XtraBars.BarCheckItem btnUpdateAccount;
         private DevExpress.XtraBars.BarCheckItem btnResetPassword;
-        private DevExpress.XtraBars.BarCheckItem btnViewAccount;
         private DevExpress.XtraBars.BarCheckItem btnRegisterBorrower;
         private DevExpress.XtraBars.BarCheckItem btnSearchBorrowBook;
         private DevExpress.XtraBars.BarCheckItem btnEditPublisher;
@@ -748,7 +762,6 @@
         private DevExpress.XtraBars.BarButtonItem btnSaveBorrower;
         private DevExpress.XtraBars.BarButtonItem btnBorrowSelected;
         private DevExpress.XtraBars.BarCheckItem btnEditBorrower;
-        private DevExpress.XtraBars.BarCheckItem btnDeleteBorrower;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBorrower;
         private DevExpress.XtraBars.BarCheckItem btnApproveBorrowerRegistration;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgBorrowerRequest;
@@ -760,6 +773,13 @@
         private DevExpress.XtraBars.BarButtonItem btnReceiveSelected;
         private DevExpress.XtraBars.BarButtonItem btnApplySanction;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPenaltyTools;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribSettings;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPenaltiesSanction;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPenalty;
+        private DevExpress.XtraBars.BarCheckItem btnCheckPenalties;
+        private DevExpress.XtraBars.BarCheckItem btnCheckPenaltyStatistics;
+        private DevExpress.XtraBars.BarButtonItem btnPrintCatalog;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPrintingTool;
     }
 }
 

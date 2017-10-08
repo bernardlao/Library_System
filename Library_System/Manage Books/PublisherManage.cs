@@ -163,6 +163,8 @@ namespace Library_System.Manage_Books
                 {
                     foreach (DataRow r in toDelete)
                     {
+                        string publisherToDefault = "UPDATE tblbook SET publisherID=0 WHERE publisherID=" + r["publisherID"].ToString() + ";";
+                        queries.Add(publisherToDefault);
                         string query = "DELETE FROM tblpublisher WHERE publisherID=" + r["publisherID"].ToString();
                         queries.Add(query);
                     }
@@ -192,7 +194,7 @@ namespace Library_System.Manage_Books
                     foreach (DataRow r in hasBooks.Rows)
                         publisherConflict += r["publisherName"].ToString() + "\n";
                     if (DialogResult.Yes == XtraMessageBox.Show("The following publisher: \n" + publisherConflict + "has an associated record already." +
-                            " Are you sure to delete those publisher(s)? \nNote: The record(s) associated to the said pubisher will also be deleted.",
+                            " Are you sure to delete those publisher(s)? \nNote: The record(s) associated to the said pubisher will be emptied.",
                             "Publisher is in Use", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
                         return true;

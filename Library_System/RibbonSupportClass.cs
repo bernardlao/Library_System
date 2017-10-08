@@ -42,7 +42,6 @@ namespace RibbonSupport
                 case SaveSender.RegisterBorrower: RegisterBorrowers(); break;
                 case SaveSender.ApproveBorrower: ApproveRegistration(); break;
                 case SaveSender.EditBorrower: UpdateBorrower(); break;
-                case SaveSender.DeleteBorrower: DeleteBorrower(); break;
                 case SaveSender.CheckAndSanctionPenalty: ApplySanction(); break;
             }
         }
@@ -63,6 +62,11 @@ namespace RibbonSupport
             ReceiveReturns();
         }
 
+        public void Print()
+        {
+            Books b = (Books)mf.scMain.Panel1.Controls[0];
+            b.PrintSelected();
+        }
         private void SaveBook()
         {
             addBookInfo abi = (addBookInfo)mf.scMain.Panel1.Controls[0];
@@ -151,11 +155,6 @@ namespace RibbonSupport
                 b.LoadList();
             }
         }
-        private void DeleteBorrower()
-        {
-            Borrowers b = (Borrowers)mf.scMain.Panel2.Controls[0];
-            b.DeleteBorrower();
-        }
         private void Approve()
         {
             BorrowedBooks bb = (BorrowedBooks)mf.scMain.Panel2.Controls[0];
@@ -176,6 +175,7 @@ namespace RibbonSupport
             Penalties p = (Penalties)mf.scMain.Panel2.Controls[0];
             p.ApplySanction();
         }
+        
     }
     public enum SaveSender
     {

@@ -157,6 +157,8 @@ namespace Library_System.Manage_Books
                 List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
                 foreach (DataRow r in dr)
                 {
+                    string defaultSubject = "UPDATE tblbook SET subjectID=0 WHERE subjectID=" + r["subjectID"].ToString() + ";";
+                    queries.Add(defaultSubject);
                     string query = "DELETE FROM tblsubject WHERE subjectID=" + r["subjectID"].ToString();
                     queries.Add(query);
                 }
@@ -189,7 +191,7 @@ namespace Library_System.Manage_Books
                         foreach (DataRow r in tbl.Rows)
                             subjectConflict += r["subjectName"].ToString() + "\n";
                         if (DialogResult.Yes == XtraMessageBox.Show("The following subject: \n" + subjectConflict + "has an associated record already." +
-                            " Are you sure to delete those subject(s)? \nNote: The record(s) associated to the said subjects will also be deleted.",
+                            " Are you sure to delete those subject(s)? \nNote: The record(s) associated to the said subjects will be emptied.",
                             "Subject is in Use", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
                             return true;

@@ -52,13 +52,15 @@ namespace Library_System.Manage_Books
             }
             else if (ss == SaveSender.ViewSearch)
             {
-                colIsSelected.Visible = false;
+                colIsSelected.Visible = true;
+                colIsSelected.Width = 60;
+                colIsSelected.OptionsColumn.FixedWidth = true;
                 lstBooksItem.OptionsBehavior.Editable = false;
             }
         }
         private void LoadList()
         {
-            string query = "SELECT * FROM (tblbook b INNER JOIN tblpublisher p ON b.publisherID=p.publisherID) INNER JOIN tblsubject s ON b.subjectID=s.subjectID;";
+            string query = "SELECT * FROM (tblbook b LEFT JOIN tblpublisher p ON b.publisherID=p.publisherID) LEFT JOIN tblsubject s ON b.subjectID=s.subjectID;";
             dt = db.SelectTable(query);
             DataColumn isSelected = new DataColumn("isSelected", typeof(bool));
             isSelected.DefaultValue = false;
@@ -107,7 +109,7 @@ namespace Library_System.Manage_Books
                     XtraMessageBox.Show(ex.Message);
                 }
             }
-            if (ss == SaveSender.DeleteBook)
+            if (ss == SaveSender.DeleteBook || ss == SaveSender.ViewSearch)
             {
                 if (lstBooksItem.FocusedColumn == colIsSelected)
                 {
@@ -243,6 +245,17 @@ namespace Library_System.Manage_Books
             else
                 XtraMessageBox.Show("The book you selected is currently unavailable. Please consider searching for books related to it.", "Insufficient Stock",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        public void PrintSelected()
+        {
+            List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
+            if (dr.Count > 0)
+            {
+                Catalogs cats = new Catalogs();
+                cats.PrepareData(dr);
+            }
+            else
+                XtraMessageBox.Show("There is no selected book to print.", "No book selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

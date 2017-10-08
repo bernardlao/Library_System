@@ -144,7 +144,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtpBday.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpBday.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.TouchUI;
+            this.dtpBday.Properties.DisplayFormat.FormatString = "MMMM dd, yyyy";
+            this.dtpBday.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dtpBday.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dtpBday.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
             this.dtpBday.Size = new System.Drawing.Size(233, 20);
             this.dtpBday.TabIndex = 14;
             // 

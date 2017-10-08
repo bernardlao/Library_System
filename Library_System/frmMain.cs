@@ -50,6 +50,7 @@ namespace Library_System
             scMain.Panel2.Controls.Add(auth);
             scMain.Panel2.Enabled = false;
             ClearCheckDoCheck(btnAddBooks);
+            rpgPrintingTool.Visible = false;
         }
 
         private void btnSaveBooks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -79,6 +80,7 @@ namespace Library_System
                     ribBorrowing.Visible = false;
                     ribManageAccounts.Visible = false;
                     ribBorrower.Visible = true;
+                    ribSettings.Visible = false;
                 }
                 else if (userLoggedIn.Equals("Admin"))
                 {
@@ -86,6 +88,13 @@ namespace Library_System
                     ribBorrowing.Visible = false;
                     ribManageAccounts.Visible = true;
                     ribBorrower.Visible = false;
+                    ribSettings.Visible = false;
+                    if (HasPendingRegister())
+                    {
+                        ribTabs.SelectedPage = ribManageAccounts;
+                        ApproveForm();
+                        ClearCheckDoCheck(btnApproveRegistration);
+                    }
                 }
                 else
                 {
@@ -93,9 +102,25 @@ namespace Library_System
                     ribBorrowing.Visible = true;
                     ribManageAccounts.Visible = false;
                     ribBorrower.Visible = false;
+                    ribSettings.Visible = true;
+                    if (HasPendingRegister())
+                    {
+                        ribTabs.SelectedPage = ribBorrowing;
+                        ApproveForm();
+                    }
                 }
                 triggerDesigner = false;
             }
+        }
+        private bool HasPendingRegister()
+        {
+            DataTable data = db.SelectTable("SELECT * FROM tblborrower WHERE status = 'Request';");
+            if (data != null)
+            {
+                if (data.Rows.Count > 0)
+                    return true;
+            }
+            return false;
         }
         private void ClearPanel()
         {
@@ -153,18 +178,6 @@ namespace Library_System
             ClearCheckDoCheck(btnResetPassword);
         }
 
-        private void btnViewAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            ClearPanel();
-            ss = SaveSender.None;
-            viewUsers vu = new viewUsers(ss);
-            scMain.SplitterPosition = 0;
-            vu.Dock = DockStyle.Fill;
-            scMain.Panel2.Enabled = true;
-            scMain.Panel2.Controls.Add(vu);
-            ClearCheckDoCheck(btnViewAccount);
-        }
-
         private void btnLogout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ClearCheckDoCheck(null);
@@ -180,8 +193,17 @@ namespace Library_System
             ss = SaveSender.None;
             ClearPanel();
             ClearCheckDoCheck(null);
+            HideAll();
         }
-
+        private void HideAll()
+        {
+            rpgPrintingTool.Visible = false;
+            rpgBorrowingTools.Visible = false;
+            rpgReceiveTools.Visible = false;
+            rpgBorrowingSave.Visible = false;
+            rpgBorrowerTools.Visible = false;
+            rpgPenaltyTools.Visible = false;
+        }
         private void btnEditSubject_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ClearPanel();
@@ -192,6 +214,7 @@ namespace Library_System
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(sm);
             ClearCheckDoCheck(btnEditSubject);
+            rpgPrintingTool.Visible = false;
         }
 
         private void btnDeleteSubject_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -204,6 +227,7 @@ namespace Library_System
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(sm);
             ClearCheckDoCheck(btnDeleteSubjects);
+            rpgPrintingTool.Visible = false;
         }
         private void btnEditPublisher_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -215,6 +239,7 @@ namespace Library_System
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(pm);
             ClearCheckDoCheck(btnEditPublisher);
+            rpgPrintingTool.Visible = false;
         }
         private void btnDeletePublisher_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -226,6 +251,7 @@ namespace Library_System
             scMain.Panel1.Enabled = true;
             scMain.Panel1.Controls.Add(pm);
             ClearCheckDoCheck(btnDeletePublisher);
+            rpgPrintingTool.Visible = false;
         }
         private void btnEditAuthor_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -237,6 +263,7 @@ namespace Library_System
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(am);
             ClearCheckDoCheck(btnEditAuthor);
+            rpgPrintingTool.Visible = false;
         }
 
         private void btnDeleteAuthor_ItemClick(object sender, ItemClickEventArgs e)
@@ -249,6 +276,7 @@ namespace Library_System
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(am);
             ClearCheckDoCheck(btnDeleteAuthor);
+            rpgPrintingTool.Visible = false;
         }
         private void btnEditBook_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -264,6 +292,7 @@ namespace Library_System
             a.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(a);
             ClearCheckDoCheck(btnEditBook);
+            rpgPrintingTool.Visible = false;
         }
 
         private void btnDeleteBooks_ItemClick(object sender, ItemClickEventArgs e)
@@ -280,6 +309,7 @@ namespace Library_System
             a.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(a);
             ClearCheckDoCheck(btnDeleteBooks);
+            rpgPrintingTool.Visible = false;
         }
         private void btnViewSearch_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -295,6 +325,7 @@ namespace Library_System
             a.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(a);
             ClearCheckDoCheck(btnViewSearch);
+            rpgPrintingTool.Visible = true;
         }
         private void btnSearchBorrowBook_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -310,6 +341,7 @@ namespace Library_System
             a.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(a);
             ClearCheckDoCheck(btnSearchBorrowBook);
+            rpgBorrowerTools.Visible = false;
         }
         private void btnRegisterBorrower_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -321,6 +353,7 @@ namespace Library_System
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(rb);
             ClearCheckDoCheck(btnRegisterBorrower);
+            rpgBorrowerTools.Visible = true;
         }
         
         private void btnBorrowSelected_ItemClick(object sender, ItemClickEventArgs e)
@@ -344,6 +377,10 @@ namespace Library_System
         }
         private void btnApproveBorrowerRegistration_ItemClick(object sender, ItemClickEventArgs e)
         {
+            ApproveForm();
+        }
+        private void ApproveForm()
+        {
             ClearPanel();
             ss = SaveSender.ApproveBorrower;
             scMain.SplitterPosition = 0;
@@ -352,17 +389,9 @@ namespace Library_System
             scMain.Panel2.Enabled = true;
             scMain.Panel2.Controls.Add(b);
             ClearCheckDoCheck(btnApproveBorrowerRegistration);
-        }
-        private void btnDeleteBorrower_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ClearPanel();
-            ss = SaveSender.DeleteBorrower;
-            scMain.SplitterPosition = 0;
-            Borrowers b = new Borrowers(ss);
-            b.Dock = DockStyle.Fill;
-            scMain.Panel2.Enabled = true;
-            scMain.Panel2.Controls.Add(b);
-            ClearCheckDoCheck(btnDeleteBorrower);
+            rpgReceiveTools.Visible = false;
+            rpgBorrowingTools.Visible = false;
+            rpgBorrowingSave.Visible = true;
         }
         private void btnEditBorrower_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -385,6 +414,9 @@ namespace Library_System
             bb.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(bb);
             ClearCheckDoCheck(btnCheckRequest);
+            rpgReceiveTools.Visible = false;
+            rpgBorrowingTools.Visible = true;
+            rpgBorrowingSave.Visible = false;
         }
         private void btnReceiveReturns_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -396,6 +428,9 @@ namespace Library_System
             bb.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(bb);
             ClearCheckDoCheck(btnReceiveReturns);
+            rpgReceiveTools.Visible = true;
+            rpgBorrowingTools.Visible = false;
+            rpgBorrowingSave.Visible = false;
         }
         private void btnCheckTransaction_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -407,6 +442,9 @@ namespace Library_System
             bb.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(bb);
             ClearCheckDoCheck(btnCheckTransaction);
+            rpgReceiveTools.Visible = false;
+            rpgBorrowingTools.Visible = false;
+            rpgBorrowingSave.Visible = false;
         }
         private void btnCheckPenalties_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -418,6 +456,7 @@ namespace Library_System
             p.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(p);
             ClearCheckDoCheck(btnCheckPenalties);
+            rpgPenaltyTools.Visible = true;
         }
         private void btnCheckPenaltyStatistics_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -429,6 +468,7 @@ namespace Library_System
             p.Dock = DockStyle.Fill;
             scMain.Panel2.Controls.Add(p);
             ClearCheckDoCheck(btnCheckPenaltyStatistics);
+            rpgPenaltyTools.Visible = false;
         }
         private void ClearCheckDoCheck(BarCheckItem itm)
         {
@@ -460,7 +500,13 @@ namespace Library_System
                 rsc.ApproveBorrow(false);
             }
         }
-
+        private void btnPrintCatalog_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (ss == SaveSender.ViewSearch)
+            {
+                rsc.Print();
+            }
+        }
         private void btnReceiveSelected_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (ss == SaveSender.ReceiveList)
@@ -468,11 +514,5 @@ namespace Library_System
                 rsc.ReceiveBookReturns();
             }
         }
-
-        
-
-        
-
-       
     }
 }

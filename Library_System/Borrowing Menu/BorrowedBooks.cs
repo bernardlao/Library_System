@@ -29,6 +29,7 @@ namespace Library_System.Borrowing_Menu
 
         private void BorrowedBooks_Load(object sender, EventArgs e)
         {
+            LoadComboBox();
             LoadList();
             lstBorrowedItem.BestFitColumns();
             if (ss == SaveSender.BorrowList)
@@ -42,6 +43,8 @@ namespace Library_System.Borrowing_Menu
                 colLibrarianID2.Visible = false;
                 colReceiverName.Visible = false;
                 colStatus.Visible = false;
+                colScheduledReturn.Visible = false;
+                grpFilter.Enabled = false;
             }
             else if (ss == SaveSender.ReceiveList)
             {
@@ -51,12 +54,19 @@ namespace Library_System.Borrowing_Menu
                 colStatus.Visible = false;
                 grpDateAllowance.Visible = false;
                 gpbLegends.Visible = true;
+                grpFilter.Enabled = false;
             }
             else if (ss == SaveSender.CheckTransactionRecord)
             {
                 colIsSelected.Visible = false;
                 grpDateAllowance.Visible = false;
             }
+        }
+        private void LoadComboBox() 
+        {
+            cmbSearhBy.Properties.Items.AddRange(new string[] { "Call Number", "Title",
+                "Borrower ID", "Borrowed By", "Approved By", "Received By" });
+            cmbSearhBy.SelectedIndex = 0;
         }
         private void LoadList()
         {
@@ -89,10 +99,25 @@ namespace Library_System.Borrowing_Menu
             dt = db.SelectTable(query);
             DataColumn isSelected = new DataColumn("isSelected", typeof(bool));
             isSelected.DefaultValue = false;
+            if (ss == SaveSender.ReceiveList || ss == SaveSender.CheckTransactionRecord)
+            {
+                DataColumn scheduledReturn = new DataColumn("scheduledReturn", typeof(DateTime));
+                scheduledReturn.DefaultValue = new DateTime();
+                dt.Columns.Add(scheduledReturn);
+                SetScheduledReturnValues();
+            }
             dt.Columns.Add(isSelected);
             lstBorrowed.DataSource = dt;
+            
         }
-
+        private void SetScheduledReturnValues()
+        {
+            foreach (DataRow r in dt.Rows)
+            {
+                DateTime schedDate = hm.GetReturnDate(Convert.ToDateTime(r["dateBorrowed"].ToString()), Convert.ToInt32(r["dateAllowance"].ToString()));
+                r["scheduledReturn"] = schedDate;
+            }
+        }
         private void lstBorrowedItem_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
         {
             if (e.Column == colIsSelected)
@@ -105,6 +130,7 @@ namespace Library_System.Borrowing_Menu
                     dr[0]["isSelected"] = !isCheck;
                 }
             }
+            
         }
 
         public void ApproveBorrowRequest()
@@ -183,7 +209,7 @@ namespace Library_System.Borrowing_Menu
                     int dateAllowed = Convert.ToInt32(r["dateAllowance"].ToString());
                     diff = dateAllowed - diff;
                     if (diff < 0)
-                        db.InsertQuery("INSERT INTO tblpenalty (borrowedBookID,status) VALUES(" + id + ",'Penaltied');");
+                        db.InsertQuery("INSERT INTO tblpenalty (borrowedBookID,status) VALUES(" + id + ",'Penalized');");
 
                     
                     string receiverUserID = frmMain.userLoggedIn;
@@ -197,7 +223,7 @@ namespace Library_System.Borrowing_Menu
                 if (queries.Count > 0)
                 {
                     db.InsertMultiple(queries);
-                    XtraMessageBox.Show("Receive Recorded.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    XtraMessageBox.Show("Book(s) received successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadList();
                 }
             }
@@ -231,6 +257,58 @@ namespace Library_System.Borrowing_Menu
                 else if (diff > 0)
                     e.Appearance.BackColor = Color.LightGreen;
             }
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            Filter();
+        }
+        private void Filter()
+        {
+            List<DataRow> dr = dt.AsEnumerable().Select(s => s).ToList();
+            bool hasSearchText = false, hasBorrowedFilter = false, hasReturnedFilter = false;
+            string searchBy=GetSearchBy();
+            if (!txtSearchKey.Text.Equals(""))
+                hasSearchText = true;
+            if (!dtpBFrom.DateTime.ToShortDateString().Equals("1/1/0001") && !dtpBTo.DateTime.ToShortDateString().Equals("1/1/0001"))
+                hasBorrowedFilter = true;
+            if (!dtpRFrom.DateTime.ToShortDateString().Equals("1/1/0001") && !dtpRTo.DateTime.ToShortDateString().Equals("1/1/0001"))
+                hasReturnedFilter = true;
+            if (hasSearchText)
+                dr = dr.Where(s => s[searchBy].ToString().ToLower().Contains(txtSearchKey.Text.ToLower())).Select(s => s).ToList();
+            if (hasBorrowedFilter && !hasReturnedFilter)
+                dr = dr.Where(s => Convert.ToDateTime(s["dateBorrowed"].ToString()) >= dtpBFrom.DateTime && Convert.ToDateTime(s["dateBorrowed"].ToString()) <= dtpBTo.DateTime)
+                    .Select(s => s).ToList();
+            else if (!hasBorrowedFilter && hasReturnedFilter)
+                dr = dr.Where(s => Convert.ToDateTime(s["dateReturned"].ToString()) >= dtpRFrom.DateTime && Convert.ToDateTime(s["dateReturned"].ToString()) <= dtpRTo.DateTime)
+                    .Select(s => s).ToList();
+            else if (hasBorrowedFilter && hasReturnedFilter)
+                dr = dr.Where(s => (Convert.ToDateTime(s["dateBorrowed"].ToString()) >= dtpBFrom.DateTime && Convert.ToDateTime(s["dateBorrowed"].ToString()) <= dtpBTo.DateTime) ||
+                    (Convert.ToDateTime(s["dateReturned"].ToString()) >= dtpRFrom.DateTime && Convert.ToDateTime(s["dateReturned"].ToString()) <= dtpRTo.DateTime))
+                    .Select(s => s).ToList();
+            DataTable d = new DataTable();
+            if(dr.Count > 0)
+               d = dr.ToArray().CopyToDataTable();
+            lstBorrowed.DataSource = d;
+        }
+        private string GetSearchBy()
+        {//"Call Number", "Title","Borrower ID", "Borrowed By", "Approver ID", "Approved By", "Receiver ID", "Received By" 
+            string selected = cmbSearhBy.Properties.Items[cmbSearhBy.SelectedIndex].ToString();
+            switch (selected)
+            {
+                case "Call Number": return "callNumber";
+                case "Title": return "title";
+                case "Borrower ID": return "borrowerID";
+                case "Borrowed By": return "bfullname";
+                case "Approved By": return "afullname";
+                case "Received By": return "rfullname";
+                default: return "";
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lstBorrowed.DataSource = dt;
         }
     }
 }

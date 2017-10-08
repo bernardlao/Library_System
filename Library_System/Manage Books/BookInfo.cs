@@ -276,7 +276,7 @@ namespace Library_System
         {
             scc.Panel1.Controls.Clear();
             scc.Panel2.Controls.Clear();
-            frmMain.ss = SaveSender.ViewSearch;
+            frmMain.ss = SaveSender.EditBook;
             Books b = new Books(frmMain.ss);
             scc.SplitterPosition = b.Size.Width;
             b.Dock = DockStyle.Fill;
@@ -501,8 +501,8 @@ namespace Library_System
         private void SetDetails()
         {
             scc = (SplitContainerControl)((SplitGroupPanel)this.Parent).Parent;
-            DataTable tbl = db.SelectTable("SELECT * FROM (((tblbookauthor ba INNER JOIN tblbook b ON ba.bookID=b.bookID) INNER JOIN " +
-                "tblauthor a ON ba.authorID=a.authorID) INNER JOIN tblpublisher p ON b.publisherID=p.publisherID) INNER JOIN tblsubject s ON b.subjectID=s.subjectID" + 
+            DataTable tbl = db.SelectTable("SELECT * FROM (((tblbookauthor ba LEFT JOIN tblbook b ON ba.bookID=b.bookID) LEFT JOIN " +
+                "tblauthor a ON ba.authorID=a.authorID) LEFT JOIN tblpublisher p ON b.publisherID=p.publisherID) LEFT JOIN tblsubject s ON b.subjectID=s.subjectID" + 
                 " WHERE b.bookID=" + editID);
             if (tbl != null)
             {

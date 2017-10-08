@@ -282,8 +282,9 @@ namespace Library_System.Manage_Books
                     XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
                     "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     db.InsertMultiple(queries);
+                    LoadList();
                 }
-                db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
+                //db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
                 SetAuthorType();
                 RefreshList();
             }

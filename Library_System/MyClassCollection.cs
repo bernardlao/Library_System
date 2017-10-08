@@ -598,6 +598,18 @@ namespace MyClassCollection
             }
             return count;
         }
+        public DateTime GetReturnDate(DateTime from, int allowedDays)
+        {
+            int count = 0;
+            while (true)
+            {
+                from = from.AddDays(1);
+                if (!from.DayOfWeek.ToString().Equals("Saturday") && !from.DayOfWeek.ToString().Equals("Sunday"))
+                    count++;
+                if (count == allowedDays)
+                    return from;
+            }
+        }
         /*public DataTable ConvertToDataTable<T>(List<T> data)
         {
             DataTable table = new DataTable();

@@ -28,6 +28,7 @@ namespace Library_System.Borrowers_Menu
             if (editID == null)
             {
                 dtpBday.DateTime = DateTime.Now;
+                dtpBday.Properties.MaxValue = db.GetServerDateTime();
             }
         }
 

@@ -80,28 +80,7 @@ namespace Library_System.Borrowers_Menu
                 }
             }
         }
-        public void DeleteBorrower()
-        {
-            List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
-            if (dr.Count > 0)
-            {
-                if (DialogResult.Yes == XtraMessageBox.Show("Are you sure you want to delete the selected account? Note : Records associated with " +
-                "the deleted account will also be deleted.", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                {
-                    List<string> queries = new List<string>();
-                    foreach (DataRow r in dr)
-                    {
-                        string query = "DELETE FROM tblborrower WHERE borrowerID='" + r["borrowerID"].ToString() + "';";
-                        queries.Add(query);
-                    }
-                    if (queries.Count > 0)
-                    {
-                        db.InsertMultiple(queries);
-                        LoadList();
-                    }
-                }
-            }
-        }
+        
 
         private void lstBorrowerItem_DoubleClick(object sender, EventArgs e)
         {
