@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using RibbonSupport;
 using MyClassCollection;
+using Logs;
 
 namespace Library_System.Borrowers_Menu
 {
@@ -19,6 +20,7 @@ namespace Library_System.Borrowers_Menu
         private MySQLDBUtilities db = new MySQLDBUtilities();
         private DataTable dt;
         private SplitContainerControl scc;
+        private ActivityLog log = new ActivityLog();
 
         public Borrowers(SaveSender ss)
         {
@@ -67,14 +69,17 @@ namespace Library_System.Borrowers_Menu
             List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
             if (dr.Count > 0)
             {
+                List<string> cons = new List<string>();
                 List<string> queries = new List<string>();
                 foreach (DataRow r in dr)
                 {
                     string query = "UPDATE tblborrower SET status='Approved' WHERE borrowerID='" + r["borrowerID"].ToString() + "';";
+                    cons.Add(r["borrowerID"].ToString() + "," + r["fname"].ToString() + "," + r["mname"].ToString() + "," + r["lname"].ToString());
                     queries.Add(query);
                 }
                 if (queries.Count > 0)
                 {
+                    log.ApproveBorrowerRegistration(frmMain.userLoggedIn, cons);
                     db.InsertMultiple(queries);
                     LoadList();
                 }

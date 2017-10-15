@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
+using Logs;
 
 namespace Library_System.Borrowers_Menu
 {
@@ -16,6 +17,7 @@ namespace Library_System.Borrowers_Menu
     {
         MySQLDBUtilities db = new MySQLDBUtilities();
         HelperMethods hm = new HelperMethods();
+        ActivityLog log = new ActivityLog();
         public string editID;
 
         public RegisterBorrower()
@@ -74,7 +76,9 @@ namespace Library_System.Borrowers_Menu
                 if (IsAllValid())
                 {
                     string query = "UPDATE tblborrower SET fname='" + txtFname.Text + "', mname=" + (txtMname.Text.Equals("")?"NULL":"'" + txtMname.Text + "'") + 
-                        ", lname='" + txtLname.Text + "', bdate='" + dtpBday.DateTime.ToString("yyyy-MM-dd") + "', address='" + txtAddress.Text.Replace("'","''") + "';";
+                        ", lname='" + txtLname.Text + "', bdate='" + dtpBday.DateTime.ToString("yyyy-MM-dd") + "', address='" + txtAddress.Text.Replace("'","''") +
+                        "' WHERE borrowerID='" + editID + "';";
+                    log.UpdateBorrower(editID, txtFname.Text, txtMname.Text, txtLname.Text);
                     db.InsertQuery(query);
                 }
             }
@@ -95,6 +99,7 @@ namespace Library_System.Borrowers_Menu
             int res = db.InsertQuery(query);
             if (res != -1)
             {
+                log.RegisterBorrower(txtBorrowerID.Text, txtFname.Text, txtMname.Text, txtLname.Text);
                 XtraMessageBox.Show("Please contact the librarian to confirm your registration.", "Registration Request Sent",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 hm.ClearTextEdit(this);

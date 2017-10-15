@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
+using Logs;
 
 namespace Library_System.Manage_Users
 {
@@ -16,7 +17,7 @@ namespace Library_System.Manage_Users
     {
         MySQLDBUtilities db = new MySQLDBUtilities();
         HelperMethods hm = new HelperMethods();
-
+        ActivityLog log = new ActivityLog();
         public addUser()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace Library_System.Manage_Users
                     txtUsername.Text + "','" + passwordToSave + "','" + generatedSalt + "','" + txtLibrarianID.Text.Replace("'","''") + "','" +
                     txtFirstname.Text + "'," + (txtMiddlename.Text.Length == 0 ? "NULL" : "'" + txtMiddlename.Text + "'") + ",'" +
                     txtLastname.Text + "');");
+                log.AddAccount(txtLibrarianID.Text.Replace("'", "''"), txtFirstname.Text, txtMiddlename.Text, txtLastname.Text, txtUsername.Text);
                 hm.ClearTextEdit(this);
             }
         }

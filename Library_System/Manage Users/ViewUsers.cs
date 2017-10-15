@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
 using RibbonSupport;
+using Logs;
 
 namespace Library_System.Manage_Users
 {
@@ -17,6 +18,7 @@ namespace Library_System.Manage_Users
     {
         MySQLDBUtilities db = new MySQLDBUtilities();
         HelperMethods hm = new HelperMethods();
+        ActivityLog log = new ActivityLog();
         SaveSender currSS;
         DataTable dt;
 
@@ -136,6 +138,7 @@ namespace Library_System.Manage_Users
         }
         private void UpdateDB()
         {
+            List<string> librarianIDs = new List<string>();
             lstUsersItem.HideEditor();
             List<string> queries = new List<string>();
             bool hasError = false;
@@ -154,21 +157,23 @@ namespace Library_System.Manage_Users
                         "', salt='" + r["salt"].ToString() + "', librarianID='" + r["librarianID"].ToString() +
                         "', fname='" + r["fname"].ToString().Trim() + "', mname='" + r["mname"].ToString().Trim() + "', lname='" + r["lname"].ToString().Trim() + "' WHERE userID=" +
                         r["userID"].ToString() + ";";
+                    librarianIDs.Add(r["librarianID"].ToString());
                     queries.Add(query);
                 }
             }
             if (queries.Count > 0)
             {
+                log.UpdateAccount(librarianIDs);
                 db.InsertMultiple(queries);
                 XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
                 "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                db.UpdateList("tbluser", "userID", new string[] { "userID", "username", "password", "librarianID", "fname", "lname", "lname" }, dt);
+                dt.AsEnumerable().Where(s => s["username"].ToString().Equals("admin")).Select(s => s).Single().Delete();
             }
-            db.UpdateList("tbluser", "userID", new string[] { "userID", "username", "password", "librarianID", "fname", "lname", "lname" },  dt);
-            dt.AsEnumerable().Where(s => s["username"].ToString().Equals("admin")).Select(s => s).Single().Delete();
-            
         }
         public void ResetPasswordNow()
         {
+            List<string> librarianIDs = new List<string>();
             List<string> queries = new List<string>();
             List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
             if (dr.Count > 0)
@@ -176,8 +181,10 @@ namespace Library_System.Manage_Users
                 foreach (DataRow r in dr)
                 {
                     string query = "UPDATE tbluser SET password='', salt='' WHERE userID=" + r["userID"].ToString();
+                    librarianIDs.Add(r["librarianID"].ToString());
                     queries.Add(query);
                 }
+                log.ResetPassword(librarianIDs);
                 db.InsertMultiple(queries);
                 LoadList();
             }

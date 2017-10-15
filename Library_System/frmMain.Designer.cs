@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribTabs = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             this.btnLogout = new DevExpress.XtraBars.BarButtonItem();
@@ -67,6 +68,7 @@
             this.btnCheckPenalties = new DevExpress.XtraBars.BarCheckItem();
             this.btnCheckPenaltyStatistics = new DevExpress.XtraBars.BarCheckItem();
             this.btnPrintCatalog = new DevExpress.XtraBars.BarButtonItem();
+            this.btnLogs = new DevExpress.XtraBars.BarCheckItem();
             this.ribBooks = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgBookManager = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgBookModifier = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -93,6 +95,7 @@
             this.ribSettings = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgPenaltiesSanction = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgPenaltyTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rpgLogs = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.scMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.tmDesigner = new System.Windows.Forms.Timer(this.components);
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
@@ -144,9 +147,10 @@
             this.btnApplySanction,
             this.btnCheckPenalties,
             this.btnCheckPenaltyStatistics,
-            this.btnPrintCatalog});
+            this.btnPrintCatalog,
+            this.btnLogs});
             this.ribTabs.Location = new System.Drawing.Point(0, 0);
-            this.ribTabs.MaxItemId = 6;
+            this.ribTabs.MaxItemId = 7;
             this.ribTabs.Name = "ribTabs";
             this.ribTabs.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribBooks,
@@ -168,10 +172,12 @@
             // 
             // btnLogout
             // 
+            this.btnLogout.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
             this.btnLogout.Caption = "Logout";
+            this.btnLogout.Glyph = global::Library_System.Properties.Resources.logout;
             this.btnLogout.Id = 2;
-            this.btnLogout.ImageUri.Uri = "Show";
             this.btnLogout.Name = "btnLogout";
+            this.btnLogout.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnLogout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLogout_ItemClick);
             // 
             // btnSaveBook
@@ -185,7 +191,7 @@
             // 
             this.btnSaveBooks.Caption = "Save";
             this.btnSaveBooks.Id = 10;
-            this.btnSaveBooks.ImageUri.Uri = "Save";
+            this.btnSaveBooks.LargeGlyph = global::Library_System.Properties.Resources.save;
             this.btnSaveBooks.Name = "btnSaveBooks";
             this.btnSaveBooks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveBooks_ItemClick);
             // 
@@ -193,7 +199,7 @@
             // 
             this.btnSaveAccount.Caption = "Save";
             this.btnSaveAccount.Id = 25;
-            this.btnSaveAccount.ImageUri.Uri = "Save";
+            this.btnSaveAccount.LargeGlyph = global::Library_System.Properties.Resources.save;
             this.btnSaveAccount.Name = "btnSaveAccount";
             this.btnSaveAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveAccount_ItemClick);
             // 
@@ -201,7 +207,9 @@
             // 
             this.btnAddBooks.Caption = "Add Book";
             this.btnAddBooks.Id = 7;
-            this.btnAddBooks.ImageUri.Uri = "AddItem";
+            this.btnAddBooks.ImageIndex = 0;
+            this.btnAddBooks.ImageIndexDisabled = 0;
+            this.btnAddBooks.LargeGlyph = global::Library_System.Properties.Resources.notebook;
             this.btnAddBooks.Name = "btnAddBooks";
             this.btnAddBooks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
@@ -209,7 +217,9 @@
             // 
             this.btnViewSearch.Caption = "View/Search Books";
             this.btnViewSearch.Id = 9;
-            this.btnViewSearch.ImageUri.Uri = "Zoom";
+            this.btnViewSearch.ImageIndex = 0;
+            this.btnViewSearch.ImageIndexDisabled = 0;
+            this.btnViewSearch.LargeGlyph = global::Library_System.Properties.Resources.notebook_8;
             this.btnViewSearch.Name = "btnViewSearch";
             this.btnViewSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewSearch_ItemClick);
             // 
@@ -217,7 +227,7 @@
             // 
             this.btnEditBook.Caption = "Edit Book";
             this.btnEditBook.Id = 10;
-            this.btnEditBook.ImageUri.Uri = "Edit";
+            this.btnEditBook.LargeGlyph = global::Library_System.Properties.Resources.notebook_12;
             this.btnEditBook.Name = "btnEditBook";
             this.btnEditBook.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditBook_ItemClick);
             // 
@@ -225,7 +235,7 @@
             // 
             this.btnDeleteBooks.Caption = "Delete Book(s)";
             this.btnDeleteBooks.Id = 11;
-            this.btnDeleteBooks.ImageUri.Uri = "Delete";
+            this.btnDeleteBooks.LargeGlyph = global::Library_System.Properties.Resources.notebook_2;
             this.btnDeleteBooks.Name = "btnDeleteBooks";
             this.btnDeleteBooks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteBooks_ItemClick);
             // 
@@ -233,7 +243,7 @@
             // 
             this.btnEditSubject.Caption = "Edit Subjects";
             this.btnEditSubject.Id = 12;
-            this.btnEditSubject.ImageUri.Uri = "Strikeout";
+            this.btnEditSubject.LargeGlyph = global::Library_System.Properties.Resources.file_4;
             this.btnEditSubject.Name = "btnEditSubject";
             this.btnEditSubject.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditSubject_ItemClick);
             // 
@@ -241,7 +251,7 @@
             // 
             this.btnDeleteSubjects.Caption = "Delete Subject(s)";
             this.btnDeleteSubjects.Id = 13;
-            this.btnDeleteSubjects.ImageUri.Uri = "StrikeoutDouble";
+            this.btnDeleteSubjects.LargeGlyph = global::Library_System.Properties.Resources.file_13;
             this.btnDeleteSubjects.Name = "btnDeleteSubjects";
             this.btnDeleteSubjects.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteSubject_ItemClick);
             // 
@@ -249,7 +259,7 @@
             // 
             this.btnCheckRequest.Caption = "Check Borrow Request";
             this.btnCheckRequest.Id = 14;
-            this.btnCheckRequest.ImageUri.Uri = "Apply";
+            this.btnCheckRequest.LargeGlyph = global::Library_System.Properties.Resources.notebook_13;
             this.btnCheckRequest.Name = "btnCheckRequest";
             this.btnCheckRequest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckRequest_ItemClick);
             // 
@@ -257,7 +267,7 @@
             // 
             this.btnReceiveReturns.Caption = "Receive Returns";
             this.btnReceiveReturns.Id = 15;
-            this.btnReceiveReturns.ImageUri.Uri = "Reset";
+            this.btnReceiveReturns.LargeGlyph = global::Library_System.Properties.Resources.notebook_14;
             this.btnReceiveReturns.Name = "btnReceiveReturns";
             this.btnReceiveReturns.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReceiveReturns_ItemClick);
             // 
@@ -265,7 +275,7 @@
             // 
             this.btnApproveRequest.Caption = "Approve Request";
             this.btnApproveRequest.Id = 17;
-            this.btnApproveRequest.ImageUri.Uri = "Previous";
+            this.btnApproveRequest.LargeGlyph = global::Library_System.Properties.Resources.approve;
             this.btnApproveRequest.Name = "btnApproveRequest";
             this.btnApproveRequest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApproveRequest_ItemClick);
             // 
@@ -273,7 +283,7 @@
             // 
             this.btnRejectRequest.Caption = "Reject Request";
             this.btnRejectRequest.Id = 18;
-            this.btnRejectRequest.ImageUri.Uri = "Cancel";
+            this.btnRejectRequest.LargeGlyph = global::Library_System.Properties.Resources.reject;
             this.btnRejectRequest.Name = "btnRejectRequest";
             this.btnRejectRequest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRejectRequest_ItemClick);
             // 
@@ -281,7 +291,7 @@
             // 
             this.btnAddAccount.Caption = "Add Account";
             this.btnAddAccount.Id = 21;
-            this.btnAddAccount.ImageUri.Uri = "Add";
+            this.btnAddAccount.LargeGlyph = global::Library_System.Properties.Resources.user_20;
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddAccount_ItemClick);
             // 
@@ -289,7 +299,7 @@
             // 
             this.btnUpdateAccount.Caption = "Update Account";
             this.btnUpdateAccount.Id = 22;
-            this.btnUpdateAccount.ImageUri.Uri = "Edit";
+            this.btnUpdateAccount.LargeGlyph = global::Library_System.Properties.Resources.user_32;
             this.btnUpdateAccount.Name = "btnUpdateAccount";
             this.btnUpdateAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpdateAccount_ItemClick);
             // 
@@ -297,7 +307,7 @@
             // 
             this.btnResetPassword.Caption = "Reset Account Password";
             this.btnResetPassword.Id = 23;
-            this.btnResetPassword.ImageUri.Uri = "Cut";
+            this.btnResetPassword.LargeGlyph = global::Library_System.Properties.Resources.user_36;
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResetPassword_ItemClick);
             // 
@@ -305,7 +315,7 @@
             // 
             this.btnRegisterBorrower.Caption = "Register";
             this.btnRegisterBorrower.Id = 25;
-            this.btnRegisterBorrower.ImageUri.Uri = "AddNewDataSource";
+            this.btnRegisterBorrower.LargeGlyph = global::Library_System.Properties.Resources.user_40;
             this.btnRegisterBorrower.Name = "btnRegisterBorrower";
             this.btnRegisterBorrower.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRegisterBorrower_ItemClick);
             // 
@@ -313,7 +323,7 @@
             // 
             this.btnSearchBorrowBook.Caption = "Search Books";
             this.btnSearchBorrowBook.Id = 26;
-            this.btnSearchBorrowBook.ImageUri.Uri = "Zoom";
+            this.btnSearchBorrowBook.LargeGlyph = global::Library_System.Properties.Resources.notebook_8;
             this.btnSearchBorrowBook.Name = "btnSearchBorrowBook";
             this.btnSearchBorrowBook.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSearchBorrowBook_ItemClick);
             // 
@@ -321,7 +331,7 @@
             // 
             this.btnEditPublisher.Caption = "Edit Publishers";
             this.btnEditPublisher.Id = 27;
-            this.btnEditPublisher.ImageUri.Uri = "EditWrapPoints";
+            this.btnEditPublisher.LargeGlyph = global::Library_System.Properties.Resources.price_tag_12;
             this.btnEditPublisher.Name = "btnEditPublisher";
             this.btnEditPublisher.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditPublisher_ItemClick);
             // 
@@ -329,7 +339,7 @@
             // 
             this.btnDeletePublisher.Caption = "Delete Publisher(s)";
             this.btnDeletePublisher.Id = 28;
-            this.btnDeletePublisher.ImageUri.Uri = "Delete";
+            this.btnDeletePublisher.LargeGlyph = global::Library_System.Properties.Resources.price_tag_2;
             this.btnDeletePublisher.Name = "btnDeletePublisher";
             this.btnDeletePublisher.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeletePublisher_ItemClick);
             // 
@@ -337,7 +347,7 @@
             // 
             this.btnEditAuthor.Caption = "Edit Author Info";
             this.btnEditAuthor.Id = 29;
-            this.btnEditAuthor.ImageUri.Uri = "EditDataSource";
+            this.btnEditAuthor.LargeGlyph = global::Library_System.Properties.Resources.archive_12;
             this.btnEditAuthor.Name = "btnEditAuthor";
             this.btnEditAuthor.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditAuthor_ItemClick);
             // 
@@ -345,7 +355,7 @@
             // 
             this.btnDeleteAuthor.Caption = "Delete Author(s)";
             this.btnDeleteAuthor.Id = 30;
-            this.btnDeleteAuthor.ImageUri.Uri = "DeleteDataSource";
+            this.btnDeleteAuthor.LargeGlyph = global::Library_System.Properties.Resources.archive_2;
             this.btnDeleteAuthor.Name = "btnDeleteAuthor";
             this.btnDeleteAuthor.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteAuthor_ItemClick);
             // 
@@ -353,7 +363,7 @@
             // 
             this.btnApproveRegistration.Caption = "Approve Borrower\'s Registration";
             this.btnApproveRegistration.Id = 31;
-            this.btnApproveRegistration.ImageUri.Uri = "Apply";
+            this.btnApproveRegistration.LargeGlyph = global::Library_System.Properties.Resources.user_43;
             this.btnApproveRegistration.Name = "btnApproveRegistration";
             this.btnApproveRegistration.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApproveRegistration_ItemClick);
             // 
@@ -361,7 +371,7 @@
             // 
             this.btnSaveBorrower.Caption = "Save";
             this.btnSaveBorrower.Id = 33;
-            this.btnSaveBorrower.ImageUri.Uri = "Save";
+            this.btnSaveBorrower.LargeGlyph = global::Library_System.Properties.Resources.save;
             this.btnSaveBorrower.Name = "btnSaveBorrower";
             this.btnSaveBorrower.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveBooks_ItemClick);
             // 
@@ -369,7 +379,7 @@
             // 
             this.btnBorrowSelected.Caption = "Borrow Selected Book";
             this.btnBorrowSelected.Id = 34;
-            this.btnBorrowSelected.ImageUri.Uri = "Up";
+            this.btnBorrowSelected.LargeGlyph = global::Library_System.Properties.Resources.notebook_3;
             this.btnBorrowSelected.Name = "btnBorrowSelected";
             this.btnBorrowSelected.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBorrowSelected_ItemClick);
             // 
@@ -377,7 +387,7 @@
             // 
             this.btnEditBorrower.Caption = "Edit Borrower";
             this.btnEditBorrower.Id = 35;
-            this.btnEditBorrower.ImageUri.Uri = "Edit";
+            this.btnEditBorrower.LargeGlyph = global::Library_System.Properties.Resources.user_52;
             this.btnEditBorrower.Name = "btnEditBorrower";
             this.btnEditBorrower.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditBorrower_ItemClick);
             // 
@@ -385,7 +395,7 @@
             // 
             this.btnApproveBorrowerRegistration.Caption = "Approve Borrower Registration";
             this.btnApproveBorrowerRegistration.Id = 37;
-            this.btnApproveBorrowerRegistration.ImageUri.Uri = "Apply";
+            this.btnApproveBorrowerRegistration.LargeGlyph = global::Library_System.Properties.Resources.user_43;
             this.btnApproveBorrowerRegistration.Name = "btnApproveBorrowerRegistration";
             this.btnApproveBorrowerRegistration.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApproveBorrowerRegistration_ItemClick);
             // 
@@ -393,7 +403,7 @@
             // 
             this.btnSaveBorrowing.Caption = "Save";
             this.btnSaveBorrowing.Id = 38;
-            this.btnSaveBorrowing.ImageUri.Uri = "Save";
+            this.btnSaveBorrowing.LargeGlyph = global::Library_System.Properties.Resources.save;
             this.btnSaveBorrowing.Name = "btnSaveBorrowing";
             this.btnSaveBorrowing.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveBooks_ItemClick);
             // 
@@ -407,7 +417,7 @@
             // 
             this.btnCheckTransaction.Caption = "Check Transaction Record";
             this.btnCheckTransaction.Id = 42;
-            this.btnCheckTransaction.ImageUri.Uri = "Refresh";
+            this.btnCheckTransaction.LargeGlyph = global::Library_System.Properties.Resources.notepad;
             this.btnCheckTransaction.Name = "btnCheckTransaction";
             this.btnCheckTransaction.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckTransaction_ItemClick);
             // 
@@ -415,7 +425,7 @@
             // 
             this.btnReceiveSelected.Caption = "Receive Selected";
             this.btnReceiveSelected.Id = 43;
-            this.btnReceiveSelected.ImageUri.Uri = "Squeeze";
+            this.btnReceiveSelected.LargeGlyph = global::Library_System.Properties.Resources.notebook_18;
             this.btnReceiveSelected.Name = "btnReceiveSelected";
             this.btnReceiveSelected.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReceiveSelected_ItemClick);
             // 
@@ -423,7 +433,7 @@
             // 
             this.btnApplySanction.Caption = "Apply Sanction";
             this.btnApplySanction.Id = 44;
-            this.btnApplySanction.ImageUri.Uri = "Clear";
+            this.btnApplySanction.LargeGlyph = global::Library_System.Properties.Resources.target;
             this.btnApplySanction.Name = "btnApplySanction";
             this.btnApplySanction.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveBooks_ItemClick);
             // 
@@ -431,7 +441,7 @@
             // 
             this.btnCheckPenalties.Caption = "Check Penalties and Sanction";
             this.btnCheckPenalties.Id = 2;
-            this.btnCheckPenalties.ImageUri.Uri = "Columns";
+            this.btnCheckPenalties.LargeGlyph = global::Library_System.Properties.Resources.clipboard;
             this.btnCheckPenalties.Name = "btnCheckPenalties";
             this.btnCheckPenalties.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckPenalties_ItemClick);
             // 
@@ -439,7 +449,7 @@
             // 
             this.btnCheckPenaltyStatistics.Caption = "Check Borrower Penalty Count";
             this.btnCheckPenaltyStatistics.Id = 3;
-            this.btnCheckPenaltyStatistics.ImageUri.Uri = "Chart";
+            this.btnCheckPenaltyStatistics.LargeGlyph = global::Library_System.Properties.Resources.analytics_6;
             this.btnCheckPenaltyStatistics.Name = "btnCheckPenaltyStatistics";
             this.btnCheckPenaltyStatistics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCheckPenaltyStatistics_ItemClick);
             // 
@@ -447,9 +457,17 @@
             // 
             this.btnPrintCatalog.Caption = "Print Selected Book Catalog";
             this.btnPrintCatalog.Id = 5;
-            this.btnPrintCatalog.ImageUri.Uri = "Print";
+            this.btnPrintCatalog.LargeGlyph = global::Library_System.Properties.Resources.print;
             this.btnPrintCatalog.Name = "btnPrintCatalog";
             this.btnPrintCatalog.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrintCatalog_ItemClick);
+            // 
+            // btnLogs
+            // 
+            this.btnLogs.Caption = "Activity Logs";
+            this.btnLogs.Id = 6;
+            this.btnLogs.LargeGlyph = global::Library_System.Properties.Resources.server_10;
+            this.btnLogs.Name = "btnLogs";
+            this.btnLogs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLogs_ItemClick);
             // 
             // ribBooks
             // 
@@ -636,7 +654,8 @@
             // 
             this.ribSettings.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.rpgPenaltiesSanction,
-            this.rpgPenaltyTools});
+            this.rpgPenaltyTools,
+            this.rpgLogs});
             this.ribSettings.Name = "ribSettings";
             this.ribSettings.Text = "Settings";
             // 
@@ -655,6 +674,14 @@
             this.rpgPenaltyTools.Name = "rpgPenaltyTools";
             this.rpgPenaltyTools.Text = "Penalty Tools";
             this.rpgPenaltyTools.Visible = false;
+            // 
+            // rpgLogs
+            // 
+            this.rpgLogs.AllowTextClipping = false;
+            this.rpgLogs.ItemLinks.Add(this.btnLogs);
+            this.rpgLogs.Name = "rpgLogs";
+            this.rpgLogs.Text = "Activity Logs";
+            this.rpgLogs.Visible = false;
             // 
             // scMain
             // 
@@ -696,10 +723,12 @@
             this.ClientSize = new System.Drawing.Size(1032, 471);
             this.Controls.Add(this.scMain);
             this.Controls.Add(this.ribTabs);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Ribbon = this.ribTabs;
             this.Text = "Library System";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribTabs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.appMenu)).EndInit();
@@ -780,6 +809,8 @@
         private DevExpress.XtraBars.BarCheckItem btnCheckPenaltyStatistics;
         private DevExpress.XtraBars.BarButtonItem btnPrintCatalog;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgPrintingTool;
+        private DevExpress.XtraBars.BarCheckItem btnLogs;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgLogs;
     }
 }
 

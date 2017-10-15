@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
 using RibbonSupport;
+using Logs;
 
 namespace Library_System.Borrowing_Menu
 {
@@ -17,6 +18,7 @@ namespace Library_System.Borrowing_Menu
     {
         MySQLDBUtilities db = new MySQLDBUtilities();
         HelperMethods hm = new HelperMethods();
+        ActivityLog log = new ActivityLog();
         SaveSender ss;
         DataTable dt;
         public Penalties(SaveSender ss)
@@ -108,6 +110,7 @@ namespace Library_System.Borrowing_Menu
                 if (qs.Count > 0)
                 {
                     db.InsertMultiple(qs);
+                    log.ApplySantion(frmMain.userLoggedIn, dr);
                     LoadList();
                 }
             }

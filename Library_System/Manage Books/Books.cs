@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using MyClassCollection;
 using RibbonSupport;
 using Library_System.Borrowers_Menu;
+using Logs;
 
 namespace Library_System.Manage_Books
 {
@@ -18,6 +19,7 @@ namespace Library_System.Manage_Books
     {
         private MySQLDBUtilities db = new MySQLDBUtilities();
         private HelperMethods hm = new HelperMethods();
+        private ActivityLog log = new ActivityLog();
         private DataTable dt;
         private DataTable tblauthor;
         private SplitContainerControl scc;
@@ -215,14 +217,17 @@ namespace Library_System.Manage_Books
                 "Confirm Deletion",MessageBoxButtons.YesNo,MessageBoxIcon.Question))
             {
                 List<string> queries = new List<string>();
+                List<string> bookIDs = new List<string>();
                 List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
                 foreach (DataRow r in dr)
                 {
                     string query = "DELETE FROM tblbook WHERE bookID=" + r["bookID"].ToString();
                     queries.Add(query);
+                    bookIDs.Add(r["bookID"].ToString());
                 }
                 if (queries.Count > 0)
                 {
+                    log.DeleteBook(frmMain.userLoggedIn, bookIDs);
                     db.InsertMultiple(queries);
                     LoadList();
                 }

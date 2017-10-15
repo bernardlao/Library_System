@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
 using RibbonSupport;
+using Logs;
 
 namespace Library_System.Manage_Books
 {
@@ -17,6 +18,8 @@ namespace Library_System.Manage_Books
     {
         private MySQLDBUtilities db = new MySQLDBUtilities();
         private HelperMethods hm = new HelperMethods();
+        private ActivityLog log = new ActivityLog();
+        private DataTable orig;
         private DataTable dt;
         private SaveSender ss;
 
@@ -44,6 +47,7 @@ namespace Library_System.Manage_Books
         private void publisherManage_Load(object sender, EventArgs e)
         {
             LoadList();
+            orig = dt.AsEnumerable().ToList().CopyToDataTable();
             lstPublisherItem.BestFitColumns();
         }
         private void LoadList()
@@ -66,13 +70,14 @@ namespace Library_System.Manage_Books
             try
             {
                 string changedVal = lstPublisherItem.GetRowCellValue(e.RowHandle, colPublisherName).ToString().Trim();
+                string add = lstPublisherItem.GetRowCellValue(e.RowHandle, colAddress).ToString().Trim();
                 string toMessage = "";
                 if (changedVal.Equals(""))
                 {
                     toMessage = "The publisher name must not be empty!";
                     allValid = false;
                 }
-                dr = dt.AsEnumerable().Where(s => s["publisherName"].ToString().Trim().Equals(changedVal) &&
+                dr = dt.AsEnumerable().Where(s => s["publisherName"].ToString().Trim().Equals(changedVal) && s["address"].ToString().Equals("") &&
                     !s["publisherID"].ToString().Equals(id)).Select(s => s).ToList();
                 if (dr.Count > 0)
                 {
@@ -128,15 +133,17 @@ namespace Library_System.Manage_Books
             lstPublisherItem.HideEditor();
             bool hasError = false;
             List<string> queries = new List<string>();
+            List<DataRow> updateRow = new List<DataRow>();
             List<DataRow> toUpdate = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
             foreach (DataRow r in toUpdate)
             {
-                if (!db.IsDataExist("tblpublisher", "publisherName='" + r["publisherName"].ToString() + "' AND publisherID!=" + r["publisherID"].ToString()))
+                if (!db.IsDataExist("tblpublisher", "publisherName='" + r["publisherName"].ToString() + "' AND address='" + r["address"].ToString() + "' AND publisherID!=" + r["publisherID"].ToString()))
                 {
                     r["isEdited"] = 0;
                     string query = "UPDATE tblpublisher SET publisherName = '" + r["publisherName"].ToString().Trim().Replace("'", "''") +
                     "', address='" + r["address"].ToString().Trim().Replace("'", "''") + "' WHERE publisherID =" + r["publisherID"].ToString();
                     queries.Add(query);
+                    updateRow.Add(r);
                 }
                 else
                 {
@@ -149,6 +156,8 @@ namespace Library_System.Manage_Books
                 XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
                 "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 db.InsertMultiple(queries);
+                log.UpdatePublisbher(frmMain.userLoggedIn, updateRow, orig);
+                orig = dt.AsEnumerable().ToList().CopyToDataTable();
             }
             db.UpdateList("tblpublisher", "publisherID", new string[] { "publisherID", "publisherName", "address" }, dt);
         }
@@ -171,7 +180,9 @@ namespace Library_System.Manage_Books
                     if (queries.Count > 0)
                     {
                         db.InsertMultiple(queries);
+                        log.DeletePublisher(frmMain.userLoggedIn, toDelete);
                         LoadList();
+                        orig = dt.AsEnumerable().ToList().CopyToDataTable();
                     }
                    
                 }

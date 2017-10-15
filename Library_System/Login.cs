@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
+using Logs;
 
 namespace Library_System
 {
@@ -16,6 +17,7 @@ namespace Library_System
     {
         string server, port, database = "DATABASE=db_library;", uid, password;
 
+        private ActivityLog log = new ActivityLog();
         private MySQLDBUtilities db = new MySQLDBUtilities();
         private HelperMethods hm = new HelperMethods();
         private ConnectionStringSolution cs = new ConnectionStringSolution();
@@ -161,6 +163,7 @@ namespace Library_System
                             saltedPassword = hm.GenerateSHA256(txtPassword.Text + salt);
                             db.InsertQuery("UPDATE tbluser SET password='" + saltedPassword + "', salt='" + salt + "' WHERE userID=" + r["userID"].ToString());
                             frmMain.userLoggedIn = (r["username"].ToString().Equals("admin") ? "Admin" : r["userID"].ToString());
+                            log.Login(frmMain.userLoggedIn);
                             return true;
                         }
                         else
@@ -171,6 +174,7 @@ namespace Library_System
                         if (r["password"].ToString().Equals(saltedPassword))
                         {
                             frmMain.userLoggedIn = (r["username"].ToString().Equals("admin") ? "Admin" : r["userID"].ToString());
+                            log.Login(frmMain.userLoggedIn);
                             return true;
                         }
                     }

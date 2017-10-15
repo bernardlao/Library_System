@@ -16,6 +16,7 @@ using DevExpress.Utils;
 using DevExpress.XtraBars;
 using Library_System.Borrowers_Menu;
 using Library_System.Borrowing_Menu;
+using Logs;
 
 namespace Library_System
 {
@@ -23,6 +24,7 @@ namespace Library_System
     {
         private MySQLDBUtilities db = new MySQLDBUtilities();
         private RibbonSupportClass rsc;
+        private ActivityLog log;
         public static SaveSender ss = SaveSender.None;
         public static string userLoggedIn = null;
         public static bool triggerDesigner = false;
@@ -31,7 +33,7 @@ namespace Library_System
         {
             InitializeComponent();
             rsc = new RibbonSupportClass(this);
-            
+            log = new ActivityLog();
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -81,6 +83,7 @@ namespace Library_System
                     ribManageAccounts.Visible = false;
                     ribBorrower.Visible = true;
                     ribSettings.Visible = false;
+                    rpgLogs.Visible = false;
                 }
                 else if (userLoggedIn.Equals("Admin"))
                 {
@@ -88,7 +91,10 @@ namespace Library_System
                     ribBorrowing.Visible = false;
                     ribManageAccounts.Visible = true;
                     ribBorrower.Visible = false;
-                    ribSettings.Visible = false;
+                    ribSettings.Visible = true;
+                    rpgLogs.Visible = true;
+                    rpgPenaltiesSanction.Visible = false;
+                    rpgPenaltyTools.Visible = false;
                     if (HasPendingRegister())
                     {
                         ribTabs.SelectedPage = ribManageAccounts;
@@ -103,6 +109,9 @@ namespace Library_System
                     ribManageAccounts.Visible = false;
                     ribBorrower.Visible = false;
                     ribSettings.Visible = true;
+                    rpgLogs.Visible = false;
+                    rpgPenaltiesSanction.Visible = true;
+                    rpgPenaltyTools.Visible = true;
                     if (HasPendingRegister())
                     {
                         ribTabs.SelectedPage = ribBorrowing;
@@ -181,11 +190,13 @@ namespace Library_System
         private void btnLogout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ClearCheckDoCheck(null);
+            if(!userLoggedIn.Equals("Guest"))
+                log.Logout(userLoggedIn);
             userLoggedIn = null;
             ribTabs.Visible = false;
             ClearPanel();
-            frmLogin log = new frmLogin();
-            log.ShowDialog();
+            frmLogin login = new frmLogin();
+            login.ShowDialog();
         }
 
         private void ribTabs_SelectedPageChanged(object sender, EventArgs e)
@@ -513,6 +524,24 @@ namespace Library_System
             {
                 rsc.ReceiveBookReturns();
             }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (userLoggedIn != null)
+                if(!userLoggedIn.Equals("Guest"))
+                    log.Logout(userLoggedIn);
+        }
+
+        private void btnLogs_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ClearPanel();
+            LogsList l = new LogsList();
+            l.Dock = DockStyle.Fill;
+            scMain.SplitterPosition = l.Size.Width;
+            scMain.Panel1.Enabled = true;
+            scMain.Panel1.Controls.Add(l);
+            ClearCheckDoCheck(btnLogs);
         }
     }
 }

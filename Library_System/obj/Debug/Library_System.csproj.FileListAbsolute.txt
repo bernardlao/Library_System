@@ -16,6 +16,7 @@ D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.Borrowe
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.BorrowMenu.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowers_Menu.RegisterBorrower.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.BorrowedBooks.resources
+D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.LogsList.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Borrowing_Menu.Penalties.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.Catalogs.resources
 D:\Library_System\Library_System\obj\Debug\Library_System.frmLogin.resources

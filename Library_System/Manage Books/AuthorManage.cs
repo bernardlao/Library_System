@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using RibbonSupport;
 using MyClassCollection;
+using Logs;
 
 namespace Library_System.Manage_Books
 {
@@ -17,6 +18,8 @@ namespace Library_System.Manage_Books
     {
         MySQLDBUtilities db = new MySQLDBUtilities();
         HelperMethods hm = new HelperMethods();
+        ActivityLog log = new ActivityLog();
+        DataTable orig;
         DataTable dt;
         SaveSender ss;
 
@@ -51,6 +54,7 @@ namespace Library_System.Manage_Books
         private void AuthorManage_Load(object sender, EventArgs e)
         {
             LoadList();
+            orig = dt.AsEnumerable().ToList().CopyToDataTable();
         }
 
         private void LoadList()
@@ -243,6 +247,7 @@ namespace Library_System.Manage_Books
             corporateView.HideEditor();
             List<string> queries = new List<string>();
             List<DataRow> dr = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
+            List<DataRow> updateRow = new List<DataRow>();
             bool hasError = false;
             if (dr.Count > 0)
             {
@@ -252,8 +257,11 @@ namespace Library_System.Manage_Books
                     if (r["fname"].ToString().Equals(""))
                     {
                         if (!db.IsDataExist("tblauthor", "corporation='" + r["corporation"].ToString().Trim().Replace("'", "''") + "' AND authorID!=" + r["authorID"].ToString()))
+                        {
                             query = "UPDATE tblauthor SET corporation='" + r["corporation"].ToString().Trim().Replace("'", "''") + "' WHERE authorID=" + r["authorID"].ToString();
-                        else 
+                            updateRow.Add(r);
+                        }
+                        else
                         {
                             hasError = false;
                             r["isEdited"] = -1;
@@ -263,8 +271,11 @@ namespace Library_System.Manage_Books
                     {
                         if (!db.IsDataExist("tblauthor", "fname='" + r["fname"].ToString().Trim() + "' AND mname='" + r["mname"].ToString().Trim() +
                             "' AND lname='" + r["lname"].ToString().Trim() + "' AND authorID!=" + r["authorID"].ToString()))
+                        {
                             query = "UPDATE tblauthor SET fname='" + r["fname"].ToString().Trim() + "', mname='" + r["mname"].ToString().Trim() +
                                 "', lname='" + r["lname"].ToString() + "' WHERE authorID=" + r["authorID"].ToString();
+                            updateRow.Add(r);
+                        }
                         else
                         {
                             hasError = false;
@@ -282,7 +293,9 @@ namespace Library_System.Manage_Books
                     XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
                     "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     db.InsertMultiple(queries);
+                    log.UpdateAuthor(frmMain.userLoggedIn, updateRow, orig);
                     LoadList();
+                    orig = dt.AsEnumerable().ToList().CopyToDataTable();
                 }
                 //db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
                 SetAuthorType();
@@ -305,7 +318,9 @@ namespace Library_System.Manage_Books
                     if (queries.Count > 0)
                     {
                         db.InsertMultiple(queries);
+                        log.DeleteAuthor(frmMain.userLoggedIn, dr);
                         LoadList();
+                        orig = dt.AsEnumerable().ToList().CopyToDataTable();
                     }
                     //db.UpdateList("tblauthor", "authorID", new string[] { "authorID", "fname", "mname", "lname", "corporation" }, dt);
                     SetAuthorType();
@@ -325,43 +340,43 @@ namespace Library_System.Manage_Books
         }
         private bool IsToDelete(List<DataRow> dr)
         {
-            string cons = "";
-            foreach (DataRow r in dr)
-                cons += r["authorID"].ToString() + ",";
-            if (cons.Length > 0)
-                cons = cons.Remove(cons.Length - 1);
-            DataTable bookAuthor = db.SelectTable("SELECT * FROM tblbookauthor b INNER JOIN tblauthor a ON b.authorID=a.authorID WHERE a.authorID IN(" + cons +
-                ") GROUP BY a.authorID");
-            if (bookAuthor != null)
-            {
-                if (bookAuthor.Rows.Count > 0)
-                {
-                    string authorConflict = "";
-                    foreach (DataRow r in bookAuthor.Rows)
-                    {
-                        if (r["fname"].ToString().Equals(""))
-                            authorConflict += r["corporation"].ToString() + "\n";
-                        else
-                            authorConflict += r["fname"].ToString() + (r["mname"].ToString().Length > 0 ? " " + r["mname"].ToString() + " " : " ") + r["lname"].ToString() + "\n";
-                    }
-                    if (DialogResult.Yes == XtraMessageBox.Show("The following author: \n" + authorConflict + "has an associated record already." +
-                            " Are you sure to delete those author(s)? \nNote: The record(s) associated to the said author will also be deleted.",
-                            "Author is in Use", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                    {
-                        List<string> ids = new List<string>();
-                        foreach (DataRow r in bookAuthor.Rows)
-                        {
-                            if (!ids.Contains(r["bookID"].ToString()))
-                                ids.Add(r["bookID"].ToString());
-                        }
-                        foreach (string id in ids)
-                            db.InsertQuery("DELETE FROM tblbook WHERE bookID=" + id);
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-            }
+            //string cons = "";
+            //foreach (DataRow r in dr)
+            //    cons += r["authorID"].ToString() + ",";
+            //if (cons.Length > 0)
+            //    cons = cons.Remove(cons.Length - 1);
+            //DataTable bookAuthor = db.SelectTable("SELECT * FROM tblbookauthor b INNER JOIN tblauthor a ON b.authorID=a.authorID WHERE a.authorID IN(" + cons +
+            //    ") GROUP BY a.authorID");
+            //if (bookAuthor != null)
+            //{
+            //    if (bookAuthor.Rows.Count > 0)
+            //    {
+            //        string authorConflict = "";
+            //        foreach (DataRow r in bookAuthor.Rows)
+            //        {
+            //            if (r["fname"].ToString().Equals(""))
+            //                authorConflict += r["corporation"].ToString() + "\n";
+            //            else
+            //                authorConflict += r["fname"].ToString() + (r["mname"].ToString().Length > 0 ? " " + r["mname"].ToString() + " " : " ") + r["lname"].ToString() + "\n";
+            //        }
+            //        if (DialogResult.Yes == XtraMessageBox.Show("The following author: \n" + authorConflict + "has an associated record already." +
+            //                " Are you sure to delete those author(s)? \nNote: The record(s) associated to the said author will also be deleted.",
+            //                "Author is in Use", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            //        {
+            //            List<string> ids = new List<string>();
+            //            foreach (DataRow r in bookAuthor.Rows)
+            //            {
+            //                if (!ids.Contains(r["bookID"].ToString()))
+            //                    ids.Add(r["bookID"].ToString());
+            //            }
+            //            foreach (string id in ids)
+            //                db.InsertQuery("DELETE FROM tblbook WHERE bookID=" + id);
+            //            return true;
+            //        }
+            //        else
+            //            return false;
+            //    }
+            //}
             return true;
         }
     }

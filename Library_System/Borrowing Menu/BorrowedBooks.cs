@@ -277,14 +277,18 @@ namespace Library_System.Borrowing_Menu
             if (hasSearchText)
                 dr = dr.Where(s => s[searchBy].ToString().ToLower().Contains(txtSearchKey.Text.ToLower())).Select(s => s).ToList();
             if (hasBorrowedFilter && !hasReturnedFilter)
-                dr = dr.Where(s => Convert.ToDateTime(s["dateBorrowed"].ToString()) >= dtpBFrom.DateTime && Convert.ToDateTime(s["dateBorrowed"].ToString()) <= dtpBTo.DateTime)
+                dr = dr.Where(s => Convert.ToDateTime(Convert.ToDateTime(s["dateBorrowed"].ToString()).ToShortDateString()) >= dtpBFrom.DateTime &&
+                    Convert.ToDateTime(Convert.ToDateTime(s["dateBorrowed"].ToString()).ToShortDateString()) <= dtpBTo.DateTime)
                     .Select(s => s).ToList();
             else if (!hasBorrowedFilter && hasReturnedFilter)
-                dr = dr.Where(s => Convert.ToDateTime(s["dateReturned"].ToString()) >= dtpRFrom.DateTime && Convert.ToDateTime(s["dateReturned"].ToString()) <= dtpRTo.DateTime)
+                dr = dr.Where(s => Convert.ToDateTime(Convert.ToDateTime(s["dateReturned"].ToString()).ToShortDateString()) >= dtpRFrom.DateTime &&
+                    Convert.ToDateTime(Convert.ToDateTime(s["dateReturned"].ToString()).ToShortDateString())  <= dtpRTo.DateTime)
                     .Select(s => s).ToList();
             else if (hasBorrowedFilter && hasReturnedFilter)
-                dr = dr.Where(s => (Convert.ToDateTime(s["dateBorrowed"].ToString()) >= dtpBFrom.DateTime && Convert.ToDateTime(s["dateBorrowed"].ToString()) <= dtpBTo.DateTime) ||
-                    (Convert.ToDateTime(s["dateReturned"].ToString()) >= dtpRFrom.DateTime && Convert.ToDateTime(s["dateReturned"].ToString()) <= dtpRTo.DateTime))
+                dr = dr.Where(s => (Convert.ToDateTime(Convert.ToDateTime(s["dateBorrowed"].ToString()).ToShortDateString()) >= dtpBFrom.DateTime &&
+                    Convert.ToDateTime(Convert.ToDateTime(s["dateBorrowed"].ToString()).ToShortDateString()) <= dtpBTo.DateTime) ||
+                    (Convert.ToDateTime(Convert.ToDateTime(s["dateReturned"].ToString()).ToShortDateString()) >= dtpRFrom.DateTime &&
+                    Convert.ToDateTime(Convert.ToDateTime(s["dateReturned"].ToString()).ToShortDateString()) <= dtpRTo.DateTime))
                     .Select(s => s).ToList();
             DataTable d = new DataTable();
             if(dr.Count > 0)

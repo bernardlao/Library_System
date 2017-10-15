@@ -12,6 +12,7 @@ using DevExpress.XtraGrid;
 using MyClassCollection;
 using RibbonSupport;
 using Library_System.Manage_Books;
+using Logs;
 
 namespace Library_System
 {
@@ -23,6 +24,9 @@ namespace Library_System
         AutoCompleteStringCollection fnames, mnames, lnames, corporations;
         private MySQLDBUtilities db = new MySQLDBUtilities();
         private HelperMethods hm = new HelperMethods();
+        private ActivityLog log = new ActivityLog();
+        string oTitle, oVolume, oQuantity;
+        List<string> oAuthors = new List<string>();
         GridControl gc;
         SplitContainerControl scc;
         bool isPersonAuthor,isMultipleAuthor;
@@ -246,6 +250,7 @@ namespace Library_System
             foreach (string s in bookAuthors)
                 queries.Add("INSERT INTO tblbookauthor (bookID,authorID) VALUES(" + bookID + "," + s + ");");
             db.InsertMultiple(queries);
+            log.AddBook(frmMain.userLoggedIn,txtTitle.Text.Replace("'", "''"), txtQuantity.Text, txtVolume.Text, bookAuthors);
             if (DialogResult.Yes == XtraMessageBox.Show("Save Successful!\nRefresh Now?", "Saved", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 hm.ClearTextEdit(this);
         }
@@ -269,6 +274,7 @@ namespace Library_System
             foreach (string s in bookAuthors)
                 qs.Add("INSERT INTO tblbookauthor (bookID,authorID) VALUES(" + editID + "," + s + ");");
             db.InsertMultiple(qs);
+            log.UpdateBook(frmMain.userLoggedIn, oTitle, oQuantity, oVolume, oAuthors, txtTitle.Text.Replace("'", "''"),txtQuantity.Text,txtVolume.Text,bookAuthors);
             if (DialogResult.Yes == XtraMessageBox.Show("Update Successful!\nReturn to List?", "Saved", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 GoBack();
         }
@@ -528,8 +534,13 @@ namespace Library_System
                     cmbSubject.Text = r["subjectName"].ToString();
                     List<string> auID = new List<string>();
                     foreach (DataRow row in tbl.Rows)
+                    {
                         auID.Add(row["authorID"].ToString());
-
+                        oAuthors.Add(row["authorID"].ToString());
+                    }
+                    oTitle = r["title"].ToString();
+                    oQuantity = r["quantity"].ToString();
+                    oVolume = r["volume"].ToString();
                     //scc.Panel2.Controls.Clear();
                     //addBookAuthor ab = new addBookAuthor();
                     addBookAuthor.ids = auID;
@@ -576,6 +587,10 @@ namespace Library_System
                         txtAuthorLname.Text = r["lname"].ToString();
                         btnMultiAuthor.Checked = false;
                     }
+                    oTitle = r["title"].ToString();
+                    oQuantity = r["quantity"].ToString();
+                    oVolume = r["volume"].ToString();
+                    oAuthors.Add(r["authorID"].ToString());
                 }
             }
         }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using MyClassCollection;
 using RibbonSupport;
+using Logs;
 
 namespace Library_System.Manage_Books
 {
@@ -17,7 +18,9 @@ namespace Library_System.Manage_Books
     {
         MySQLDBUtilities db = new MySQLDBUtilities();
         HelperMethods hm = new HelperMethods();
+        ActivityLog log = new ActivityLog();
         DataTable dt;
+        DataTable orig;
         SaveSender ss;
         public subjectManage(SaveSender sSender)
         {
@@ -41,6 +44,7 @@ namespace Library_System.Manage_Books
         private void SubjectManage_Load(object sender, EventArgs e)
         {
             LoadList();
+            orig = dt.AsEnumerable().ToList().CopyToDataTable();
             lstSubjectItem.BestFitColumns();
         }
         private void LoadList()
@@ -126,6 +130,7 @@ namespace Library_System.Manage_Books
             lstSubjectItem.HideEditor();
             List<string> queries = new List<string>();
             bool hasError = false;
+            List<DataRow> editSubject = new List<DataRow>();
             List<DataRow> dr = dt.AsEnumerable().Where(s => s["isEdited"].ToString().Equals("1")).Select(s => s).ToList();
             foreach (DataRow r in dr)
             {
@@ -133,6 +138,7 @@ namespace Library_System.Manage_Books
                 {
                     r["isEdited"] = 0;
                     string query = "UPDATE tblsubject SET subjectName='" + r["subjectName"].ToString().Trim().Replace("'", "''") + "' WHERE subjectID=" + r["subjectID"].ToString();
+                    editSubject.Add(r);
                     queries.Add(query);
                 }
                 else
@@ -146,6 +152,8 @@ namespace Library_System.Manage_Books
                 XtraMessageBox.Show((hasError ? "There is a conflict in updating your datas. The item marked in red contains issue. Refreshing List..." :
                 "Update Success! All valid items was updated. Refreshing List"), (hasError ? "Data Mismatch" : "Update Successfully"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 db.InsertMultiple(queries);
+                log.UpdateSubject(frmMain.userLoggedIn, editSubject, orig);
+                orig = dt.AsEnumerable().ToList().CopyToDataTable();
             }
             db.UpdateList("tblsubject", "subjectID", new string[] { "subjectID", "subjectName" }, dt);
         }
@@ -153,10 +161,12 @@ namespace Library_System.Manage_Books
         {
             if (IsToDelete())
             {
+                List<DataRow> deleteRows = new List<DataRow>();
                 List<string> queries = new List<string>();
                 List<DataRow> dr = dt.AsEnumerable().Where(s => s["isSelected"].ToString().Equals("True")).Select(s => s).ToList();
                 foreach (DataRow r in dr)
                 {
+                    deleteRows.Add(r);
                     string defaultSubject = "UPDATE tblbook SET subjectID=0 WHERE subjectID=" + r["subjectID"].ToString() + ";";
                     queries.Add(defaultSubject);
                     string query = "DELETE FROM tblsubject WHERE subjectID=" + r["subjectID"].ToString();
@@ -165,6 +175,8 @@ namespace Library_System.Manage_Books
                 if (queries.Count > 0)
                 {
                     db.InsertMultiple(queries);
+                    log.DeleteSubject(frmMain.userLoggedIn, deleteRows);
+                    orig = dt.AsEnumerable().ToList().CopyToDataTable();
                     LoadList();
                 }
                 
