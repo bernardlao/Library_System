@@ -134,7 +134,8 @@ namespace Library_System.Borrowing_Menu
             if (hasSearchText)
                 dr = dr.Where(s => s[searchBy].ToString().ToLower().Contains(txtSearchKey.Text.ToLower())).Select(s => s).ToList();
             if(hasReturnedFilter)
-                dr = dr.Where(s => Convert.ToDateTime(s["dateReturned"].ToString()) >= dtpRFrom.DateTime && Convert.ToDateTime(s["dateReturned"].ToString()) <= dtpRTo.DateTime)
+                dr = dr.Where(s => Convert.ToDateTime(Convert.ToDateTime(s["dateReturned"].ToString()).ToShortDateString()) >= dtpRFrom.DateTime &&
+                    Convert.ToDateTime(Convert.ToDateTime(s["dateReturned"].ToString()).ToShortDateString()) <= dtpRTo.DateTime)
                     .Select(s => s).ToList();
             DataTable d = new DataTable();
             if (dr.Count > 0)

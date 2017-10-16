@@ -144,9 +144,9 @@ Penalty Sanctions8
                     Convert.ToDateTime(Convert.ToDateTime(s["logDate"].ToString()).ToShortDateString()) <= to).Select(s => s).ToList();
             }
             if (cmbSearchBy.SelectedIndex == 0)
-                dr = dr.Where(s => s["librarianID"].ToString().Contains(txtLoggedInUserID.Text)).ToList();
+                dr = dr.Where(s => s["librarianID"].ToString().ToLower().Contains(txtLoggedInUserID.Text.ToLower())).ToList();
             else
-                dr = dr.Where(s => s["fullname"].ToString().Contains(txtLoggedInUserID.Text)).ToList();
+                dr = dr.Where(s => s["fullname"].ToString().ToLower().Contains(txtLoggedInUserID.Text.ToLower())).ToList();
             if (dr.Count > 0)
                 lstLogs.DataSource = dr.CopyToDataTable();
             else
